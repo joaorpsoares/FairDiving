@@ -36,6 +36,11 @@
         // Function to check existence of a specific user
         checkExistence: function(email) {
             return databaseUsers.checkExistence([email]);
+        },
+
+        // Function to insert a new user on database
+        insertNewUser: function(user) {
+            return databaseUsers.insertNewUser(user);
         }
     };
 
