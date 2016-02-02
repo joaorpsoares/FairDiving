@@ -22,13 +22,13 @@
                         // TODO: crypto, send email
                         crypto.randomBytes(32, function(err, buf) {
                             if (err) {
-                                reject(err);
+                                res.status(406).send(err);
                             } else {
 
                                 bcrypt.hash(req.body.password, null, null, function(err, hash) {
 
                                     if (err) {
-                                        reject(err);
+                                        res.status(406).send(err);
                                     } else {
 
                                         var user = [req.body.email, hash, buf.toString('hex')];
@@ -55,7 +55,33 @@
 
         // Route to verify the login
         server.post('/api/login', function(req, res) {
-
+            if (validator.isEmail(req.body.email)) {
+                database.getSensetiveData(req.body.email)
+                    .then(function(result) {
+                        if (result.length > 0) {
+                            if (!result[0].active) res.status(406).send('You need to complete the registration before login. Check you email.');
+                            else {
+                                bcrypt.compare(req.body.password, result[0].password, function(err, result) {
+                                    if (err) {
+                                        res.status(406).send(err);
+                                    } else {
+                                        if (result)
+                                            res.status(200).send('OK');
+                                        else
+                                            res.status(406).send('Email or password not correct.');
+                                    }
+                                });
+                            }
+                        } else {
+                            res.status(406).send(err);
+                        }
+                    })
+                    .catch(function(err) {
+                        res.status(406).send(err);
+                    });
+            } else {
+                res.status(406).send('Sorry! This email does not exist!');
+            }
         });
 
     };

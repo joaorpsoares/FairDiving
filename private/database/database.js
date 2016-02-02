@@ -41,7 +41,13 @@
         // Function to insert a new user on database
         insertNewUser: function(user) {
             return databaseUsers.insertNewUser(user);
+        },
+
+        // Function to get sensetive data of a user
+        getSensetiveData: function(email) {
+            return databaseUsers.getSensetiveData([email]);
         }
+
     };
 
 }());

@@ -41,6 +41,19 @@
                     }
                 });
             });
+        },
+
+        // Function to retrieve a password of user
+        getSensetiveData: function(email) {
+            return new Promise(function(resolve, reject) {
+                client.query('SELECT password,active FROM users WHERE email = $1', email, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result.rows);
+                    }
+                });
+            });
         }
     };
 

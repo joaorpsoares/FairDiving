@@ -19,13 +19,14 @@ CREATE TABLE users (
 	telephone VARCHAR(60),
 	-- security
 	password VARCHAR(255) NOT NULL,
-	token VARCHAR(64) NOT NULL
+	token VARCHAR(64) NOT NULL,
+	-- active or not
+	active bit NOT NULL DEFAULT '0'
 );
 
 
 
 -- INSERT COUNTRIES
-
 
 INSERT INTO countries ("abrev", "name") VALUES (E'AF', E'Afghanistan');
 INSERT INTO countries ("abrev", "name") VALUES (E'AX', E'Åland Islands');
