@@ -16,38 +16,41 @@
         server.post('/api/register', function(req, res) {
 
             if (validator.isEmail(req.body.email)) {
+                if (!validator.matches(req.body.password, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/))
+                    res.status(406).send('Your password needs to have at least one capital letter, one small letter, one number and a have a size of 6 or more ');
+                else {
+                    database.checkExistence(req.body.email)
+                        .then(function() {
+                            // TODO: crypto, send email
+                            crypto.randomBytes(32, function(err, buf) {
+                                if (err) {
+                                    res.status(406).send(err);
+                                } else {
 
-                database.checkExistence(req.body.email)
-                    .then(function() {
-                        // TODO: crypto, send email
-                        crypto.randomBytes(32, function(err, buf) {
-                            if (err) {
-                                res.status(406).send(err);
-                            } else {
+                                    bcrypt.hash(req.body.password, null, null, function(err, hash) {
 
-                                bcrypt.hash(req.body.password, null, null, function(err, hash) {
+                                        if (err) {
+                                            res.status(406).send(err);
+                                        } else {
 
-                                    if (err) {
-                                        res.status(406).send(err);
-                                    } else {
+                                            var user = [req.body.email, hash, buf.toString('hex')];
 
-                                        var user = [req.body.email, hash, buf.toString('hex')];
-
-                                        database.insertNewUser(user)
-                                            .then(function() {
-                                                res.status(200).send('OK');
-                                            })
-                                            .catch(function(err) {
-                                                res.status(406).send('Not OK');
-                                            });
-                                    }
-                                });
-                            }
+                                            database.insertNewUser(user)
+                                                .then(function() {
+                                                    res.status(200).send('OK');
+                                                })
+                                                .catch(function(err) {
+                                                    res.status(406).send('Not OK');
+                                                });
+                                        }
+                                    });
+                                }
+                            });
+                        })
+                        .catch(function(err) {
+                            res.status(406).send(err);
                         });
-                    })
-                    .catch(function(err) {
-                        res.status(406).send(err);
-                    });
+                }
             } else {
                 res.status(400).send('The email that was given is not valid.');
             }
