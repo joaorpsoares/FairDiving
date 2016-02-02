@@ -46,6 +46,11 @@
         // Function to get sensetive data of a user
         getSensetiveData: function(email) {
             return databaseUsers.getSensetiveData([email]);
+        },
+
+        // Function to update active atribute
+        updateActiveAtribute: function(token) {
+            return databaseUsers.updateActiveAtribute([token]);
         }
 
     };

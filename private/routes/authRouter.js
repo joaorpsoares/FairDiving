@@ -87,6 +87,18 @@
             }
         });
 
+        // Route to check token
+        server.get('/api/confirmation/:id', function(req, res) {
+
+            database.updateActiveAtribute(req.params.id)
+                .then(function() {
+                    res.status(200).send('OK');
+                })
+                .catch(function(err) {
+                    res.status(406).send(err);
+                });
+        });
+
     };
 
 }());

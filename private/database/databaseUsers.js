@@ -54,6 +54,19 @@
                     }
                 });
             });
+        },
+
+        // Function to update an active atribute
+        updateActiveAtribute: function(token) {
+            return new Promise(function(resolve, reject) {
+                client.query('UPDATE users SET active = \'1\' WHERE token = $1', token, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result.rows);
+                    }
+                });
+            });
         }
     };
 
