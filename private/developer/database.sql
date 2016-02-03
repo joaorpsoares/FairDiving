@@ -20,11 +20,35 @@ CREATE TABLE users (
 	-- security
 	password VARCHAR(255) NOT NULL,
 	token VARCHAR(64) NOT NULL,
+	admin bit NOT NULL DEFAULT '0',
 	-- active or not
 	active bit NOT NULL DEFAULT '0'
 );
 
 
+CREATE TABLE operators (
+	id BIGSERIAL PRIMARY KEY,
+	rej_user_id BIGINT REFERENCES users(id)
+);
+
+CREATE TABLE packageImage (
+	id BIGINT PRIMARY KEY,
+	imageName VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE packages (
+	id BIGSERIAL PRIMARY KEY,
+	operatorID BIGINT REFERENCES operators(id),
+	imageID BIGINT REFERENCES packageImage(id),
+	--  package info
+	title VARCHAR (140) NOT NULL,
+	price REAL NOT NULL,
+	description VARCHAR(500) NOT NULL,
+	-- Geolocation
+	country_code VARCHAR(2) NOT NULL,
+	lat REAL NOT NULL DEFAULT 0,
+	lng REAL NOT NULL DEFAULT 0
+);
 
 -- INSERT COUNTRIES
 

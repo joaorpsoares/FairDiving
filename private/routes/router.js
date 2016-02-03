@@ -13,6 +13,8 @@
         // Require the routes related to authentication
         require('./authRouter')(server);
 
+        // Require the routes related to packages
+        require('./packageRouter')(server);
     };
 
 }());
