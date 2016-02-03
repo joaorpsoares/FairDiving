@@ -5,6 +5,7 @@
     var express = require('express'),
         server = express(),
         morgan = require('morgan'),
+        path = require('path'),
         bodyParser = require('body-parser'),
         emailModule = require('./private/modules/email-module'),
         database = require('./private/database/database');
@@ -39,9 +40,14 @@
 
     server.use(bodyParser.json());
 
-    server.get('/', function(req, res) {
-        res.send('Hello World!');
-    });
+    // Sets the folder where are the files are static
+    server.use(express.static(path.resolve(__dirname, './public/')));
+
+    // Sets the folder where the views are
+    server.set('views', path.resolve(__dirname, './public/'));
+
+    // Sets the view engine to EJS
+    server.set('view engine', 'ejs');
 
     require('./private/routes/router')(server);
 
