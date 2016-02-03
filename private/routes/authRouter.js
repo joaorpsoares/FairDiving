@@ -5,7 +5,9 @@
     var database = require('../database/database'),
         validator = require('validator'),
         crypto = require('crypto'),
+        email = require('../modules/email-module'),
         bcrypt = require('bcrypt-nodejs');
+
 
     // Definition of the routes related with authentication.
     module.exports = function(server) {
@@ -37,10 +39,19 @@
 
                                             database.insertNewUser(user)
                                                 .then(function() {
-                                                    res.status(200).send('OK');
+                                                    email.sendWelcome(req.body.email, buf.toString('hex'))
+                                                        .then(function(contact) {
+                                                            // Send the message to the log file
+                                                            console.log('@authRouter.js: Welcome e-mail sent to ' + contact);
+                                                            res.status(200).send('OK');
+                                                        })
+                                                        .catch(function(err) {
+                                                            console.log('@authRouter.js: Welcome e-mail not sent.');
+                                                            res.status(200).send(err);
+                                                        });
                                                 })
                                                 .catch(function(err) {
-                                                    res.status(406).send('Not OK');
+                                                    res.status(406).send(err);
                                                 });
                                         }
                                     });
@@ -102,4 +113,3 @@
     };
 
 }());
-

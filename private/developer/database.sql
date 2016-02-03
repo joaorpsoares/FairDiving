@@ -1,5 +1,8 @@
 DROP TABLE IF EXISTS countries CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS operators CASCADE;
+DROP TABLE IF EXISTS packageImage CASCADE;
+DROP TABLE IF EXISTS packages CASCADE;
 
 
 CREATE TABLE countries (
@@ -32,7 +35,7 @@ CREATE TABLE operators (
 );
 
 CREATE TABLE packageImage (
-	id BIGINT PRIMARY KEY,
+	id BIGSERIAL PRIMARY KEY,
 	imageName VARCHAR(255) NOT NULL
 );
 
@@ -45,7 +48,7 @@ CREATE TABLE packages (
 	price REAL NOT NULL,
 	description VARCHAR(500) NOT NULL,
 	-- Geolocation
-	country_code VARCHAR(2) NOT NULL,
+	country_code VARCHAR(2) REFERENCES countries(abrev),
 	lat REAL NOT NULL DEFAULT 0,
 	lng REAL NOT NULL DEFAULT 0
 );
