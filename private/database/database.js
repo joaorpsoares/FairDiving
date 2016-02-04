@@ -8,7 +8,8 @@
         client = new pg.Client(conString),
 
         // database modules
-        databaseUsers = require('./databaseUsers');
+        databaseUsers = require('./databaseUsers'),
+        databasePackages = require('./databasePackages');
 
     module.exports = {
 
@@ -22,6 +23,7 @@
 
                         // Connect to other database modules
                         databaseUsers.connect(client);
+                        databasePackages.connect(client);
                         resolve();
                     }
                 });
@@ -33,10 +35,39 @@
             client.disconnect();
         },
 
+        /*
+                USER RELATED FUNCTIONS
+        */
+
         // Function to check existence of a specific user
         checkExistence: function(email) {
             return databaseUsers.checkExistence([email]);
+        },
+
+        // Function to insert a new user on database
+        insertNewUser: function(user) {
+            return databaseUsers.insertNewUser(user);
+        },
+
+        // Function to get sensetive data of a user
+        getSensetiveData: function(email) {
+            return databaseUsers.getSensetiveData([email]);
+        },
+
+        // Function to update active atribute
+        updateActiveAtribute: function(token) {
+            return databaseUsers.updateActiveAtribute([token]);
+        },
+
+        /*
+                PACKAGE RELATED FUNCTIONS
+        */
+
+        // Function to insert a new package
+        insertNewPackage: function(divePackage) {
+            return databasePackages.insertNewPackage(divePackage);
         }
+
     };
 
 }());

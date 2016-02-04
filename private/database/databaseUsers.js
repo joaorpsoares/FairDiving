@@ -15,7 +15,25 @@
         // Function to check if there is already a user
         checkExistence: function(email) {
             return new Promise(function(resolve, reject) {
-                client.query('SELECT email FROM users WHERE email = $1', email, function(result, err) {
+                client.query('SELECT email FROM users WHERE email = $1', email, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+
+                        if (result.rows.length === 0) {
+                            resolve();
+                        } else {
+                            reject('This email already on our database.');
+                        }
+                    }
+                });
+            });
+        },
+
+        // Function to insert a new user on database.
+        insertNewUser: function(user) {
+            return new Promise(function(resolve, reject) {
+                client.query('INSERT INTO users(email, password, token) VALUES ($1, $2, $3) ', user, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {
@@ -25,14 +43,27 @@
             });
         },
 
-        // Function to insert a new user on database.
-        insertNewUser: function(user) {
+        // Function to retrieve a password of user
+        getSensetiveData: function(email) {
             return new Promise(function(resolve, reject) {
-                client.query('INSERT INTO users(email, password, token) VALUES ($1, $2, $3) ', user, function(result, err) {
+                client.query('SELECT password,active FROM users WHERE email = $1', email, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {
-                        resolve();
+                        resolve(result.rows);
+                    }
+                });
+            });
+        },
+
+        // Function to update an active atribute
+        updateActiveAtribute: function(token) {
+            return new Promise(function(resolve, reject) {
+                client.query('UPDATE users SET active = \'1\' WHERE token = $1', token, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result.rows);
                     }
                 });
             });
