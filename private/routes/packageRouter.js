@@ -42,8 +42,30 @@
                         })
                 }
             }
+        });
 
+        // Route to get all packages from database
+        server.get('/api/package', function(req, res) {
+            database.getPackages()
+                .then(function(packs) {
+                    res.status(200).send(packs);
+                })
+                .catch(function(err) {
+                    res.status(406).send('It was impossible to retrieve the packages.');
+                })
+        });
+
+        // Route to get a unique package informaton
+        server.get('/api/package/:id', function(req, res) {
+            database.getPackageID(req.params.id)
+                .then(function(result) {
+                    res.status(200).send(result);
+                })
+                .catch(function(err) {
+                    res.status(406).send(err);
+                })
         });
     };
 
 }());
+
