@@ -14,11 +14,11 @@
                 templateUrl: 'app/views/register.ejs'
             })
             .when('/login', {
-                controller: 'userCtrl',
+                controller: 'UserCtrl',
                 templateUrl: 'app/views/login.ejs'
             })
             .when('/register', {
-                controller: 'userCtrl',
+                controller: 'UserCtrl',
                 templateUrl: 'app/views/register.ejs'
             })
             .otherwise({
@@ -31,3 +31,4 @@
     });
 
 }());
+

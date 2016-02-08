@@ -16,12 +16,12 @@
 	
 	<!-- 100% Width & Height container  -->
 	<div class="login-fullwidith">
-		
 		<!-- Login Wrap  -->
 		<div class="login-wrap">
 			<img src="images/logo.png" class="login-img" alt="logo"/><br/>
 			<div class="login-c1">
 				<div class="cpadding50">
+					<div ng-if="errorMessage"> {{errorMessage}} <br/></div>
 					<input ng-model="user.email" type="email" class="form-control logpadding" placeholder="email" required>
 					<br/>
 					<input ng-model="user.password" type="password" class="form-control logpadding" placeholder="Password" required>
