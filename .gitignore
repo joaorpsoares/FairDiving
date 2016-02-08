@@ -3,8 +3,10 @@ logs
 *.log
 npm-debug.log*
 .DS_Store
+
 # Ignore secret files
 secrets/
+images/
 
 # Runtime data
 pids
