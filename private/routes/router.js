@@ -10,6 +10,16 @@
             res.render('index');
         });
 
+        // Route to send login page
+        server.get('/login', function(req, res) {
+            res.render('index');
+        });
+
+        // Route to send register page
+        server.get('/register', function(req, res) {
+            res.render('index');
+        });
+
         // Route to send forbidden view
         server.get('/forbidden', function(req, res) {
             res.render('index');
@@ -23,3 +33,4 @@
     };
 
 }());
+
