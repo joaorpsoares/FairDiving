@@ -19,6 +19,18 @@
                 });
 
         };
+        this.register = function(user) {
+
+            return $http.post('/api/register', user)
+                .success(function(res) {
+                    deferred.resolve();
+
+                })
+                .error(function(err) {
+                    deferred.reject(err);
+                });
+
+        };
     };
 
     // Injecting modules used for better minifing later on
@@ -28,4 +40,3 @@
     angular.module('fairdiving').service('userServices', userServices);
 
 }());
-

@@ -8,16 +8,30 @@
         $scope.user = {};
 
         $scope.login = function() {
-            if ($scope.userLogin === '' || $scope.userPassword === '') {
+            if ($scope.user.email === '' || $scope.user.password === '') {
                 // TODO: Show error
             } else {
-                console.log($scope.user);
                 userServices.login($scope.user)
                     .then(function() {
                         console.log("Login successful");
                     })
                     .catch(function() {
                         console.log("Login failed");
+                    });
+            }
+        };
+
+        $scope.register = function() {
+            console.log($scope.user);
+            if ($scope.user.email === '' || $scope.user.password === '' || $scope.user.confirmPassword === '') {
+                // TODO: Show error 
+            } else {
+                userServices.register($scope.user)
+                    .then(function() {
+                        console.log("Register successful");
+                    })
+                    .catch(function() {
+                        console.log("Register failed");
                     });
             }
         };
@@ -31,4 +45,3 @@
     angular.module('fairdiving').controller('UserCtrl', UserCtrl);
 
 }());
-

@@ -16,54 +16,57 @@
 
         // Route to register a user
         server.post('/api/register', function(req, res) {
-
-            if (validator.isEmail(req.body.email)) {
-                if (!validator.matches(req.body.password, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/))
-                    res.status(406).send('Your password needs to have at least one capital letter, one small letter, one number and a have a size of 6 or more ');
-                else {
-                    database.checkExistence(req.body.email)
-                        .then(function() {
-                            // TODO: crypto, send email
-                            crypto.randomBytes(32, function(err, buf) {
-                                if (err) {
-                                    res.status(406).send(err);
-                                } else {
-
-                                    bcrypt.hash(req.body.password, null, null, function(err, hash) {
-
-                                        if (err) {
-                                            res.status(406).send(err);
-                                        } else {
-
-                                            var user = [req.body.email, hash, buf.toString('hex')];
-
-                                            database.insertNewUser(user)
-                                                .then(function() {
-                                                    email.sendWelcome(req.body.email, buf.toString('hex'))
-                                                        .then(function(contact) {
-                                                            // Send the message to the log file
-                                                            console.log('@authRouter.js: Welcome e-mail sent to ' + contact);
-                                                            res.status(200).send('OK');
-                                                        })
-                                                        .catch(function(err) {
-                                                            console.log('@authRouter.js: Welcome e-mail not sent.');
-                                                            res.status(200).send(err);
-                                                        });
-                                                })
-                                                .catch(function(err) {
-                                                    res.status(406).send(err);
-                                                });
-                                        }
-                                    });
-                                }
-                            });
-                        })
-                        .catch(function(err) {
-                            res.status(406).send(err);
-                        });
-                }
+            if (req.body.password !== req.body.confirmPassword) {
+                res.status(406).send('Your passwords are diferents');
             } else {
-                res.status(400).send('The email that was given is not valid.');
+                if (validator.isEmail(req.body.email)) {
+                    if (!validator.matches(req.body.password, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/))
+                        res.status(406).send('Your password needs to have at least one capital letter, one small letter, one number and a have a size of 6 or more ');
+                    else {
+                        database.checkExistence(req.body.email)
+                            .then(function() {
+                                // TODO: crypto, send email
+                                crypto.randomBytes(32, function(err, buf) {
+                                    if (err) {
+                                        res.status(406).send(err);
+                                    } else {
+
+                                        bcrypt.hash(req.body.password, null, null, function(err, hash) {
+
+                                            if (err) {
+                                                res.status(406).send(err);
+                                            } else {
+
+                                                var user = [req.body.email, hash, buf.toString('hex')];
+
+                                                database.insertNewUser(user)
+                                                    .then(function() {
+                                                        email.sendWelcome(req.body.email, buf.toString('hex'))
+                                                            .then(function(contact) {
+                                                                // Send the message to the log file
+                                                                console.log('@authRouter.js: Welcome e-mail sent to ' + contact);
+                                                                res.status(200).send('OK');
+                                                            })
+                                                            .catch(function(err) {
+                                                                console.log('@authRouter.js: Welcome e-mail not sent.');
+                                                                res.status(200).send(err);
+                                                            });
+                                                    })
+                                                    .catch(function(err) {
+                                                        res.status(406).send(err);
+                                                    });
+                                            }
+                                        });
+                                    }
+                                });
+                            })
+                            .catch(function(err) {
+                                res.status(406).send(err);
+                            });
+                    }
+                } else {
+                    res.status(400).send('The email that was given is not valid.');
+                }
             }
         });
 
