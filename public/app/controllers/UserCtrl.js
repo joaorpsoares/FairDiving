@@ -2,7 +2,7 @@
 
     'use strict';
 
-    // Created the controller to the dashboard view
+    // Created the controller to the user view
     var UserCtrl = function($scope, userServices) {
 
         $scope.user = {};
@@ -21,6 +21,7 @@
             }
         };
 
+
         $scope.register = function() {
             console.log($scope.user);
             if ($scope.user.email === '' || $scope.user.password === '' || $scope.user.confirmPassword === '') {
@@ -35,6 +36,7 @@
                     });
             }
         };
+
 
     };
 
