@@ -11,15 +11,14 @@
 
             return $http.get('/api/package/' + Id)
                 .success(function(res) {
-                    deferred.resolve();
-
+                    deferred.resolve(res);
                 })
                 .error(function(err) {
                     deferred.reject(err);
                 });
 
         };
-       
+
     };
 
     // Injecting modules used for better minifing later on

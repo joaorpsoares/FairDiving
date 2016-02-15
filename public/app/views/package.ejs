@@ -1,8 +1,7 @@
 
+<div ng-include="'/app/views/header.ejs'"></div>
 
-
-<div ng-include="../pages.ejs"></div>
-	<div class="container breadcrub">
+	<div data-ng-init="getPackageID()" class="container breadcrub">
 	    <div>
 			<a class="homebtn left" href="/"></a>
 			<div class="left">
@@ -28,19 +27,22 @@
 						<div id="inner">
 							<div id="caroufredsel_wrapper2">
 								<div id="carousel">
-									<img ng-repeat = "image in packageOnUse.image" src="/package/{{ package.id }}/{{ image.name }}" alt="" />
+									<img src="../../images/default.jpg" alt="" /><!--ng-repeat = "image in packageOnUse.image"--> 
 								</div>
 							</div>
+							<!--
 							<div id="pager-wrapper">
 								<div id="pager">
 									<img ng-repeat = "image in packageOnUse.image" src="/package/{{ package.id }}/{{ image.name }}" alt="" />
 								</div>
 							</div>
+-->
 						</div>
 						<div class="clearfix"></div>
 						<button id="prev_btn2" class="prev2"><img src="/images/spacer.png" alt=""/></button>
 						<button id="next_btn2" class="next2"><img src="/images/spacer.png" alt=""/></button>
 					</div>
+
 				</div> <!-- /c-carousel -->
 			</div>
 			<!-- END OF SLIDER -->			
@@ -246,3 +248,4 @@
 			</div>
 		</div>
 	</div>
+<div ng-include="'/app/views/footer.ejs'"></div>

@@ -1,0 +1,1041 @@
+.darkblue{
+color:#003366;
+}
+
+.wh5percent{width:5%;}
+.wh15percent{width:15%;}
+.wh25percent{width:25%;}
+.wh35percent{width:35%;}
+.wh45percent{width:45%;}
+.wh55percent{width:55%;}
+.wh65percent{width:65%;}
+.wh75percent{width:75%;}
+.wh85percent{width:85%;}
+.wh95percent{width:95%;}
+
+.lh6{line-height:24px;}
+
+.flightsgrid{
+width:100%;
+background:url('../../../updates/update1/img/bgflights.png') #000 repeat-y;
+}
+.flightsgridmore{
+width:100%;
+height:30px;
+background:#006699;
+color:black;
+text-align:center;
+padding:4px 0px 0px 0px;
+}
+.flightsgridmore a{color:black; -webkit-transition:.3s;-moz-transition:.3s;transition:.3s;}
+.flightsgridmore a:hover{color:white; text-decoration:none;}
+
+
+.caroufredsel_wrapper2{-webkit-transition:.2s;-moz-transition:.2s;transition:.2s}
+#flightsfoo li{-webkit-transition:.2s;-moz-transition:.2s;transition:.2s}
+#flights2foo li{-webkit-transition:.2s;-moz-transition:.2s;transition:.2s}
+
+/*CarouFredSel*/
+.flights_wrapper {
+	background-color: transparent;
+	width: 50%;
+	height: 100%;
+	/*margin: 0px auto;*/
+	padding: 0px;
+	float:left;	
+}
+.flights_list_carousel {
+	background-color: transparent;
+	margin: 0px;
+	width: 100%;
+	overflow:hidden;
+	position:relative;
+}
+.flights_list_carousel ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: block;
+}
+.flights_list_carousel li {
+	font-size: 40px;
+	color: #cccccc;
+	text-align: center;
+	background-color: transparent;
+	/*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+	border-right: 1px solid rgba(255,255,255,0.2);
+	height: 240px;	
+	padding: 0;
+	margin: 0px 0px;
+	display: block;
+	float: left;
+	line-height:10px ;
+	text-align:center;
+	
+}
+
+.flights_list_carousel.responsive {
+	width: auto;
+	margin-left: 0;
+}
+.flightsprev {
+	width:20px;
+	height:20px;
+	float: left;
+	margin-left: 20px;
+	background:#006699;
+	position:absolute;
+	top:10px;
+	left:-10px;
+}
+
+.flightsprev:hover{
+	background:#72bf66;
+}
+a.flightsprev    img {width:8px;height:14px; display:block; background:url('../../../images/sprite.png')  -13px -36px; margin:1px 0 0 5px;}
+a:hover.flightsprev   img {width:8px;height:14px; display:block; background:url('../../../images/sprite.png')  -13px -54px;}
+
+
+.flightsnext {
+	width:20px;
+	height:20px;
+	float: right;
+	margin-right: 20px;
+	background:#006699;
+	position:absolute;
+	top:10px;
+	right:-11px;
+}
+.flightsnext:hover{
+	background:#72bf66;
+}
+a.flightsnext    img {width:8px;height:14px; display:block; background:url('../../../images/sprite.png')  -6px -35px; margin:0px 0 0 8px;}
+a:hover.flightsnext   img {width:8px;height:14px; display:block; background:url('../../../images/sprite.png')  -6px -53px;}
+/*END OF CarouFredSel*/
+
+
+
+
+.fconnection{
+color:white;
+text-align:center;
+padding:10px;
+border-bottom: 1px solid  rgba(255,255,255,0.2);
+border-right: 1px solid  rgba(255,255,255,0.2);
+}
+.flights_list_carousel li img{
+	/*width:70%;*/
+}
+.fln{ width:100%; height:90px; display:block; border-bottom: 1px solid  rgba(255,255,255,0.2);}
+li.fch{height:90px!important; }
+
+li.fch img{width:100%; }
+li.fch2 img{width:100%; }
+
+
+@media (min-width: 700px) {
+li.fch img{width:auto; }
+li.fch2 img{width:auto; }
+
+}
+
+.ftable li{
+clear:both;
+width:100%;
+height:50px;
+padding:20px 0px;
+border-right: 0px;
+border-bottom: 1px solid  rgba(255,255,255,0.2);
+font-size:18px;
+}
+.ftable li a{color:#ccc;}
+.ftable li a:hover{color:#fff; text-decoration:none;}
+.ftable li:hover {background: rgba(255,255,255,0.2);}
+.ftable li.fch:hover {background: none;}
+.ftable li:hover a{color:#fff;}
+
+
+.ftable2 li{
+clear:both;
+width:100%!important;
+height:50px!important;
+padding:20px 0px!important;
+border-left: 0px!important;
+border-bottom: 1px solid  rgba(255,255,255,0.2);
+font-size:18px!important;;
+}
+li.fch2{height:90px!important; }
+
+.ftable2 li a{color:#ccc;}
+.ftable2 li a:hover{color:#fff; text-decoration:none;}
+.ftable2 li:hover {background: rgba(255,255,255,0.2);}
+.ftable2 li.fch2:hover {background: none;}
+.ftable2 li:hover a{color:#fff;}
+
+
+
+
+
+
+
+/*CarouFredSel*/
+.flights2_wrapper {
+	background-color: transparent;
+	width: 50%;
+	height: 100%;
+	/*margin: 0px auto;*/
+	padding: 0px;
+	float:right;
+}
+.flights2_list_carousel {
+	background-color: transparent;
+	margin: 0px;
+	width: 100%;
+	overflow:hidden;
+	position:relative;
+}
+.flights2_list_carousel ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: block;
+}
+.flights2_list_carousel li {
+	font-size: 40px;
+	color: #cccccc;
+	text-align: center;
+	background-color: transparent;
+	/*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+	border-left: 1px solid rgba(255,255,255,0.2);
+	height: 240px;	
+	padding: 0;
+	margin: 0px 0px;
+	display: block;
+	float: left;
+	line-height:10px ;
+	text-align:center;
+	
+}
+
+.flights2_list_carousel.responsive {
+	width: auto;
+	margin-left: 0;
+}
+.flights2prev {
+	width:20px;
+	height:20px;
+	float: left;
+	margin-left: 20px;
+	background:#006699;
+	position:absolute;
+	top:10px;
+	left:-10px;
+}
+
+.flights2prev:hover{
+	background:#72bf66;
+}
+a.flights2prev    img {width:8px;height:14px; display:block; background:url('../../../images/sprite.png')  -13px -36px; margin:1px 0 0 5px;}
+a:hover.flights2prev   img {width:8px;height:14px; display:block; background:url('../../../images/sprite.png')  -13px -54px;}
+
+
+.flights2next {
+	width:20px;
+	height:20px;
+	float: right;
+	margin-right: 20px;
+	background:#006699;
+	position:absolute;
+	top:10px;
+	right:-11px;
+}
+.flights2next:hover{
+	background:#72bf66;
+}
+a.flights2next    img {width:8px;height:14px; display:block; background:url('../../../images/sprite.png')  -6px -35px; margin:0px 0 0 8px;}
+a:hover.flights2next   img {width:8px;height:14px; display:block; background:url('../../../images/sprite.png')  -6px -53px;}
+/*END OF CarouFredSel*/
+
+
+
+
+
+
+.filtertip2 {height:100px; background:#fff; padding:0px; color:#999999; position:relative; text-align:center; line-height:10px; font-family:'Open Sans'}
+.filtertip2 a{color:#999999;}
+.tip-arrow2{width:33px; height:9px; background:url('../../../updates/update1/img/tip-arrow.png'); position:absolute; bottom:-9px; left:50%; margin-left:-15px;}
+
+
+
+
+/*#####################
+		FLIGHTS
+#####################*/
+.fblueline{
+background:#006699;
+padding:3px 10px 3px 10px;
+color:#fff;
+}
+.fgreenline{
+background:#72bf66;
+padding:3px 10px 3px 10px;
+color:#fff;
+}
+.frow1{
+background:#f2f2f2;
+min-height:110px;
+color:#666;
+border-left: 1px solid #e8e8e8;
+border-bottom: 1px solid #e8e8e8;
+border-right: 1px solid #e8e8e8;
+}
+.frowexpand{
+background:#fdf8da;
+color:#666;
+border-left: 1px solid #e8e8e8;
+border-bottom: 1px solid #e8e8e8;
+border-right: 1px solid #e8e8e8;
+}
+
+.frow2{
+background:#ffffff;
+min-height:110px;
+color:#666;
+border-left: 1px solid #e8e8e8;
+border-bottom: 1px solid #e8e8e8;
+border-right: 1px solid #e8e8e8;
+}
+.fselect{
+background:#f2f2f2;
+padding:5px 7px 7px 7px;
+text-align:right;
+}
+.table  tbody > tr > td{
+border-top:0px!important;
+width:20%;
+}
+.radiomargin0{
+margin:0px;
+}
+
+
+
+
+
+
+/*#####################
+	 Hide button
+#####################*/
+.hidebtn{
+border:2px solid #ef9348;
+padding:5px 15px 5px 15px;
+background:#fff;
+color:#ef9348;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+-webkit-transition:.2s;-moz-transition:.2s;transition:.2s
+}
+.hidebtn:hover{
+border:2px solid #ef9348;
+color:#fff;
+background:#ef9348;
+}
+.hidebtn:hover.cunvailable{
+border:2px solid #ebebeb;
+padding:5px 15px 5px 15px;
+background:#fff;
+color:#999;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+-webkit-transition:.2s;-moz-transition:.2s;transition:.2s
+}
+
+
+
+
+.lightbtn{
+border:2px solid #ebebeb;
+padding:5px 15px 5px 15px;
+background:#fff;
+color:#999;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+-webkit-transition:.2s;-moz-transition:.2s;transition:.2s
+}
+.lightbtn:hover{
+border:2px solid #e2e2e2;
+padding:5px 15px 5px 15px;
+background:#fff;
+color:#999;
+}
+.lightbtn:hover.cunvailable{
+border:2px solid #ebebeb;
+padding:5px 15px 5px 15px;
+background:#fff;
+color:#999;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+-webkit-transition:.2s;-moz-transition:.2s;transition:.2s
+}
+
+
+
+
+.selectbtn{
+border:2px solid #0099cc;
+padding:5px 10px 5px 10px;
+background:#0099cc;
+color:#fff;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+-webkit-transition:.2s;-moz-transition:.2s;transition:.2s
+}
+.selectbtn:hover{
+border:2px solid #006699;
+padding:5px 10px 5px 10px;
+background:#006699;
+color:#fff;
+}
+.selectbtn:hover.cunvailable{
+border:2px solid #ebebeb;
+padding:5px 15px 5px 15px;
+background:#fff;
+color:#999;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+-webkit-transition:.2s;-moz-transition:.2s;transition:.2s
+}
+
+
+.bookbtn2{
+border:2px solid #ebebeb;
+padding:5px 15px 5px 15px;
+background:#fff;
+color:#999;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+-webkit-transition:.2s;-moz-transition:.2s;transition:.2s
+}
+.bookbtn2:hover{
+border:2px solid #72bf66;
+color:#fff;
+background:#72bf66;
+}
+.bookbtn2:hover.cunvailable{
+border:2px solid #ebebeb;
+padding:5px 15px 5px 15px;
+background:#fff;
+color:#999;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+-webkit-transition:.2s;-moz-transition:.2s;transition:.2s
+}
+
+
+
+
+
+
+
+
+span.farrow{
+width:12px;
+height:5px;
+display:inline-block;
+background:url('../../../updates/update1/img/arrow.png') no-repeat;
+position:relative;
+top:-2px;
+}
+span.farrow-top{
+width:5px;
+height:12px;
+display:inline-block;
+background:url('../../../updates/update1/img/arrow-top.png') no-repeat;
+}
+span.farrow-btm{
+width:5px;
+height:12px;
+display:inline-block;
+background:url('../../../updates/update1/img/arrow-btm.png') no-repeat;
+}
+
+
+
+
+
+
+
+/*###############################
+	 FLIGHTS TABLE RESPONSIVE
+#################################*/
+
+ul.flightstable{
+margin:0px;
+padding:0px;
+}
+ul.flightstable li{
+min-height:50px;
+border:0px solid #ccc;
+list-style-type: none;
+margin:0px;
+padding:0px;
+}
+ul.flightstable li.ft1{
+float:none;
+width:100%;
+text-align:left;
+padding: 0px 0px 0px 20px;
+}
+ul.flightstable li.ft2{
+float:left;
+width:33%;
+padding: 0px 0px 0px 20px;
+}
+ul.flightstable li.ft3{
+float:left;
+width:33%;
+}
+ul.flightstable li.ft4{
+float:left;
+width:33%;
+}
+ul.flightstable li.ft5{
+float:none;
+width:100%;
+clear:both;
+text-align:right;
+padding: 0px 20px 0px 0px;
+}
+
+
+@media (min-width: 600px) {
+
+	ul.flightstable li.ft1{
+	float:left;
+	width:20%;
+	text-align:center;
+	padding: 0px;
+	}
+	ul.flightstable li.ft2{
+	float:left;
+	width:20%;
+	padding: 0px;
+	}
+	ul.flightstable li.ft3{
+	float:left;
+	width:20%;
+	}
+	ul.flightstable li.ft4{
+	float:left;
+	width:20%;
+	}
+	ul.flightstable li.ft5{
+	float:left;
+	width:20%;
+	clear:none;
+	}
+
+}
+/*	 END OF FLIGHTS TABLE RESPONSIVE */
+
+
+
+
+
+
+
+
+
+/*###############################
+	 FLIGHTS PAYMENT PAGE
+#################################*/
+
+.fdash{
+width:100%;
+height:1px;
+background:url('../../../updates/update1/img/dash.png');
+}
+
+.fcircle{
+width:39px;
+height:39px;
+border:2px solid #ebebeb;
+background:#fff;
+-webkit-border-radius: 100px;
+-moz-border-radius: 100px;
+border-radius: 100px;
+position:relative;
+z-index:100;
+}
+.fline2px{
+width:100%;
+height:2px;
+background:#ebebeb;
+display:block;
+position:relative;
+top:-20px;
+z-index:10;
+}
+
+span.fdeparture{
+width:25px;
+height:21px;
+background:url('../../../updates/update1/img/departure.png') no-repeat;
+display:block;
+margin:6px 0px 0px 4px;
+}
+span.fstop{
+width:25px;
+height:21px;
+background:url('../../../updates/update1/img/stop.png') no-repeat;
+display:block;
+margin:6px 0px 0px 4px;
+}
+span.farrival{
+width:25px;
+height:21px;
+background:url('../../../updates/update1/img/arrival.png') no-repeat;
+display:block;
+margin:6px 0px 0px 4px;
+}
+
+
+span.fcaricon{
+width:25px;
+height:21px;
+background:url('../../../updates/update1/img/caricon.png') no-repeat;
+display:block;
+margin:6px 0px 0px 4px;
+}
+span.fhotelicon{
+width:25px;
+height:21px;
+background:url('../../../updates/update1/img/hotelicon.png') no-repeat;
+display:block;
+margin:6px 0px 0px 4px;
+}
+
+
+
+/*###############################
+	 WE ARE SEARCHING
+#################################*/
+
+img.search-logo{margin-bottom:5px; width:130px;}
+.blue{color:#006699;}
+
+.login-wrap2{
+width:80%;
+height:450px;
+background:transparent;
+margin:auto auto;
+position:absolute;
+}
+@media (min-width: 700px) {
+	.login-wrap2{
+	width:660px;
+	height:450px;
+	background:transparent;
+	margin:auto auto;
+	position:absolute;
+	}
+}
+
+.searchingbg{
+width:100%;
+height:250px;
+background:white;
+}
+
+ul.leftatr{
+list-style-type:none;
+margin:0px;
+padding:0px;
+float:left;
+width:40%;
+}
+ul.leftatr li{
+height:50px;
+background:#006699;
+border-bottom:2px solid #e7e7e7;
+text-align:right;
+padding-top:15px;
+padding-right:20px;
+text-transform:uppercase;
+color:#fff;
+font-weight:700;
+font-size:14px;
+}
+
+
+ul.rightatr{
+list-style-type:none;
+margin:0px;
+padding:0px;
+float:right;
+width:60%;
+}
+ul.rightatr li{
+height:50px;
+background:#fff;
+border-bottom:2px solid #e7e7e7;
+text-align:left;
+padding-top:15px;
+padding-left:20px;
+text-transform:uppercase;
+color:#999999;
+font-weight:700;
+font-size:14px;
+}
+
+
+/*###############################
+		CARS LISTINGS
+#################################*/
+
+.carscontainer{
+border:1px solid #e6e6e6;
+
+}
+
+
+span.icn-air{
+width:16px;
+height:15px;
+background:url('../../../updates/update1/img/icon-air.png')no-repeat;
+display:inline-block;
+position:relative;
+top:3px;
+margin-right:7px;
+}
+span.icn-gas{
+width:16px;
+height:15px;
+background:url('../../../updates/update1/img/icon-gas.png')no-repeat;
+display:inline-block;
+position:relative;
+top:3px;
+margin-right:7px;
+}
+span.icn-gear{
+width:16px;
+height:15px;
+background:url('../../../updates/update1/img/icon-gear.png')no-repeat;
+display:inline-block;
+position:relative;
+top:3px;
+margin-right:7px;
+}
+.purchasecontainer{
+border-top:1px solid #e6e6e6;
+margin-top:10px;
+padding:10px 20px 10px 20px;
+}
+
+
+.carscontainer img{opacity:0.9; -webkit-transition:.2s;-moz-transition:.2s;transition:.2s}
+.carscontainer img:hover{opacity:1;}
+
+
+
+/*###############################
+	   RENTACARS PAYMENT
+#################################*/
+
+.cposalert{
+position:absolute;
+bottom:28px;
+width:95%;
+text-align:right;
+}
+.alertcust{
+border-radius:0px;
+margin:0 auto;
+border:0px;
+text-align:left;
+}
+
+
+/*###############################
+			ACTIVITIES
+#################################*/
+.itemlabel4{background:#FFF; width:100%; height:210px;  font-family:"Open Sans"; font-size:13px; line-height:15px; overflow:hidden; border:1px solid #e8e8e8;}
+
+
+
+
+
+
+
+
+/*###############################
+			CRUISES
+#################################*/
+
+
+.cruisedropd{
+width:100%;
+
+background:#f2f2f2;
+border:1px solid #e8e8e8;
+
+}
+.crclose{
+border-top:1px solid #e8e8e8;
+padding:10px;
+background:#fff;
+margin-top:-1px;
+}
+
+ul.cruislist{
+list-style-type:none;
+margin:0px;
+padding:0px;
+width:16.6%;
+float:left;
+
+}
+
+ul.cruislist li{
+height:65px;
+background:url('../../../updates/update1/img/dash.png') repeat-x;
+text-align:center;
+padding:15px 0;
+}
+
+.crpos{
+margin-right:5px;
+float:right;
+}
+li.crcstm01{
+text-transform:uppercase;
+color:#999;
+font-weight:700;
+font-size:13px;
+font-family:"Open Sans";
+padding-top:24px!important;
+}
+
+li.crcstm02{
+text-transform:uppercase;
+color:#ff6633;
+font-weight:600;
+font-size:13px;
+
+padding-top:24px!important;
+}
+
+
+
+
+span.greensquare{
+width:28px;
+height:28px;
+background:#72bf66;
+display:inline-block;
+margin-right:20px;
+}
+
+span.bluesquare{
+width:28px;
+height:28px;
+background:#6699cc;
+display:inline-block;
+margin-right:20px;
+}
+
+.indent-5{
+text-indent:-4px;
+}
+
+
+
+
+/*###############################
+	      NEW HOMEPAGE
+#################################*/
+
+.navbar-wrapper3{min-height:0px; background:transparent; border-bottom:0px solid #cccccc;  padding-bottom:0px;}
+.mtslideb{position:relative; top:0px;}
+.mtnav2{position:relative; top:0px;}
+@media (min-width: 992px) {
+.navbar-wrapper3{min-height:110px; background:transparent; border-bottom:0px solid #cccccc;  padding-bottom:0px;}
+.mtslideb{position:relative; top:0px;}
+.mtnav2{position:relative; top:30px;}
+}
+
+#dajy{
+height:100%!important;
+}
+
+/*if you change the margin-top you must change it also in js-new-homepage.js*/
+.cst03{background:#fff; margin-top:900px; position:relative;  z-index:100; display:block;}
+
+
+.navbar-brand{
+padding:12px 15px 0px 0!important;
+}
+
+
+.nav2 > li > a{
+font-family:Lato;
+font-size:14px;
+font-weight:bold;
+}
+.nav2 > li.active > a{
+}
+
+.navlight > li > a{
+color:#fff;
+}
+.navlight > li.active> a{
+color:#fff;
+}
+.navdark > li > a{
+color:#666!important;
+}
+.navdark > li.active > a{
+color:#006599;
+}
+
+
+img.logo2 {width:108px; margin-top:-13px;}
+@media (min-width: 992px) {
+img.logo2 {width:108px; margin-top:-43px;}
+}
+
+
+
+.fullscreen-container2 {
+	width:100% !important;
+	position:relative;
+	padding:0;
+	height:100%!important;
+}
+@media (min-width: 992px) {
+	.fullscreen-container2 {
+		width:100% !important;
+		position:relative;
+		padding:0;
+		height:100%!important;
+	}
+}
+
+
+.navbar-fixed-top2{
+position:fixed;
+top:0;
+left:0;
+right:0;
+z-index:1000;
+}
+.navbg{
+background:#fff;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.13);
+}
+
+.searchvalign{
+margin-top:200px;
+}
+
+.searchcontainer{
+z-index:100; 
+position:relative; 
+left:0;
+right:0; 
+max-width:550px; 
+margin:  auto; 
+margin-top:160px;
+}
+
+.tsdow{
+text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.tp-leftarrow{
+display:block;
+}
+.tp-rightarrow{
+display:block;
+}
+
+
+.mw400{
+	max-width:400px;
+}
+.inph{
+	height:40px;
+	z-index:10000;
+}
+.nbtn-search {
+  /*color: #333333;
+  background-color: #ffffff;
+  border-color: #cccccc;
+  */
+	text-transform:uppercase;
+	margin-top:-38px;
+	margin-right:2px;
+	height:36px;
+	border: 1px solid #d75124;
+	background: #e35121;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ff6633), to(#e35121));
+	background: -webkit-linear-gradient(top, #ff6633, #e35121);
+	background: -moz-linear-gradient(top, #ff6633, #e35121);
+	background: -ms-linear-gradient(top, #ff6633, #e35121);
+	background: -o-linear-gradient(top, #ff6633, #e35121);
+	padding: 7.5px 13px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: rgba(0,0,0,0.18) 0 1px 0;
+	-moz-box-shadow: rgba(0,0,0,0.18) 0 1px 0;
+	box-shadow: rgba(0,0,0,0.18) 0 1px 0;
+	text-shadow: rgba(0,0,0,.4) 0 -1px 0;
+	color:#ffffff;
+	font-size: 13px;
+	font-family: Helvetica, Arial, Sans-Serif;
+	text-decoration: none;
+	vertical-align: middle;
+
+	font-family:"Open Sans";
+	font-weight:700;
+  
+-webkit-transition:.3s;-moz-transition:.3s;transition:.3s;
+}
+.nbtn-search:hover{
+	/*color:#be3507;*/
+	color:#ffffff;
+	/*text-shadow: rgba(255,255,255,.4) 0 1px 0;*/
+	text-shadow: rgba(0,0,0,.4) 0 -1px 0;
+	
+	background: #ff6633;
+	background: -webkit-gradient(linear, left top, left bottom, from(#e35121), to(#ff6633));
+	background: -webkit-linear-gradient(top, #e35121, #ff6633);
+	background: -moz-linear-gradient(top, #e35121, #ff6633);
+	background: -ms-linear-gradient(top, #e35121, #ff6633);
+	background: -o-linear-gradient(top, #e35121, #ff6633);
+	
+	
+}
+
+
+.lnews{
+padding:50px;
+text-align:center;
+font-family:Lato;
+font-size:24px;
+color:#000;
+text-transform:uppercase;
+}
+
+.right0{
+right:0px;
+}

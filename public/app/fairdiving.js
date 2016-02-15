@@ -11,15 +11,19 @@
         $routeProvider
             .when('/', {
                 controller: 'UserCtrl',
-                templateUrl: 'app/views/register.ejs'
+                templateUrl: 'app/views/login.ejs'
             })
             .when('/login', {
-                controller: 'userCtrl',
+                controller: 'UserCtrl',
                 templateUrl: 'app/views/login.ejs'
             })
             .when('/register', {
-                controller: 'userCtrl',
+                controller: 'UserCtrl',
                 templateUrl: 'app/views/register.ejs'
+            })
+            .when('/package', {
+                controller: 'UserCtrl',
+                templateUrl: 'app/views/package.ejs'
             })
             .otherwise({
                 redirectTo: '/'
