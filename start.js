@@ -31,7 +31,11 @@
             console.log(err);
         });
 
-    server.use(morgan('dev'));
+    server.use(morgan('dev', {
+        skip: function(req, res) {
+            return res.statusCode < 400
+        }
+    }));
 
     // Allows the server to read JSON files
     server.use(bodyParser.urlencoded({
@@ -56,3 +60,4 @@
     });
 
 }());
+

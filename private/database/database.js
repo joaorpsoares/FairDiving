@@ -66,6 +66,16 @@
         // Function to insert a new package
         insertNewPackage: function(divePackage) {
             return databasePackages.insertNewPackage(divePackage);
+        },
+
+        // Function to retrieve all packages
+        getPackages: function() {
+            return databasePackages.getPackages();
+        },
+
+        // Function to retrieve a certain package
+        getPackageID: function(id) {
+            return databasePackages.getPackageID([id]);
         }
 
     };
