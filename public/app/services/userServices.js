@@ -3,7 +3,7 @@
     'use strict';
 
     // Created the services related to users
-    var userServices = function($http, $q, $cookies, $window) {
+    var UserServices = function($http, $q, $cookies, $window) {
 
         var deferred = $q.defer();
 
@@ -15,6 +15,7 @@
 
                 })
                 .error(function(err) {
+                    console.log(err);
                     deferred.reject(err);
                 });
 
@@ -27,6 +28,7 @@
 
                 })
                 .error(function(err) {
+                    console.log(err);
                     deferred.reject(err);
                 });
 
@@ -34,9 +36,10 @@
     };
 
     // Injecting modules used for better minifing later on
-    userServices.$inject = ['$http', '$q', '$cookies', '$window'];
+    UserServices.$inject = ['$http', '$q', '$cookies', '$window'];
 
     // Enabling the service in the app
-    angular.module('fairdiving').service('userServices', userServices);
+    angular.module('fairdiving').service('UserServices', UserServices);
 
 }());
+

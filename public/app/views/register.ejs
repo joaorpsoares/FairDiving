@@ -31,10 +31,9 @@
 			<img src="images/logo.png" class="login-img" alt="logo"/><br/>
 			<div class="register-c1">
 				<div class="cpaddingleftright50">
+				<div ng-if="errorMessage"> {{errorMessage}} <br/></div>
 				<h3>Register</h3>
 					<!-- TODO: Username no mínimo-->
-					<!--<input type="text" class="form-control logpadding" name="username" placeholder="Username" required>-->
-					
 					<input ng-model="user.email" type="email" class="form-control logpadding" name="email" placeholder="Email" required>
 					<br/>
 					<input ng-model="user.password" type="password" class="form-control logpadding" name="password" placeholder="Password" id="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"   required title="5 characters minimum" required>
