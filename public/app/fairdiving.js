@@ -22,7 +22,7 @@
                 templateUrl: 'app/views/register.ejs'
             })
             .when('/package', {
-                controller: 'UserCtrl',
+                controller: 'PkgCtrl',
                 templateUrl: 'app/views/package.ejs'
             })
             .otherwise({
