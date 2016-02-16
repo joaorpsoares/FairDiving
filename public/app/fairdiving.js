@@ -10,8 +10,8 @@
         // Definition of the view routes
         $routeProvider
             .when('/', {
-                controller: 'UserCtrl',
-                templateUrl: 'app/views/login.ejs'
+                // controller: 'UserCtrl',
+                templateUrl: 'app/views/home.ejs'
             })
             .when('/login', {
                 controller: 'UserCtrl',
@@ -35,4 +35,3 @@
     });
 
 }());
-
