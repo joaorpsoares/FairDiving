@@ -6,13 +6,15 @@
         validator = require('validator'),
         crypto = require('crypto'),
         email = require('../modules/email-module'),
-        bcrypt = require('bcrypt-nodejs');
+        bcrypt = require('bcrypt-nodejs'),
+        token = require('../modules/token-module'),
+        mdl = require('./middleware/middleware');
 
 
     // Definition of the routes related with authentication.
     module.exports = function(server) {
 
-        // TODO: VERIFY COOKIE
+        // TODO: INSERT DEFAULT ROLE
 
         // Route to register a user
         server.post('/api/register', function(req, res) {
@@ -25,7 +27,7 @@
                     if (!validator.matches(req.body.password, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/))
                         res.status(406).send('Your password needs to have at least one capital letter, one small letter, one number and a have a size of 6 or more ');
                     else {
-                        database.checkExistence(req.body.email)
+                        database.checkExistence(req.body.email.toLowerCase())
                             .then(function() {
                                 // TODO: crypto, send email
                                 crypto.randomBytes(32, function(err, buf) {
@@ -39,7 +41,7 @@
                                                 res.status(406).send(err);
                                             } else {
 
-                                                var user = [req.body.email, hash, buf.toString('hex')];
+                                                var user = [req.body.email.toLowerCase(), hash, buf.toString('hex')];
 
                                                 database.insertNewUser(user)
                                                     .then(function() {
@@ -80,19 +82,25 @@
                         if (result.length > 0) {
                             if (!result[0].active) res.status(406).send('You need to complete the registration before login. Check you email.');
                             else {
-                                bcrypt.compare(req.body.password, result[0].password, function(err, result) {
+                                bcrypt.compare(req.body.password, result[0].password, function(err, _result) {
                                     if (err) {
-                                        res.status(406).send(err);
+                                        res.status(406).send('Password and email didnt match.');
                                     } else {
-                                        if (result)
-                                            res.status(200).send('OK');
-                                        else
+                                        if (_result) {
+                                            token.sign(result[0].token)
+                                                .then(function(token) {
+                                                    res.status(200).send(token);
+                                                }).catch(function(err) {
+                                                    res.status(400).send('We could not generate a token for this session');
+                                                });
+                                        } else {
                                             res.status(406).send('Email or password not correct.');
+                                        }
                                     }
                                 });
                             }
                         } else {
-                            res.status(406).send(err);
+                            res.status(406).send('Email is not known.');
                         }
                     })
                     .catch(function(err) {

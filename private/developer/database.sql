@@ -3,6 +3,8 @@ DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS operators CASCADE;
 DROP TABLE IF EXISTS packageImage CASCADE;
 DROP TABLE IF EXISTS packages CASCADE;
+DROP TABLE IF EXISTS roles CASCADE;
+DROP TABLE IF EXISTS roles_users CASCADE;
 
 
 CREATE TABLE countries (
@@ -52,6 +54,23 @@ CREATE TABLE packages (
 	lat REAL NOT NULL DEFAULT 0,
 	lng REAL NOT NULL DEFAULT 0
 );
+
+
+CREATE TABLE roles (
+	id BIGSERIAL PRIMARY KEY,
+	description VARCHAR(10) NOT NULL
+);
+
+CREATE TABLE roles_users (
+	roleid BIGINT REFERENCES roles(id),
+	userid BIGINT REFERENCES users(id)
+);
+
+-- INSERT ROLES
+INSERT INTO roles ("description") VALUES (E'GUEST');
+INSERT INTO roles ("description") VALUES (E'MEMBER');
+INSERT INTO roles ("description") VALUES (E'OPERATOR');
+INSERT INTO roles ("description") VALUES (E'ADMIN');
 
 -- INSERT COUNTRIES
 

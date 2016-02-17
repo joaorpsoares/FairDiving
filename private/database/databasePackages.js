@@ -33,10 +33,10 @@
                     if (err) {
                         reject(err);
                     } else {
-                        console.log("List of packages retrieved was deliver successful")
+                        console.log("List of packages retrieved was deliver successful");
                         resolve(result.rows);
                     }
-                })
+                });
             });
         },
 
@@ -47,7 +47,7 @@
                     if (err) {
                         reject(err);
                     } else {
-                        console.log("List of packages retrieved was deliver successful")
+                        console.log("List of packages retrieved was deliver successful");
                         resolve(result.rows[0]);
                     }
                 })

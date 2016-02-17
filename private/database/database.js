@@ -51,12 +51,27 @@
 
         // Function to get sensetive data of a user
         getSensetiveData: function(email) {
-            return databaseUsers.getSensetiveData([email]);
+            return databaseUsers.getSensetiveData([email.toLowerCase()]);
         },
 
         // Function to update active atribute
         updateActiveAtribute: function(token) {
             return databaseUsers.updateActiveAtribute([token]);
+        },
+
+        // Function to retrieve a clearance level from a token
+        retrieveUsrLevelByToken: function(token) {
+            return databaseUsers.retrieveUsrLevelByToken([token]);
+        },
+
+        // Function to retrieve an userID using only token
+        retrieveUsrIDByToken: function(token) {
+            return databaseUsers.retrieveUsrIDByToken([token]);
+        },
+
+        // Function to insert a default role on registered people
+        insertUsrLevel: function(usrId) {
+            return databaseUsers.insertUsrLevel(usrId);
         },
 
         /*
@@ -81,4 +96,3 @@
     };
 
 }());
-

@@ -1,0 +1,14 @@
+{
+    "API": {
+        "GUEST": ["/api/login", "/api/register"],
+        "MEMBER": [],
+        "OPERATOR": [],
+        "ADMIN": []
+    },
+    "VIEWS": {
+        "GUEST": ["/", "/login", "/register"],
+        "MEMBER": ["/"],
+        "OPERATOR": [],
+        "ADMIN": []
+    }
+}
