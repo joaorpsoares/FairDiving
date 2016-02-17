@@ -21,6 +21,9 @@
                 controller: 'UserCtrl',
                 templateUrl: 'app/views/register.ejs'
             })
+            .when('/forbidden', {
+                templateUrl: 'app/views/forbidden.ejs'
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -31,4 +34,3 @@
     });
 
 }());
-

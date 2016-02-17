@@ -11,8 +11,13 @@
 
             return $http.post('/api/login', user)
                 .success(function(res) {
-                    deferred.resolve();
+                    
+                    // Use cookie
+                    $cookies.put('session', res, {
+                        path: '/'
+                    });
 
+                    deferred.resolve();
                 })
                 .error(function(err) {
                     console.log(err);
