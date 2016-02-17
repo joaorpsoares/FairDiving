@@ -53,7 +53,8 @@
                         <!-- <li><a href="#">Become a Partner</a></li> -->
                         <li><a href="/about">About Us</a></li>
                         <li><a href="/contact">Contact</a></li>
-                        <!-- <li class="dropdown active">
+                        <li class="dropdown active">
+                            <!--
 					{% if user %}
 					<a data-toggle="dropdown" class="dropdown-toggle">{{ user.username }} <b class="lightcaret mt-3"></b></a>
                     <ul class="dropdown-menu posright-0">
@@ -69,24 +70,28 @@
 							</div>
 						</li>
                     </ul>
-					{% else %}
-					<a data-toggle="dropdown" class="dropdown-toggle">Not logged in <b class="lightcaret mt-3"></b></a>
-                    <ul class="dropdown-menu posright-0">
-						<li>
-							<div class="row dropwidth01">
-								<ul class="droplist col-md-6">
-									<li class="dropdown-header">Already have an account?</li>
-									<a href="/login"><li>Login</li></a>
-								</ul>
-								<ul class="droplist col-md-6">
-									<li class="dropdown-header">If not, create one!</li>
-									<a href="/register"><li>Register</li></a>
-								</ul>
-							</div>
-						</li>
-                    </ul>
-					{% endif %}
-                  </li>-->
+					{% else %}-->
+                            <a data-toggle="dropdown" class="dropdown-toggle">Not logged in <b class="lightcaret mt-3"></b></a>
+                            <ul class="dropdown-menu posright-0">
+                                <li>
+                                    <div class="row dropwidth01">
+                                        <ul class="droplist col-md-6">
+                                            <li class="dropdown-header">Already have an account?</li>
+                                            <a href="/login">
+                                                <li>Login</li>
+                                            </a>
+                                        </ul>
+                                        <ul class="droplist col-md-6">
+                                            <li class="dropdown-header">If not, create one!</li>
+                                            <a href="/register">
+                                                <li>Register</li>
+                                            </a>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- {% endif %}-->
+                        </li>
                     </ul>
                 </div>
                 <!-- /Navigation-->
