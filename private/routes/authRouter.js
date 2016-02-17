@@ -18,7 +18,9 @@
 
         // Route to register a user
         server.post('/api/register', function(req, res) {
-            if (req.body.password !== req.body.confirmPassword) {
+             if (!validator.matches(req.body.password, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/)) {
+                        res.status(406).send('Your password needs to have at least one capital letter, one small letter, one number and a have a size of 6 or more ');
+            } else if (req.body.password !== req.body.confirmPassword) {
                 res.status(406).send('Your passwords are diferents');
             } else {
                 if (validator.isEmail(req.body.email)) {

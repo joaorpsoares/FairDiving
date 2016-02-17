@@ -1,5 +1,7 @@
 (function() {
 
+
+
     'use strict';
 
     // Main router where all routes are called. This is done so the project code is cleaner and more maintainable.
@@ -20,6 +22,11 @@
             res.render('index');
         });
 
+        // Route to send package page
+        server.get('/package', function(req, res) {
+            res.render('index');
+        });
+
         // Route to send forbidden view
         server.get('/forbidden', function(req, res) {
             res.render('index');
@@ -33,4 +40,3 @@
     };
 
 }());
-

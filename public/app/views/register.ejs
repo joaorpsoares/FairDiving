@@ -1,51 +1,45 @@
-	
-	<link href="../styles/custom.css" rel="stylesheet" media="screen">
-	<link href="../scripts/plugins/animo/animate+animo.css" rel="stylesheet" media="screen">
-
-	<link href="../styles/carousel.css" rel="stylesheet">
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-	  <script src="../scripts/html5shiv.js"></script>
-	  <script src="../scripts/respond.min.js"></script>
+<!-- Bootstrap -->
+<link href="../dist/css/bootstrap.css" rel="stylesheet" media="screen">
+<link href="../assets/css/custom.css" rel="stylesheet" media="screen">
+<!-- Animo css-->
+<link href="../plugins/animo/animate+animo.css" rel="stylesheet" media="screen">
+<link href="../examples/carousel/carousel.css" rel="stylesheet">
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+	  <script src="assets/js/html5shiv.js"></script>
+	  <script src="assets/js/respond.min.js"></script>
 	<![endif]-->
-
-	<!-- Include all compiled plugins (below), or include individual files as needed 
-	<script src="dist/js/bootstrap.min.js"></script>-->
-
-		<!-- Javascript  
-	<script src="assets/js/initialize-loginpage.js"></script>
-	<script src="assets/js/jquery.easing.js"></script>
-	-->
-	<!-- Load Animo 
-	<script src="plugins/animo/animo.js"></script>-->
-	<link href='http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400,300,300italic' rel='stylesheet' type='text/css'>	
-	<link rel="stylesheet" type="text/css" href="../styles/font-awesome.css" media="screen" />
-	
-	<!-- Ratio buttons style -->
-	<!--<link href="css/skins/square/blue.css" rel="stylesheet">
-	<script src="css/skins/icheck.js"></script>-->
-
-	<!-- 100% Width & Height container  -->
-	<div class="login-fullwidith">
-		
-		<!-- Login Wrap  -->
-		<div class="login-wrap">
-			<img src="images/logo.png" class="login-img" alt="logo"/><br/>
-			<div class="register-c1">
-				<div class="cpaddingleftright50">
-				<div ng-if="errorMessage"> {{errorMessage}} <br/></div>
-				<h3>Register</h3>
-					<!-- TODO: Username no mínimo-->
-					<input ng-model="user.email" type="email" class="form-control logpadding" name="email" placeholder="Email" required>
-					<br/>
-					<input ng-model="user.password" type="password" class="form-control logpadding" name="password" placeholder="Password" id="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"   required title="5 characters minimum" required>
-					<br/>
-    				<input ng-model="user.confirmPassword" type="password"  class="form-control logpadding" name="confirm_password" placeholder="Confirm password" id="confirm_password" required/> 
-    				<br/>
-    				
-					
-<!--
+<!-- Fonts -->
+<link href='http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400,300,300italic' rel='stylesheet' type='text/css'>
+<!-- Font-Awesome -->
+<link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css" media="screen" />
+<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="assets/css/font-awesome-ie7.css" media="screen" /><![endif]-->
+<!-- Load jQuery -->
+<script src="../assets/js/jquery.v2.0.3.js"></script>
+<!-- 100% Width & Height container  -->
+<div class="login-fullwidith">
+    <!-- Login Wrap  -->
+    <div class="login-wrap">
+        <img src="images/logo.png" class="login-img" alt="logo" />
+        <br/>
+        <div class="register-c1">
+            <div class="cpaddingleftright50">
+                <br/>
+                <div ng-if="errorMessage">
+                    <div class="alert alert-warning">
+                        <strong>Warning!</strong> {{errorMessage}}
+                    </div>
+                </div>
+                <h3>Register</h3>
+                <!-- TODO: Username no mínimo-->
+                <input ng-model="user.email" type="email" class="form-control logpadding" name="email" placeholder="Email" required>
+                <br/>
+                <input ng-model="user.password" type="password" class="form-control logpadding" name="password" placeholder="Password" id="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" required title="5 characters minimum" required>
+                <br/>
+                <input ng-model="user.confirmPassword" type="password" class="form-control logpadding" name="confirm_password" placeholder="Confirm password" id="confirm_password" required/>
+                <br/>
+                <!--
 					<br/>
 					<select class="form-control mySelectBoxClass" name="country_code" required>
 						  <option value="">Country...</option>
@@ -315,43 +309,40 @@
 						});
 					</script>
 					<br/>-->
-				</div>
-			</div>
-			<div class="register-c2">
-				<div class="logmargfix">
-					<div class="cpaddingleftright50">
-							<div class="alignbottom">
-								<button class="bluebtn margtop20" id="submitButton" type="submit" ng-click="register()" disabled>Submit</button>							
-							</div>
-					</div>
-				</div>
-			</div>		
-		</div>
-		<!-- End of Login Wrap  -->
-	
-	</div>	
-	<!-- End of Container  -->
-
-
-	
-	<script>
-	$('#confirm_password').on('keyup', function () {
+            </div>
+        </div>
+        <div class="register-c2">
+            <div class="logmargfix">
+                <div class="cpaddingleftright50">
+                    <div class="alignbottom">
+                        <button class="bluebtn margtop20" id="submitButton" type="submit" ng-click="register()" disabled>Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Login Wrap  -->
+</div>
+<!-- End of Container  -->
+<script>
+$('#confirm_password').on('keyup', function() {
     if ($(this).val() == $('#password').val()) {
         $('#submitButton').prop("disabled", false);
         $('#confirm_password').css('border', '2px solid green');
-    } else{
+    } else {
         $('#submitButton').prop("disabled", true);
-    	$('#confirm_password').css('border', '2px solid red');
+        $('#confirm_password').css('border', '2px solid red');
     }
 });
-	</script>
-	<!--
-	<script>
-	function errorMessage(){
-		$('.login-wrap').animo( { animation: 'tada' } );
-	}
-	</script>
-	-->
-	<script src="../scripts/initialize-loginpage.js"></script>
-	<script src="../scripts/jquery.easing.js"></script>
-	<script src="../scripts/plugins/animo/animo.js"></script>
+</script>
+<script src="../assets/js/initialize-loginpage.js"></script>
+<script src="../assets/js/jquery.easing.js"></script>
+<!-- Load Animo -->
+<script src="../plugins/animo/animo.js"></script>
+<script>
+function errorMessage() {
+    $('.login-wrap').animo({
+        animation: 'tada'
+    });
+}
+</script>

@@ -10,8 +10,8 @@
         // Definition of the view routes
         $routeProvider
             .when('/', {
-                controller: 'UserCtrl',
-                templateUrl: 'app/views/register.ejs'
+                // controller: 'UserCtrl',
+                templateUrl: 'app/views/home.ejs'
             })
             .when('/login', {
                 controller: 'UserCtrl',
@@ -23,6 +23,10 @@
             })
             .when('/forbidden', {
                 templateUrl: 'app/views/forbidden.ejs'
+            })
+            .when('/package', {
+                controller: 'PkgCtrl',
+                templateUrl: 'app/views/package.ejs'
             })
             .otherwise({
                 redirectTo: '/'
