@@ -22,7 +22,7 @@
             };
 
             if (!__package.imageID || !__package.title || !__package.price || !__package.description || !__package.country_code) {
-                res.status(406).send(err);
+                res.status(406).send('Error');
             } else {
                 if (__package.title.length > 140) {
                     res.status(406).send('Title has too many characters.');

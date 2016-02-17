@@ -15,7 +15,7 @@
 			<a class="backbtn right" href="/packages"></a>
 		</div>
 		<div class="clearfix"></div>
-		<div class="brlines"></div>
+		<div class="brlines"></div>	
 	</div>
 	
 	<div class="container">
@@ -51,6 +51,7 @@
 			<div class="col-md-4 detailsright offset-0">
 				<div class="padding20">
 					<h4 class="lh1">{{ packageOnUse.title }}</h4>
+					<h5>Country</h5>
 				</div>
 				
 				<div class="line3"></div>
@@ -85,17 +86,35 @@
 				</div>
 
 				-->
+
+				<div class="col-md-12 bordertype3">
+					<img src="images/user-rating-4.png" alt=""/><br/>
+					Advanced Divers
+				</div>
+				
+				<div class="col-md-6 bordertype1 padding20">
+					<span class="opensans size30 bold grey2">4.5</span>/5<br/>
+						guest ratings
+				</div>
+				<div class="col-md-6 bordertype2 padding20">
+					<a href="#" class="grey">+Add review</a>
+				</div>
+
+				
+				<div class="clearfix"></div><br/>
+<!--
 				<div class="col-md-6 bordertype3">
 					<span class="grey">Book now or add your review below!</span>
 				</div>
 				<div class="clearfix"></div><br/>
-				
+				-->
 				<div class="hpadding20">
 				<!--
 					{% if package.operator_id == user.id %}
 					<a href="/package/{{ package.id }}/edit" class="add2fav margtop5">Edit package</a>
 					{% endif %}
 				-->
+					<a href="#" class="add2fav margtop5">Add to wishlist</a>
 					<a href="/book/{{ package.id }}" class="booknow margtop20 btnmarg">Book now</a>
 				</div>
 			</div>
@@ -104,34 +123,137 @@
 		</div>
 		<!-- END OF container-->
 		
-		<div class="container mt25 offset-0">
+		<div class="container mt25 offset-0" ng-init="tab = 1">
 
 			<div class="col-md-8 pagecontainer2 offset-0">
 				<div class="cstyle10"></div>
 		
-				<ul class="nav nav-tabs" id="myTab">
+			<!--	<ul class="nav nav-tabs" id="myTab">
 					<li onclick="mySelectUpdate()" class="active"><a data-toggle="tab" href="#summary"><span class="summary"></span><span class="hidetext">Description</span></a></li>
 					<li onclick="loadScript()" class=""><a data-toggle="tab" href="#maps"><span class="maps"></span><span class="hidetext">Maps</span></a></li>
 					<li onclick="mySelectUpdate();" class=""><a data-toggle="tab" href="#reviews"><span class="reviews"></span><span class="hidetext">Reviews</span></a></li>
+				</ul> -->
+
+				<ul class="nav nav-tabs" id="myTab">
+					<li class="opensans dark size14 bold" ng-class="{active:tab === 1}"><a href ng-click="tab = 1">Description</a></li>
+					<li class="opensans dark size14 bold" ng-class="{active:tab === 2}" onclick="loadScript()"><a href ng-click="tab = 2">Maps</a></li>
+					<li class="opensans dark size14 bold" ng-class="{active:tab === 3}"><a href ng-click="tab = 3">Reviews</a></li>
 				</ul>
-				
-				<div class="tab-content4" >
-					<!-- DESCRIPTION -->				
+
+				<div class="panel" ng-show="tab === 1">
+					<h4 class="opensans dark size16 bold">Description</h4>
+					<p>{{ packageOnUse.description }}</p>
+				</div>
+
+				<div class="panel" ng-show="tab === 2">
+					<h4 class="opensans dark size16 bold">Maps</h4>
+					<div id="map-canvas"></div>
+					<input id="map-canvaslat" type="text" value="{{ packageOnUse.lat }}">
+					<input id="map-canvaslng" type="text" value="{{ packageOnUse.lng }}">
+				</div>
+
+				<div class="panel" ng-show="tab === 3">
+					<h4 class="opensans dark size16 bold">Reviews</h4>
+					<p></p>
+
+					<div class="line2"></div>
+						
+						<div class="hpadding20">							
+							<div class="col-md-4 offset-0 center">
+								<div class="padding20">
+									<div class="bordertype5">
+										<div class="circlewrap">
+											<img src="images/user-avatar.jpg" class="circleimg" alt=""/>
+											<span>4.5</span>
+										</div>
+										<span class="dark">by Sena</span><br/>
+										from London, UK<br/>
+										<img src="images/check.png" alt=""/><br/>
+										<span class="green">Recommended<br/>for Everyone</span>
+									</div>
+									
+								</div>
+							</div>
+							<div class="col-md-8 offset-0">
+								<div class="padding20">
+									<span class="opensans size16 dark">Great experience</span><br/>
+									<span class="opensans size13 lgrey">Posted Jun 02, 2013</span><br/>
+									<p>Excellent hotel, friendly staff would def go there again!</p>	
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+							
+						<div class="line2"></div>
+
+						<div class="hpadding20">
+							<span class="opensans dark size16 bold">Submit your review</span>
+						</div>
+						
+						<div class="line2"></div>
+
+						<div class="wh33percent left center">
+							<ul class="jslidetext2">
+								<li>Evaluation</li>
+								<li>Title</li>
+								<li>Comment</li>
+							</ul>
+						</div>
+
+						<form name="reviewForm">
+
+						<!--	<select>
+								<option value="1">1 star</option>
+								<option value="2">2 star</option>
+								<option value="3">3 star</option>
+								<option value="4">4 star</option>
+								<option value="5">5 star</option>
+							</select>
+
+							<textarea></textarea>
+							<input type="submit" value="Submit"></input>
+                            -->
+                            <div class="wh66percent right offset-0">
+
+								<select class="form-control mySelectBoxClass margtop10">
+								  <option selected>Wonderful!</option>
+								  <option>Nice</option>
+								  <option>Neutral</option>
+								  <option>Don't recommend</option>
+								</select>
+								<input type="text" class="form-control margtop10" placeholder="">
+								
+								<textarea class="form-control margtop10" rows="3"></textarea>
+								
+								<div class="clearfix"></div>
+								<button type="submit" class="btn-search4 margtop20">Submit</button>
+							</div>	
+
+						</form>
+
+
+				</div>
+
+
+
+
+
+				<!--<div class="tab-content4" >
+					<!-- DESCRIPTION 				
 					<div id="summary" class="tab-pane fade active in">
 						<p class="hpadding20">
 						{{ packageOnUse.description }}
 						</p>				
 					</div>
+					-->
 												
 					<!-- LOCATION -->					
-					<div id="maps" class="tab-pane fade">
+				<!--	<div id="maps" class="tab-pane fade">
 						<div class="hpadding20">
 							
-							<div id="map-canvas"></div>
-							<input id="map-canvaslat" type="text" value="{{ packageOnUse.lat }}">
-							<input id="map-canvaslng" type="text" value="{{ packageOnUse.lng }}">
+							
 						</div>
-					</div>
+					</div> -->
 					
 					<!-- REVIEWS -->	
 
