@@ -11,11 +11,13 @@
 
             return $http.post('/api/login', user)
                 .success(function(res) {
-                    
+
                     // Use cookie
                     $cookies.put('session', res, {
                         path: '/'
                     });
+
+                    $window.location = '/';
 
                     deferred.resolve();
                 })
@@ -29,6 +31,7 @@
 
             return $http.post('/api/register', user)
                 .success(function(res) {
+                    $window.location = '/login';
                     deferred.resolve();
 
                 })
@@ -47,4 +50,3 @@
     angular.module('fairdiving').service('UserServices', UserServices);
 
 }());
-

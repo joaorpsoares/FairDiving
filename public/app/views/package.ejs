@@ -125,9 +125,9 @@
 					<li onclick="mySelectUpdate();" class=""><a data-toggle="tab" href="#reviews"><span class="reviews"></span><span class="hidetext">Reviews</span></a></li>
 				</ul> -->
             <ul class="nav nav-tabs" id="myTab">
-                <li class="opensans dark size14 bold" ng-class="{active:tab === 1}"><a href ng-click="tab = 1">Description</a></li>
-                <li class="opensans dark size14 bold" ng-class="{active:tab === 2}" onclick="loadScript()"><a href ng-click="tab = 2">Maps</a></li>
-                <li class="opensans dark size14 bold" ng-class="{active:tab === 3}"><a href ng-click="tab = 3">Reviews</a></li>
+                <li class="opensans dark size14 bold" ng-class="{active:tab === 1}"><a data-toggle="tab" href ng-click="tab = 1"><span class="summary"></span><span class="hidetext">Description</a></li>
+                <li class="opensans dark size14 bold" ng-class="{active:tab === 2}" onclick="loadScript()"><a data-toggle="tab" href ng-click="tab = 2"><span class="maps"></span><span class="hidetext">Maps</a></li>
+                <li class="opensans dark size14 bold" ng-class="{active:tab === 3}"><a data-toggle="tab" href ng-click="tab = 3"><span class="reviews"></span><span class="hidetext"></span>Reviews</a></li>
             </ul>
             <div class="panel" ng-show="tab === 1">
                 <h4 class="opensans dark size16 bold">Resume</h4>
@@ -189,6 +189,48 @@
                     <span class="opensans dark size16 bold">Submit your review</span>
                 </div>
                 <div class="line2"></div>
+                <div class="wh33percent left ">
+                    <ul class="jslidetext2">
+                        <li>Rating*</li>
+                        </br>
+                        <li style="margin-top: 10px;">Recommended*</li>
+                        <li>Title</li>
+                        </br>
+                        <li>Comment</li>
+                    </ul>
+                </div>
+                <form action="/api/review" method="post">
+                    <div class="wh66percent right offset-0">
+                        <div class="padding20 jslidetext2">
+                            <input type="hidden" name="userId" value="{{ user.id }}">
+                            <input type="hidden" name="packageId" value="{{ package.id }}">
+                            <input type="radio" name="score" value="5" required>
+                            <label>5</label>
+                            <input type="radio" name="score" value="4">
+                            <label>4</label>
+                            <input type="radio" name="score" value="3">
+                            <label>3</label>
+                            <input type="radio" name="score" value="2">
+                            <label>2</label>
+                            <input type="radio" name="score" value="1">
+                            <label>1</label>
+                            </br>
+                            </br>
+                            <input type="radio" name="recommended" value="1" required>
+                            <label>Yes</label>
+                            <input type="radio" name="recommended" value="0">
+                            <label>No</label>
+                            </br>
+                            <input type="text" name="title" class="form-control margtop10" placeholder="A brief description of your experience">
+                            </br>
+                            <textarea name="review" class="form-control margtop10" rows="3" placeholder="Explain your rating"></textarea>
+                            <div class="clearfix"></div>
+                            <button type="submit" class="btn-search4 margtop20">Submit</button>
+                            <br/>
+                        </div>
+                    </div>
+                </form>
+                <!--
                 <div class="wh33percent left center">
                     <ul class="jslidetext2">
                         <li>Evaluation</li>
@@ -207,7 +249,7 @@
 
 							<textarea></textarea>
 							<input type="submit" value="Submit"></input>
-                            -->
+                            
                     <div class="wh66percent right offset-0">
                         <select class="form-control mySelectBoxClass margtop10">
                             <option value="1" selected>Wonderful!</option>
@@ -223,8 +265,8 @@
                         </br>
                     </div>
                 </form>
-            </div>
-            <!--<div class="tab-content4" >
+            </div>-->
+                <!--<div class="tab-content4" >
 					<!-- DESCRIPTION 				
 					<div id="summary" class="tab-pane fade active in">
 						<p class="hpadding20">
@@ -232,15 +274,15 @@
 						</p>				
 					</div>
 					-->
-            <!-- LOCATION -->
-            <!--	<div id="maps" class="tab-pane fade">
+                <!-- LOCATION -->
+                <!--	<div id="maps" class="tab-pane fade">
 						<div class="hpadding20">
 							
 							
 						</div>
 					</div> -->
-            <!-- REVIEWS -->
-            <!--				
+                <!-- REVIEWS -->
+                <!--				
 					<div id="reviews" class="tab-pane fade ">
 						<div class="hpadding20">
 							<div class="col-md-4 offset-0">
@@ -349,6 +391,7 @@
 					</div>
 					-- >
 					<!-- REVIEWS -->
+            </div>
         </div>
         <div class="col-md-4">
             <div class="pagecontainer2 testimonialbox">

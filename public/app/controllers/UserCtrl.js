@@ -52,4 +52,3 @@
     angular.module('fairdiving').controller('UserCtrl', UserCtrl);
 
 }());
-
