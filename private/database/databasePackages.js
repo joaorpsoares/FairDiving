@@ -52,8 +52,23 @@
                     }
                 })
             });
+        },
+
+        // Function to retrieve a all reviews from a certain package
+        getReviewsByPackage: function(id) {
+            return new Promise(function(resolve, reject) {
+                client.query('SELECT * FROM reviews WHERE packageid = $1', id, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        console.log("List of reveiews retrieved was deliver successful");
+                        resolve(result.rows);
+                    }
+                })
+            });
         }
+
+
     };
 
 }());
-

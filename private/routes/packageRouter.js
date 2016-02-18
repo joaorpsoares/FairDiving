@@ -88,6 +88,17 @@
                     res.status(406).send(err);
                 });
         });
+
+        // Route to get a all reviews informaton from a certain package
+        server.get('/api/package/:id/reviews', function(req, res) {
+            database.getReviewsByPackage(req.params.id)
+                .then(function(result) {
+                    res.status(200).send(result);
+                })
+                .catch(function(err) {
+                    res.status(406).send(err);
+                });
+        });
     };
 
 }());

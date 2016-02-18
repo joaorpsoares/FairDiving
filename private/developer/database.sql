@@ -3,8 +3,10 @@ DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS operators CASCADE;
 DROP TABLE IF EXISTS packageImage CASCADE;
 DROP TABLE IF EXISTS packages CASCADE;
+DROP TABLE IF EXISTS packageType CASCADE;
 DROP TABLE IF EXISTS roles CASCADE;
 DROP TABLE IF EXISTS roles_users CASCADE;
+DROP TABLE IF EXISTS reviews CASCADE;
 
 
 CREATE TABLE countries (
@@ -41,14 +43,24 @@ CREATE TABLE packageImage (
 	imageName VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE packageType (
+	id BIGSERIAL PRIMARY KEY,
+	description VARCHAR(30) NOT NULL
+);
+
 CREATE TABLE packages (
 	id BIGSERIAL PRIMARY KEY,
 	operatorID BIGINT REFERENCES operators(id),
 	imageID BIGINT REFERENCES packageImage(id),
 	--  package info
+	package_type BIGINT REFERENCES packageType(id),
+	certification VARCHAR (140) NOT NULL,
+	difficulty VARCHAR(60) NOT NULL,
+	n_dives REAL NOT NULL,
+	dive_sites VARCHAR(100) NOT NULL,
 	title VARCHAR (140) NOT NULL,
 	price REAL NOT NULL,
-	description VARCHAR(500) NOT NULL,
+	description VARCHAR(500) NOT NULL, -- resume, duration, included, not included, what you'll see, duration, max depth, visibility, best-season, special
 	-- Geolocation
 	country_code VARCHAR(2) REFERENCES countries(abrev),
 	lat REAL NOT NULL DEFAULT 0,
@@ -65,6 +77,16 @@ CREATE TABLE roles_users (
 	roleid BIGINT REFERENCES roles(id),
 	userid BIGINT REFERENCES users(id)
 );
+
+CREATE TABLE reviews (
+	id BIGSERIAL PRIMARY KEY,
+	title VARCHAR (100) NOT NULL,
+	rating REAL NOT NULL,
+	comment VARCHAR (500) NOT NULL,
+	packageid BIGINT REFERENCES packages(id)
+);
+
+
 
 -- INSERT ROLES
 INSERT INTO roles ("description") VALUES (E'GUEST');

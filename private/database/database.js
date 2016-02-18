@@ -91,6 +91,11 @@
         // Function to retrieve a certain package
         getPackageID: function(id) {
             return databasePackages.getPackageID([id]);
+        },
+
+        // Function to retrieve a all reviews from a certain package
+        getReviewsByPackage: function(id) {
+            return databasePackages.getReviewsByPackage([id]);
         }
 
     };
