@@ -28,6 +28,14 @@
                 controller: 'PkgCtrl',
                 templateUrl: 'app/views/package.ejs'
             })
+            .when('/package/:id', {
+                controller: 'PkgCtrl',
+                templateUrl: 'app/views/package.ejs'
+            })
+            .when('/profile', {
+                controller: 'UserCtrl',
+                templateUrl: 'app/views/profile.ejs'
+            })
             .otherwise({
                 redirectTo: '/'
             });

@@ -3,12 +3,11 @@
     'use strict';
 
     // Created the controller to the package view
-    var PkgCtrl = function($scope, pkgServices) {
+    var PkgCtrl = function($scope, pkgServices, $routeParams) {
 
         $scope.packages = {};
-
         $scope.packageOnUse = {
-            Id: 1
+            Id: $routeParams.id
         };
 
         $scope.getPackageID = function() {
@@ -30,7 +29,7 @@
     };
 
     // Injecting modules used for better minifing later on
-    PkgCtrl.$inject = ['$scope', 'pkgServices'];
+    PkgCtrl.$inject = ['$scope', 'pkgServices', '$routeParams'];
 
     // Enabling the controller in the app
     angular.module('fairdiving').controller('PkgCtrl', PkgCtrl);
