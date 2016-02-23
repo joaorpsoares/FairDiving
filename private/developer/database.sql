@@ -38,20 +38,21 @@ CREATE TABLE operators (
 	rej_user_id BIGINT REFERENCES users(id)
 );
 
-CREATE TABLE packageImage (
-	id BIGSERIAL PRIMARY KEY,
-	imageName VARCHAR(255) NOT NULL
-);
-
 CREATE TABLE packageType (
 	id BIGSERIAL PRIMARY KEY,
 	description VARCHAR(30) NOT NULL
 );
 
+CREATE TABLE packageImage (
+	id BIGSERIAL PRIMARY KEY,
+	imageName VARCHAR(255) NOT NULL,
+	idPackage BIGINT DEFAULT NULL
+);
+
 CREATE TABLE packages (
 	id BIGSERIAL PRIMARY KEY,
 	operatorID BIGINT REFERENCES operators(id),
-	imageID BIGINT REFERENCES packageImage(id),
+	imageID BIGINT REFERENCES packageimage(id),
 	--  package info
 	package_type BIGINT REFERENCES packageType(id),
 	certification VARCHAR (140) NOT NULL,
@@ -66,7 +67,6 @@ CREATE TABLE packages (
 	lat REAL NOT NULL DEFAULT 0,
 	lng REAL NOT NULL DEFAULT 0
 );
-
 
 CREATE TABLE roles (
 	id BIGSERIAL PRIMARY KEY,
@@ -86,7 +86,16 @@ CREATE TABLE reviews (
 	packageid BIGINT REFERENCES packages(id)
 );
 
+INSERT INTO users("email", "token", "password", "admin", "active") VALUES ('ei12109@fe.up.pt', '1de6cc7a3b3602b98c774f28fbde1778b1e802a321908b1ae1f554e700eee150', '$2a$10$CLSAWw2Z3sJxNuzAPs7jOeww1z9jAq9Hd9Z0fBLMAzL2oONOn9Eky', '1', '1');
+INSERT INTO operators("rej_user_id") VALUES(1);
 
+-- INSERT DEFAULT IMAGE
+INSERT INTO packageImage("imagename") VALUES('default.jpg');
+
+-- INSERT packageTypes
+INSERT INTO packageType ("description") VALUES (E'Fundive');
+INSERT INTO packageType ("description") VALUES (E'CompletePackage');
+INSERT INTO packageType ("description") VALUES (E'DiveCourse');
 
 -- INSERT ROLES
 INSERT INTO roles ("description") VALUES (E'GUEST');
@@ -349,3 +358,6 @@ INSERT INTO countries ("abrev", "name") VALUES (E'EH', E'Western Sahara');
 INSERT INTO countries ("abrev", "name") VALUES (E'YE', E'Yemen');
 INSERT INTO countries ("abrev", "name") VALUES (E'ZM', E'Zambia');
 INSERT INTO countries ("abrev", "name") VALUES (E'ZW', E'Zimbabwe');
+
+-- INSERT DEFAULT PACKAGE
+insert into packages("operatorid","imageid","package_type","certification","difficulty","n_dives", "dive_sites", "title", "price", "description", "country_code") VALUES (1,1,1,'PRO DIVE CERTIFICATE','HARD', 2, 'Maldives sea', 'Dive through Maldives', 2600, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.','AF');

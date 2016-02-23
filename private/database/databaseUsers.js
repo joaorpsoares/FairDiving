@@ -33,11 +33,11 @@
         // Function to insert a new user on database.
         insertNewUser: function(user) {
             return new Promise(function(resolve, reject) {
-                client.query('INSERT INTO users(email, password, token) VALUES ($1, $2, $3) ', user, function(err, result) {
+                client.query('INSERT INTO users(email, password, token) VALUES ($1, $2, $3) RETURNING id', user, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {
-                        resolve();
+                        resolve(result.rows[0].id);
                     }
                 });
             });
@@ -97,12 +97,14 @@
 
         // Function to insert a default level of a register user
         insertUsrLevel: function(usrId) {
-            client.query('INSERT INTO roles_users(roleid, userid) VALUES($1,$2)', [2, usrId], function(err, result) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve();
-                }
+            return new Promise(function(resolve, reject) {
+                client.query('INSERT INTO roles_users(roleid, userid) VALUES($1,$2)', [2, usrId], function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result.rows);
+                    }
+                });
             });
         }
     };

@@ -8,7 +8,8 @@
         email = require('../modules/email-module'),
         bcrypt = require('bcrypt-nodejs'),
         token = require('../modules/token-module'),
-        mdl = require('./middleware/middleware');
+        mdl = require('./middleware/middleware'),
+        Transaction = require('pg-transaction');
 
 
     // Definition of the routes related with authentication.
@@ -18,8 +19,8 @@
 
         // Route to register a user
         server.post('/api/register', function(req, res) {
-             if (!validator.matches(req.body.password, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/)) {
-                        res.status(406).send('Your password needs to have at least one capital letter, one small letter, one number and a have a size of 6 or more ');
+            if (!validator.matches(req.body.password, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/)) {
+                res.status(406).send('Your password needs to have at least one capital letter, one small letter, one number and a have a size of 6 or more ');
             } else if (req.body.password !== req.body.confirmPassword) {
                 res.status(406).send('Your passwords are diferents');
             } else {
@@ -29,12 +30,10 @@
                     else {
                         database.checkExistence(req.body.email.toLowerCase())
                             .then(function() {
-                                // TODO: crypto, send email
                                 crypto.randomBytes(32, function(err, buf) {
                                     if (err) {
                                         res.status(406).send(err);
                                     } else {
-
                                         bcrypt.hash(req.body.password, null, null, function(err, hash) {
 
                                             if (err) {
@@ -43,17 +42,34 @@
 
                                                 var user = [req.body.email.toLowerCase(), hash, buf.toString('hex')];
 
+                                                var __transaction = new Transaction(database.getClient());
+
+                                                __transaction.on('error', function(err) {
+                                                    if (err) throw err;
+                                                });
+                                                __transaction.begin();
+                                                __transaction.savepoint('_beforeInsertUser');
+
                                                 database.insertNewUser(user)
-                                                    .then(function() {
-                                                        email.sendWelcome(req.body.email, buf.toString('hex'))
-                                                            .then(function(contact) {
-                                                                // Send the message to the log file
-                                                                console.log('@authRouter.js: Welcome e-mail sent to ' + contact);
-                                                                res.status(200).send('OK');
+                                                    .then(function(usrID) {
+                                                        console.log(usrID);
+                                                        database.insertUsrLevel(usrID)
+                                                            .then(function() {
+                                                                __transaction.commit();
+                                                                email.sendWelcome(req.body.email, buf.toString('hex'))
+                                                                    .then(function(contact) {
+                                                                        // Send the message to the log file
+                                                                        console.log('@authRouter.js: Welcome e-mail sent to ' + contact);
+                                                                        res.status(200).send('OK');
+                                                                    })
+                                                                    .catch(function(err) {
+                                                                        console.log('@authRouter.js: Welcome e-mail not sent.');
+                                                                        res.status(200).send(err);
+                                                                    });
                                                             })
                                                             .catch(function(err) {
-                                                                console.log('@authRouter.js: Welcome e-mail not sent.');
-                                                                res.status(200).send(err);
+                                                                __transaction.rollback('_beforeInsertUser');
+                                                                res.status(406).send(err);
                                                             });
                                                     })
                                                     .catch(function(err) {

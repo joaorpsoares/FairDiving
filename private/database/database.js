@@ -35,6 +35,11 @@
             client.disconnect();
         },
 
+        // Function to get client variable
+        getClient: function() {
+            return client;
+        },
+
         /*
                 USER RELATED FUNCTIONS
         */
@@ -96,6 +101,11 @@
         // Function to retrieve a all reviews from a certain package
         getReviewsByPackage: function(id) {
             return databasePackages.getReviewsByPackage([id]);
+        },
+
+        // Function to update a package imageID
+        updateImageIDPackage: function(idPackage, idImage) {
+            return databasePackages.updateImageIDPackage([idPackage, idImage]);
         }
 
     };

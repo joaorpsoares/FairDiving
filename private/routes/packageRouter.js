@@ -4,32 +4,31 @@
 
     var database = require('../database/database'),
         validator = require('validator'),
-        cookie = require('../modules/token-module');
+        cookie = require('../modules/token-module'),
+        multer = require('multer'),
+        upload = multer({ dest: 'images/packages/' });
 
     // Definition of the routes related with packages.
     module.exports = function(server) {
 
-        // TODO: VERIFY COOKIE
-
         // Route to insert a new package
-        server.post('/api/package', function(req, res) {
-
-
+        server.post('/api/package', upload.array('avatar'), function(req, res) {
             cookie.verifySession(req.cookies.session)
                 .then(function(info) {
+                    console.log(info);
                     if (info.role === "OPERATOR" || info.role === "ADMIN") {
                         database.retrieveUsrIDByToken(info.token)
                             .then(function(usrID) {
+
+                                console.log(req.body);
                                 var __package = {
                                     operatorID: usrID,
-                                    imageID: req.body.imageID,
+                                    imageID: 1, // Default one
                                     title: req.body.title,
                                     price: req.body.price,
                                     description: req.body.description,
                                     country_code: req.body.country_code
                                 };
-
-                                console.log(__package);
 
                                 if (!__package.imageID || !__package.title || !__package.price || !__package.description || !__package.country_code) {
                                     res.status(406).send("error");
@@ -44,7 +43,9 @@
                                         database.insertNewPackage(Object.keys(__package).map(function(key) {
                                                 return __package[key];
                                             }))
-                                            .then(function() {
+                                            .then(function(packageID) {
+                                                console.log(packageID);
+                                                console.log(upload);
                                                 res.status(200).send('OK');
                                             })
                                             .catch(function(err) {
@@ -52,8 +53,10 @@
                                             });
                                     }
                                 }
+
                             })
                             .catch(function(err) {
+                                console.log(err);
                                 res.status(406).send(err);
                             });
                     } else {
@@ -64,7 +67,6 @@
                     console.log(err);
                     res.status(406).send("You are not allowed to use this");
                 });
-
         });
 
         // Route to get all packages from database

@@ -50,7 +50,7 @@
                         console.log("List of packages retrieved was deliver successful");
                         resolve(result.rows[0]);
                     }
-                })
+                });
             });
         },
 
@@ -64,7 +64,20 @@
                         console.log("List of reveiews retrieved was deliver successful");
                         resolve(result.rows);
                     }
-                })
+                });
+            });
+        },
+
+        // Function to update a package imageID
+        updateImageIDPackage: function(info) {
+            return new Promise(function(resolve, reject) {
+                client.query('UPDATE packages SET imageID = $1 WHERE id = $2', info, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result.rows);
+                    }
+                });
             });
         }
 
