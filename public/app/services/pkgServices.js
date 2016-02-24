@@ -19,6 +19,19 @@
 
         };
 
+        this.insertNewPackage = function(newPackage) {
+
+            return $http.post('/api/package/', newPackage)
+                .success(function(res) {
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    deferred.reject(err);
+                });
+
+        };
+
+
     };
 
     // Injecting modules used for better minifing later on

@@ -103,7 +103,7 @@
                         <span class="size16 bold">Personal details</span>
                         <div class="line2"></div>
                         <div class="col-md-12 offset-0">
-                            <form action="" method="post">
+                            <!--    <form action="" method="post">
                                 Username*:
                                 <input type="text" class="form-control" value="" rel="popover" name="username" />
                                 <br /> Name*:
@@ -124,10 +124,10 @@
                                 <input type="text" class="form-control" value="" name="zipcode">
                                 <br/> Country:
                                 <select class="form-control" name="country_code">
-                                    <!-- for each country -->
-                                    <!-- se countrycode ==  country code do user selecionar-->
+                                    for each country
+                                    se countrycode ==  country code do user selecionar
                                     <option value="" selected="selected"></option>
-                                    <!-- end for -->
+                                    end for
                                 </select>
                                 <br/>
                                 <br/>
@@ -136,7 +136,7 @@
                                 <br/> Description:
                                 <input type="text" class="form-control" value="" name="aboutme">
                                 <button type="submit" class="bluebtn margtop20">Update</button>
-                            </form>
+                            </form> -->
                         </div>
                         <div class="clearfix"></div>
                         <br/>
@@ -148,49 +148,48 @@
                     <!-- TAB 2 PACKAGES-->
                     <div class="tab-pane" id="packages">
                         <div class="padding40">
-                            <span class="size16 bold"> </span>
+                            <span class="size16 bold">Create a package</span>
                             <div class="line2"></div>
                             <!-- COL 1 -->
                             <div class="col-md-12 offset-0">
-                                <form action="/api/package" method="post">
-                                    <input type="hidden" name="operator_id" value="">
+                                <form>
                                     <br/> Title*:
-                                    <input type="text" class="form-control" placeholder="Enter the package title" rel="popover" id="title" name="title" required="required">
-                                    </br> Type*:
-                                    <select class="form-control" name="country_code" required="required">
+                                    <input ng-model="newPackage.title" type="text" class="form-control" placeholder="Enter the package title" rel="popover" required="required">
+                                    <!-- </br> Type*:
+                                    <select ng-model="newPackage.package_type" class="form-control" name="country_code" required="required">
                                         <option value="1" selected="selected">Fun Dive</option>
                                         <option value="2">Dive Course</option>
                                         <option value="3">Complete Package</option>
-                                    </select>
+                                    </select>-->
                                     <br/> Price*:
-                                    <input type="number" min="0" class="form-control" placeholder="Enter the package price" rel="popover" id="price" name="price" required="required">
+                                    <input ng-model="newPackage.price" type="number" min="0" class="form-control" placeholder="Enter the package price" rel="popover" required="required">
                                     <br/> Certification*:
-                                    <input type="text" class="form-control" placeholder="Enter the certification needed to this package" id="certification" name="certification" required="required">
+                                    <input ng-model="newPackage.certification" type="text" class="form-control" placeholder="Enter the certification needed to this package" required="required">
                                     <br/> Difficulty*:
-                                    <input type="text" class="form-control" placeholder="Enter the difficulty of this package" id="difficulty" name="difficulty" required="required">
-                                    <br/> Number of Dives*:
-                                    <input type="text" class="form-control" placeholder="Enter the number of dives of this package" id="n_dives" name="n_dives" required="required">
+                                    <input ng-model="newPackage.difficulty" type="text" class="form-control" placeholder="Enter the difficulty of this package" required="required">
+                                    <!--   <br/> Number of Dives*:
+                                    <input ng-model="newPackage.n_dives" type="text" class="form-control" placeholder="Enter the number of dives of this package" id="n_dives" name="n_dives" required="required">-->
                                     <br/> Dive Sites*:
-                                    <input type="text" class="form-control" placeholder="Enter the dive sites of this package" id="dive_sites" name="dive_sites" required="required">
+                                    <input ng-model="newPackage.dive_sites" type="text" class="form-control" placeholder="Enter the dive sites of this package" required="required">
                                     <br/> Description*:
-                                    <input type="text" class="form-control" placeholder="Enter the package description" id="description" name="description" required="required">
-                                    <br/> Location*:
-                                    <select class="form-control" name="country_code" required="required">
+                                    <input ng-model="newPackage.description" type="text" class="form-control" placeholder="Enter the package description" required="required">
+                                    <!-- <br/> Location*:
+                                    <select ng-model="newPackage.country_code" class="form-control" name="country_code" required="required">
                                         <option value="" selected="selected" disabled="disabled">Country...</option>
-                                        <!-- for each country -->
+                                        for each country
                                         <option value=""></option>
-                                        <!-- endfor -->
+                                        endfor
                                     </select>
                                     <br/>
-                                    <input type="text" class="form-control" placeholder="Description of the location (address, etc.)" name="location" required="required">
-                                    <br/> Image*:
+                                    <input type="text" class="form-control" placeholder="Description of the location (address, etc.)" name="location" required="required">-->
+                                    <!-- <br/> Image*:
                                     <br/>
                                     <div class="fileUpload btn btn-default">
                                         <span>Upload</span>
                                         <input type="file" class="upload" name="image" accept="image/*">
                                     </div>
-                                    <br/>
-                                    <button type="submit" class="bluebtn margtop20">Create</button>
+                                    <br/> -->
+                                    <button type="submit" class="bluebtn margtop20" ng-click="insertNewPackage(newPackage)">Create</button>
                                 </form>
                             </div>
                             <div class="clearfix"></div>

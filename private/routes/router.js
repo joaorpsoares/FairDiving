@@ -32,6 +32,7 @@
             res.render('index');
         });
 
+        // Route to send profile page
         server.get('/profile', function(req, res) {
             res.render('index');
         });

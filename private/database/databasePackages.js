@@ -15,7 +15,7 @@
         // Function to insert a new package on database
         insertNewPackage: function(divePackage) {
             return new Promise(function(resolve, reject) {
-                client.query('INSERT INTO packages (operatorID, imageID, title, price, description, country_code) VALUES($1, $2, $3, $4, $5, $6) RETURNING id', divePackage, function(err, result) {
+                client.query('INSERT INTO packages (certification, difficulty, dive_sites, title, price, description) VALUES($1, $2, $3, $4, $5, $6) RETURNING id', divePackage, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {

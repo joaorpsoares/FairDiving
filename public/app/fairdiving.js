@@ -33,7 +33,7 @@
                 templateUrl: 'app/views/package.ejs'
             })
             .when('/profile', {
-                controller: 'UserCtrl',
+                controller: 'PkgCtrl',
                 templateUrl: 'app/views/profile.ejs'
             })
             .otherwise({
