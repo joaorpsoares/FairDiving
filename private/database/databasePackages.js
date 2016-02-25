@@ -15,7 +15,11 @@
         // Function to insert a new package on database
         insertNewPackage: function(divePackage) {
             return new Promise(function(resolve, reject) {
+<<<<<<< HEAD
                 client.query('INSERT INTO packages (operatorID, imageID, title, price, description, certification, difficulty, n_dives, dive_sites, country_code) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id', divePackage, function(err, result) {
+=======
+                client.query('INSERT INTO packages (certification, difficulty, dive_sites, title, price, description) VALUES($1, $2, $3, $4, $5, $6) RETURNING id', divePackage, function(err, result) {
+>>>>>>> 2fba66bf04ad4b2cd4e06bae147157c160159e7a
                     if (err) {
                         reject(err);
                     } else {
