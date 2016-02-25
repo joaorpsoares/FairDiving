@@ -95,6 +95,19 @@
             });
         },
 
+        // Function to retrieve user from userID
+        retrieveUsrById: function(id) {
+            return new Promise(function(resolve, reject) {
+                client.query('SELECT firstname, lastname, birthdate, country, email, telephone FROM users WHERE id = $1', id, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result.rows);
+                    }
+                });
+            });
+        },
+
         // Function to insert a default level of a register user
         insertUsrLevel: function(usrId) {
             return new Promise(function(resolve, reject) {

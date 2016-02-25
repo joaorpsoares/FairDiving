@@ -41,8 +41,10 @@
                                 reject(err);
                             });
                     }).catch(function(err) {
+
                         reject('Failed to verify session');
                     });
+
             });
         }
     };

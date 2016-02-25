@@ -102,10 +102,10 @@
                         <!-- End of Admin top -->
                         <span class="size16 bold">Personal details</span>
                         <div class="line2"></div>
-                        <div class="col-md-12 offset-0">
-                            <!--    <form action="" method="post">
+                        <div class="col-md-12 offset-0" ng-controller="UserCtrl">
+                            <form>
                                 Username*:
-                                <input type="text" class="form-control" value="" rel="popover" name="username" />
+                                <input type="text" class="form-control" placeholder="" value="" rel="popover" name="username" />
                                 <br /> Name*:
                                 <input type="text" class="form-control" value="" rel="popover" name="name" />
                                 <br /> Email address*:
@@ -124,10 +124,9 @@
                                 <input type="text" class="form-control" value="" name="zipcode">
                                 <br/> Country:
                                 <select class="form-control" name="country_code">
-                                    for each country
-                                    se countrycode ==  country code do user selecionar
+                                    <!--       for each country se countrycode == country code do user selecionar
                                     <option value="" selected="selected"></option>
-                                    end for
+                                    end for -->
                                 </select>
                                 <br/>
                                 <br/>
@@ -136,7 +135,7 @@
                                 <br/> Description:
                                 <input type="text" class="form-control" value="" name="aboutme">
                                 <button type="submit" class="bluebtn margtop20">Update</button>
-                            </form> -->
+                            </form>
                         </div>
                         <div class="clearfix"></div>
                         <br/>

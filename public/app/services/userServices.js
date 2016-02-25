@@ -41,6 +41,22 @@
                 });
 
         };
+        /*
+
+        this.getLoggedUser = function(id) {
+
+            return $http.get('/api/user/' + id)
+                .success(function(res) {
+                    deferred.resolve(res);
+
+                })
+                .error(function(err) {
+                    console.log(err);
+                    deferred.reject(err);
+                });
+
+
+        };*/
     };
 
     // Injecting modules used for better minifing later on

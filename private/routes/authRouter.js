@@ -139,6 +139,20 @@
                 });
         });
 
+
+        // Route to retrieve user by token
+        server.get('/api/user', function(req, res) {
+            token.verifySession(req.cookies.session)
+                .then(function(userInfo) {
+                    res.status(200).send(userInfo.token);
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    res.status(406).send(err);
+                });
+
+        });
+
     };
 
 }());
