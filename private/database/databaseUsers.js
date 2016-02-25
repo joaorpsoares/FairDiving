@@ -23,7 +23,7 @@
                         if (result.rows.length === 0) {
                             resolve();
                         } else {
-                            reject('This email already on our database.');
+                            reject('This email is already on our database.');
                         }
                     }
                 });

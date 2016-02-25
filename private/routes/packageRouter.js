@@ -6,7 +6,15 @@
         validator = require('validator'),
         cookie = require('../modules/token-module'),
         multer = require('multer'),
-        upload = multer({ dest: 'images/packages/' });
+        storage = multer.diskStorage({
+            destination: function(req, file, cb) {
+                cb(null, 'images/packages/');
+            },
+            filename: function(req, file, cb) {
+                cb(null, file.fieldname + '-' + Date.now());
+            }
+        }),
+        upload = multer({ storage: storage });
 
     // Definition of the routes related with packages.
     module.exports = function(server) {
@@ -15,20 +23,23 @@
         server.post('/api/package', upload.array('avatar'), function(req, res) {
             cookie.verifySession(req.cookies.session)
                 .then(function(info) {
-                    console.log(info);
                     if (info.role === "OPERATOR" || info.role === "ADMIN") {
                         database.retrieveUsrIDByToken(info.token)
                             .then(function(usrID) {
-
-                                console.log(req.body);
                                 var __package = {
                                     operatorID: usrID,
                                     imageID: 1, // Default one
                                     title: req.body.title,
                                     price: req.body.price,
                                     description: req.body.description,
+                                    certification: req.body.certification,
+                                    difficulty: req.body.difficulty,
+                                    n_dives: req.body.n_dives,
+                                    dive_sites: req.body.dive_sites,
                                     country_code: req.body.country_code
                                 };
+
+                                console.log(__package);
 
                                 if (!__package.imageID || !__package.title || !__package.price || !__package.description || !__package.country_code) {
                                     res.status(406).send("error");
@@ -65,7 +76,7 @@
                 })
                 .catch(function(err) {
                     console.log(err);
-                    res.status(406).send("You are not allowed to use this");
+                    res.status(406).send("You are not allowed to create packages. If you think it is a mistake, contact our support.");
                 });
         });
 

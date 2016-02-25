@@ -15,11 +15,10 @@
         // Function to insert a new package on database
         insertNewPackage: function(divePackage) {
             return new Promise(function(resolve, reject) {
-                client.query('INSERT INTO packages (operatorID, imageID, title, price, description, country_code) VALUES($1, $2, $3, $4, $5, $6) RETURNING id', divePackage, function(err, result) {
+                client.query('INSERT INTO packages (operatorID, imageID, title, price, description, certification, difficulty, n_dives, dive_sites, country_code) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id', divePackage, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {
-                        console.log("Package created:", result.rows);
                         resolve(result.rows[0]);
                     }
                 });
@@ -33,7 +32,6 @@
                     if (err) {
                         reject(err);
                     } else {
-                        console.log("List of packages retrieved was deliver successful");
                         resolve(result.rows);
                     }
                 });
@@ -47,7 +45,6 @@
                     if (err) {
                         reject(err);
                     } else {
-                        console.log("List of packages retrieved was deliver successful");
                         resolve(result.rows[0]);
                     }
                 });
@@ -61,7 +58,6 @@
                     if (err) {
                         reject(err);
                     } else {
-                        console.log("List of reveiews retrieved was deliver successful");
                         resolve(result.rows);
                     }
                 });
