@@ -41,7 +41,22 @@
                     });
             }
         };
-
+        /*
+                //A function that gets a package by id
+                $scope.getLoggedUser = function() {
+                    //     if ($scope.user.Id === '') {
+                    //       // TODO: Show error
+                    //  } else {
+                    UserServices.getLoggedUser($scope.user.Id)
+                        .then(function() {
+                            console.log("getLoggedUser successful");
+                        })
+                        .catch(function() {
+                            console.log("getLoggedUser failed");
+                        });
+                    //    }
+                };
+        */
 
     };
 
