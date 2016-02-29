@@ -33,8 +33,7 @@
                     .then(function(_token) {
                         database.retrieveUsrLevelByToken(_token)
                             .then(function(level) {
-                                console.log(level);
-                                if (level === []) resolve("GUEST");
+                                if (level.length === 0) resolve("GUEST");
                                 else resolve({ token: _token, role: level[0].description });
                             })
                             .catch(function(err) {

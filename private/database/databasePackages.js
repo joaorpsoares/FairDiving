@@ -15,14 +15,11 @@
         // Function to insert a new package on database
         insertNewPackage: function(divePackage) {
             return new Promise(function(resolve, reject) {
-<<<<<<< HEAD
-                client.query('INSERT INTO packages (operatorID, imageID, title, price, description, certification, difficulty, n_dives, dive_sites, country_code) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id', divePackage, function(err, result) {
-=======
-                client.query('INSERT INTO packages (certification, difficulty, dive_sites, title, price, description) VALUES($1, $2, $3, $4, $5, $6) RETURNING id', divePackage, function(err, result) {
->>>>>>> 2fba66bf04ad4b2cd4e06bae147157c160159e7a
+                client.query('INSERT INTO packages (operatorID, title, price, description, certification, difficulty, n_dives, dive_sites, country_code) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id', divePackage, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {
+                        console.log(result.rows[0]);
                         resolve(result.rows[0]);
                     }
                 });
@@ -69,13 +66,14 @@
         },
 
         // Function to update a package imageID
-        updateImageIDPackage: function(info) {
+        relateImagesToPackages: function(relation) {
+            console.log(relation);
             return new Promise(function(resolve, reject) {
-                client.query('UPDATE packages SET imageID = $1 WHERE id = $2', info, function(err, result) {
+                client.query('SELECT relateImagesToPackages($1, $2)', relation, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {
-                        resolve(result.rows);
+                        resolve();
                     }
                 });
             });

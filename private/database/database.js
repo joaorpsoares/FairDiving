@@ -85,6 +85,7 @@
 
         // Function to insert a new package
         insertNewPackage: function(divePackage) {
+            console.log(divePackage);
             return databasePackages.insertNewPackage(divePackage);
         },
 
@@ -104,8 +105,8 @@
         },
 
         // Function to update a package imageID
-        updateImageIDPackage: function(idPackage, idImage) {
-            return databasePackages.updateImageIDPackage([idPackage, idImage]);
+        relateImagesToPackages: function(idPackage, imageNames) {
+            return databasePackages.relateImagesToPackages([imageNames, idPackage]);
         }
 
     };
