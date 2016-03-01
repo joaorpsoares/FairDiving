@@ -52,7 +52,6 @@
 
                                                 database.insertNewUser(user)
                                                     .then(function(usrID) {
-                                                        console.log(usrID);
                                                         database.insertUsrLevel(usrID)
                                                             .then(function() {
                                                                 __transaction.commit();

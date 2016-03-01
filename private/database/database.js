@@ -89,7 +89,6 @@
 
         // Function to insert a new package
         insertNewPackage: function(divePackage) {
-            console.log(divePackage);
             return databasePackages.insertNewPackage(divePackage);
         },
 

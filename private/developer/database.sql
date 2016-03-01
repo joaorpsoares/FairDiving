@@ -353,7 +353,7 @@ CREATE FUNCTION relateImagesToPackages(TEXT[], int) RETURNS void AS $$
 	BEGIN 
 		FOREACH x in ARRAY $1
 		LOOP 
-			INSERT INTO packageImage(imageName, packageid) VALUES(x,$2); 
+			INSERT INTO packageImage(imageName, idPackage) VALUES(x,$2); 
 		END LOOP;
 	END;
 $$ LANGUAGE plpgsql;

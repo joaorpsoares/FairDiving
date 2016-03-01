@@ -71,14 +71,13 @@
                                             }))
                                             .then(function(packageID) {
 
-                                                database.relateImagesToPackages(_imageNames, packageID.id)
+                                                database.relateImagesToPackages(packageID.id, _imageNames)
                                                     .then(function() {
                                                         __transaction.commit();
                                                         res.status(200).send('OK');
                                                     })
                                                     .catch(function(err) {
                                                         __transaction.rollback("_beforeInsertUser");
-                                                        console.log(err);
                                                         res.status(406).send("Images were not uploaded.");
                                                     });
                                             })

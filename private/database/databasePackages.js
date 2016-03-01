@@ -19,7 +19,6 @@
                     if (err) {
                         reject(err);
                     } else {
-                        console.log(result.rows[0]);
                         resolve(result.rows[0]);
                     }
                 });
@@ -67,7 +66,6 @@
 
         // Function to update a package imageID
         relateImagesToPackages: function(relation) {
-            console.log(relation);
             return new Promise(function(resolve, reject) {
                 client.query('SELECT relateImagesToPackages($1, $2)', relation, function(err, result) {
                     if (err) {
