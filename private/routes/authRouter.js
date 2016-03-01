@@ -20,13 +20,13 @@
         // Route to register a user
         server.post('/api/register', function(req, res) {
             if (!validator.matches(req.body.password, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/)) {
-                res.status(406).send('Your password needs to have at least one capital letter, one small letter, one number and a have a size of 6 or more ');
+                res.status(406).send('Your password needs to have at least one capital letter, one lowercase letter, one number and a length of 6 or more.');
             } else if (req.body.password !== req.body.confirmPassword) {
-                res.status(406).send('Your passwords are diferents');
+                res.status(406).send('Your passwords are different.');
             } else {
                 if (validator.isEmail(req.body.email)) {
                     if (!validator.matches(req.body.password, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/))
-                        res.status(406).send('Your password needs to have at least one capital letter, one small letter, one number and a have a size of 6 or more ');
+                        res.status(406).send('Your password needs to have at least one capital letter, one lowercase letter, one number and a length of 6 or more.');
                     else {
                         database.checkExistence(req.body.email.toLowerCase())
                             .then(function() {
@@ -81,7 +81,8 @@
                                 });
                             })
                             .catch(function(err) {
-                                res.status(406).send(err);
+                                res.status(406).send('This email is already in our database.'
+);
                             });
                     }
                 } else {
@@ -107,7 +108,7 @@
                                                 .then(function(token) {
                                                     res.status(200).send(token);
                                                 }).catch(function(err) {
-                                                    res.status(400).send('We could not generate a token for this session');
+                                                    res.status(400).send('We could not generate a token for this session.');
                                                 });
                                         } else {
                                             res.status(406).send('Email or password not correct.');
