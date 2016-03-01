@@ -12,18 +12,72 @@
             client = mainClient;
         },
 
+        // Function to insert a new package on database
         insertNewPackage: function(divePackage) {
             return new Promise(function(resolve, reject) {
-                client.query('INSERT INTO packages (operatorID, imageID, title, price, description, country_code) VALUES($1, $2, $3, $4, $5, $6) RETURNING id', divePackage, function(err, result) {
+                client.query('INSERT INTO packages (operatorID, title, price, description, certification, difficulty, n_dives, dive_sites, country_code) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id', divePackage, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {
-                        console.log("Package created:", result.rows);
                         resolve(result.rows[0]);
                     }
                 });
             });
+        },
+
+        // Function to retrieve all packages from database
+        getPackages: function() {
+            return new Promise(function(resolve, reject) {
+                client.query('SELECT * FROM packages', function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result.rows);
+                    }
+                });
+            });
+        },
+
+        // Function to retrieve a certain package from database
+        getPackageID: function(id) {
+            return new Promise(function(resolve, reject) {
+                client.query('SELECT * FROM packages WHERE id = $1', id, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result.rows[0]);
+                    }
+                });
+            });
+        },
+
+        // Function to retrieve a all reviews from a certain package
+        getReviewsByPackage: function(id) {
+            return new Promise(function(resolve, reject) {
+                client.query('SELECT * FROM reviews WHERE packageid = $1', id, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result.rows);
+                    }
+                });
+            });
+        },
+
+        // Function to update a package imageID
+        relateImagesToPackages: function(relation) {
+            return new Promise(function(resolve, reject) {
+                client.query('SELECT relateImagesToPackages($1, $2)', relation, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                });
+            });
         }
+
+
     };
 
 }());

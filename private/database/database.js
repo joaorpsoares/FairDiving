@@ -35,6 +35,11 @@
             client.disconnect();
         },
 
+        // Function to get client variable
+        getClient: function() {
+            return client;
+        },
+
         /*
                 USER RELATED FUNCTIONS
         */
@@ -51,12 +56,31 @@
 
         // Function to get sensetive data of a user
         getSensetiveData: function(email) {
-            return databaseUsers.getSensetiveData([email]);
+            return databaseUsers.getSensetiveData([email.toLowerCase()]);
         },
 
         // Function to update active atribute
         updateActiveAtribute: function(token) {
             return databaseUsers.updateActiveAtribute([token]);
+        },
+
+        // Function to retrieve a clearance level from a token
+        retrieveUsrLevelByToken: function(token) {
+            return databaseUsers.retrieveUsrLevelByToken([token]);
+        },
+
+        // Function to retrieve an userID using only token
+        retrieveUsrIDByToken: function(token) {
+            return databaseUsers.retrieveUsrIDByToken([token]);
+        },
+
+        retrieveUsrById: function(id) {
+            return databaseUsers.retrieveUsrById(id);
+        },
+
+        // Function to insert a default role on registered people
+        insertUsrLevel: function(usrId) {
+            return databaseUsers.insertUsrLevel(usrId);
         },
 
         /*
@@ -66,9 +90,28 @@
         // Function to insert a new package
         insertNewPackage: function(divePackage) {
             return databasePackages.insertNewPackage(divePackage);
+        },
+
+        // Function to retrieve all packages
+        getPackages: function() {
+            return databasePackages.getPackages();
+        },
+
+        // Function to retrieve a certain package
+        getPackageID: function(id) {
+            return databasePackages.getPackageID([id]);
+        },
+
+        // Function to retrieve a all reviews from a certain package
+        getReviewsByPackage: function(id) {
+            return databasePackages.getReviewsByPackage([id]);
+        },
+
+        // Function to update a package imageID
+        relateImagesToPackages: function(idPackage, imageNames) {
+            return databasePackages.relateImagesToPackages([imageNames, idPackage]);
         }
 
     };
 
 }());
-

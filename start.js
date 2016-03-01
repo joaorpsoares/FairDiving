@@ -6,7 +6,11 @@
         server = express(),
         morgan = require('morgan'),
         path = require('path'),
+        // Request parsing and handling information
         bodyParser = require('body-parser'),
+        cookieParser = require('cookie-parser'),
+        mld = require('./private/routes/middleware/middleware.js'),
+        // Database and email connection information.
         emailModule = require('./private/modules/email-module'),
         database = require('./private/database/database');
 
@@ -31,14 +35,26 @@
             console.log(err);
         });
 
-    server.use(morgan('dev'));
+    // Logging information on server information
+    server.use(morgan('dev', {
+        skip: function(req, res) {
+            return res.statusCode < 400;
+        }
+    }));
 
     // Allows the server to read JSON files
     server.use(bodyParser.urlencoded({
         extended: false
     }));
 
+
+    // Set up the parsing helpers
+    server.use(cookieParser());
     server.use(bodyParser.json());
+
+
+    // TODO: Not implemented corretly. Do better.
+    //server.use(mld.securityLevel);
 
     // Sets the folder where are the files are static
     server.use(express.static(path.resolve(__dirname, './public/')));

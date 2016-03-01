@@ -1,0 +1,580 @@
+<div ng-include="'/app/views/header.ejs'">
+</div>
+<div class="container breadcrub">
+    <div>
+        <a class="homebtn left" href="#"></a>
+        <div class="left">
+            <ul class="bcrumbs">
+                <li>/</li>
+                <li><a href="#" class="active">Profile</a></li>
+            </ul>
+        </div>
+        <a class="backbtn right" href="#"></a>
+    </div>
+    <div class="clearfix"></div>
+    <div class="brlines"></div>
+</div>
+<!-- CONTENT -->
+<div class="container">
+    <div class="container mt25 offset-0">
+        <!-- CONTENT -->
+        <div class="col-md-12 pagecontainer2 offset-0">
+            <!-- LEFT MENU -->
+            <div class="col-md-1 offset-0">
+                <!-- Nav tabs -->
+                <ul class="nav profile-tabs">
+                    <li class="active">
+                        <a href="#profile" data-toggle="tab">
+                            <span class="profile-icon"></span> Your profile
+                        </a>
+                    </li>
+                    <!-- if role == operator -->
+                    <li>
+                        <a href="#packages" data-toggle="tab" onclick="mySelectUpdate()">
+                            <span class="bookings-icon"></span> Packages
+                        </a>
+                    </li>
+                    <!--endif-->
+                    <li>
+                        <a href="#wishlist" data-toggle="tab" onclick="mySelectUpdate()">
+                            <span class="wishlist-icon"></span> Wishlist
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#settings" data-toggle="tab" onclick="mySelectUpdate()">
+                            <span class="settings-icon"></span> Settings
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#history" data-toggle="tab" onclick="mySelectUpdate()">
+                            <span class="history-icon"></span> History
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#password" data-toggle="tab" onclick="mySelectUpdate()">
+                            <span class="password-icon"></span> Change password
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#newsletter" data-toggle="tab" onclick="mySelectUpdate()">
+                            <span class="newsletter-icon"></span> Newsletters
+                        </a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <!-- LEFT MENU -->
+            <!-- RIGHT CPNTENT -->
+            <div class="col-md-11 offset-0">
+                <!-- Tab panes from left menu -->
+                <div class="tab-content5">
+                    <!-- TAB 1 -->
+                    <div class="tab-pane padding40 active" id="profile">
+                        <!-- Admin top -->
+                        <div class="col-md-4 offset-0">
+                            <img src="images/user.png" alt="" class="left margright20" />
+                            <p class="size12 grey margtop10">
+                                Hi, <span class="lred"> </span>
+                            </p>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4 ">
+                            <table class="table table-bordered  mt-10">
+                                <tr class="grey opensans">
+                                    <td class="center"><span class="size30 slim lh4">2</span>
+                                        <br/><span class="size12">Trips</span></td>
+                                    <td class="center"><span class="size30 slim lh4">5</span>
+                                        <br/><span class="size12">Places</span></td>
+                                    <td class="center"><span class="size30 slim lh4">14</span>
+                                        <br/><span class="size12">Days away</span></td>
+                                    <td class="center"><span class="size30 slim lh4">3</span>
+                                        <br/><span class="size12">Countries</span></td>
+                                </tr>
+                            </table>
+                        </div>
+                        </br>
+                        </br>
+                        </br>
+                        </br>
+                        </br>
+                        <!-- End of Admin top -->
+                        <span class="size16 bold">Personal details</span>
+                        <div class="line2"></div>
+                        <div class="col-md-12 offset-0" ng-controller="UserCtrl">
+                            <form>
+                                Username*:
+                                <input type="text" class="form-control" placeholder="" value="" rel="popover" name="username" />
+                                <br /> Name*:
+                                <input type="text" class="form-control" value="" rel="popover" name="name" />
+                                <br /> Email address*:
+                                <input type="text" class="form-control" value="" name="email" />
+                                <br /> Phone number:
+                                <input type="text" class="form-control" value="" name="phonenumber">
+                                <br/> Birthday:
+                                <input type="text" class="form-control mySelectCalendar" value="" name="birthday" id="datepicker3" />
+                                <br/>
+                                <br/>
+                                <span class="size16 bold">Your address</span>
+                                <div class="line2"></div>
+                                <br/> Address:
+                                <input type="text" class="form-control" value="" name="address">
+                                <br/> Zip Code:
+                                <input type="text" class="form-control" value="" name="zipcode">
+                                <br/> Country:
+                                <select class="form-control" name="country_code">
+                                    <!--       for each country se countrycode == country code do user selecionar
+                                    <option value="" selected="selected"></option>
+                                    end for -->
+                                </select>
+                                <br/>
+                                <br/>
+                                <span class="size16 bold">About Me</span>
+                                <div class="line2"></div>
+                                <br/> Description:
+                                <input type="text" class="form-control" value="" name="aboutme">
+                                <button type="submit" class="bluebtn margtop20">Update</button>
+                            </form>
+                        </div>
+                        <div class="clearfix"></div>
+                        <br/>
+                        <br/>
+                        <br/>
+                    </div>
+                    <!-- END OF TAB 1 -->
+                    <!-- if role == operator -->
+                    <!-- TAB 2 PACKAGES-->
+                    <div class="tab-pane" id="packages">
+                        <div class="padding40">
+                            <span class="size16 bold">Create a package</span>
+                            <div class="line2"></div>
+                            <!-- COL 1 -->
+                            <div class="col-md-12 offset-0">
+                                <form>
+                                    <br/> Title*:
+                                    <input ng-model="newPackage.title" type="text" class="form-control" placeholder="Enter the package title" rel="popover" required="required">
+                                    <!-- </br> Type*:
+                                    <select ng-model="newPackage.package_type" class="form-control" name="country_code" required="required">
+                                        <option value="1" selected="selected">Fun Dive</option>
+                                        <option value="2">Dive Course</option>
+                                        <option value="3">Complete Package</option>
+                                    </select>-->
+                                    <br/> Price*:
+                                    <input ng-model="newPackage.price" type="number" min="0" class="form-control" placeholder="Enter the package price" rel="popover" required="required">
+                                    <br/> Certification*:
+                                    <input ng-model="newPackage.certification" type="text" class="form-control" placeholder="Enter the certification needed to this package" required="required">
+                                    <br/> Difficulty*:
+                                    <input ng-model="newPackage.difficulty" type="text" class="form-control" placeholder="Enter the difficulty of this package" required="required">
+                                    <!--   <br/> Number of Dives*:
+                                    <input ng-model="newPackage.n_dives" type="text" class="form-control" placeholder="Enter the number of dives of this package" id="n_dives" name="n_dives" required="required">-->
+                                    <br/> Dive Sites*:
+                                    <input ng-model="newPackage.dive_sites" type="text" class="form-control" placeholder="Enter the dive sites of this package" required="required">
+                                    <br/> Description*:
+                                    <input ng-model="newPackage.description" type="text" class="form-control" placeholder="Enter the package description" required="required">
+                                    <!-- <br/> Location*:
+                                    <select ng-model="newPackage.country_code" class="form-control" name="country_code" required="required">
+                                        <option value="" selected="selected" disabled="disabled">Country...</option>
+                                        for each country
+                                        <option value=""></option>
+                                        endfor
+                                    </select>
+                                    <br/>
+                                    <input type="text" class="form-control" placeholder="Description of the location (address, etc.)" name="location" required="required">-->
+                                    <!-- <br/> Image*:
+                                    <br/>
+                                    <div class="fileUpload btn btn-default">
+                                        <span>Upload</span>
+                                        <input type="file" class="upload" name="image" accept="image/*">
+                                    </div>
+                                    <br/> -->
+                                    <button type="submit" class="bluebtn margtop20" ng-click="insertNewPackage(newPackage)">Create</button>
+                                </form>
+                            </div>
+                            <div class="clearfix"></div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <span class="dark size18">Your latest packages</span>
+                            <div class="right mt-5">
+                                <select class="form-control mySelectBoxClass hasCustomSelect cpwidth">
+                                    <option value="">All time</option>
+                                    <option value="">Countries</option>
+                                    <option value="">Date</option>
+                                </select>
+                            </div>
+                            <div class="right mr20 mt-5">
+                                <select class="form-control mySelectBoxClass hasCustomSelect cpwidth2">
+                                    <option value="">5/page</option>
+                                    <option value="">15/page</option>
+                                    <option value="">20/page</option>
+                                </select>
+                            </div>
+                            <div class="line4"></div>
+                            <br/>
+                            <!-- for each package 
+                            <div class="col-md-4 offset-0">
+                                <a href=""><img alt="" class="left mr20" src="" width="20%"></a>
+                                <a class="dark" href="#"><b></b></a> /
+                                <span class="dark size12"></span>
+                                <br>
+                                <span class="opensans green bold size14">$</span> <span class="grey">avg/night</span>
+                                <br>
+                            </div>
+                            <div class="col-md-7">
+                                <span class="grey"></span>
+                            </div>
+                            <div class="col-md-1 offset-0">
+                                <a href="" onclick="errorMessage()" type="submit" class="btn-search5 right">More</a>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="line4"></div>
+                             endfor -->
+                            <div class="line4"></div>
+                            <ul class="pagination right paddingbtm20">
+                                <li class="disabled"><a href="#">«</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">»</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- END OF TAB 2 PACKAGES -->
+                    <!-- end if -->
+                    <!-- TAB 3 -->
+                    <div class="tab-pane" id="wishlist">
+                        <div class="padding40">
+                            <br/>
+                            <br/>
+                            <span class="dark size18">Favourites list (NOT DONE)</span>
+                            <div class="right mt-5">
+                                <select class="form-control mySelectBoxClass hasCustomSelect cpwidth2">
+                                    <option value="">5/page</option>
+                                    <option value="">15/page</option>
+                                    <option value="">20/page</option>
+                                </select>
+                            </div>
+                            <div class="line4"></div>
+                            <br/>
+                            <div>
+                                <div class="col-md-4 offset-0">
+                                    <a href="#"><img alt="" class="left mr20" src="images/smallthumb-1.jpg"></a>
+                                    <a class="dark" href="#"><b>Hotel Dany</b></a> /
+                                    <span class="dark size12">Greece - Zakynthos</span>
+                                    <br>
+                                    <span class="opensans green bold size14">$36-$160</span> <span class="grey">avg/night</span>
+                                    <br>
+                                    <img alt="" src="images/filter-rating-5.png">
+                                    <br/>
+                                </div>
+                                <div class="col-md-7">
+                                    <span class="grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam faucibus, quam vel interdum lacinia, lacus justo rutrum lorem, in fermentum ligula est a diam. Nam aliquet arcu est, a malesuada odio laoreet non.</span>
+                                </div>
+                                <div class="col-md-1 offset-0">
+                                    <button onclick="errorMessage()" type="submit" class="btn-search5 right"><span class="glyphicon glyphicon-heart dark"></span></button>
+                                </div>
+                                <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt10" type="button">×</button>
+                                <div class="clearfix"></div>
+                                <div class="line6"></div>
+                            </div>
+                            <div>
+                                <div class="col-md-4 offset-0">
+                                    <a href="#"><img alt="" class="left mr20" src="images/smallthumb-2.jpg"></a>
+                                    <a class="dark" href="#"><b>Hotel Dany</b></a> /
+                                    <span class="dark size12">Greece - Zakynthos</span>
+                                    <br>
+                                    <span class="opensans green bold size14">$36-$160</span> <span class="grey">avg/night</span>
+                                    <br>
+                                    <img alt="" src="images/filter-rating-5.png">
+                                    <br/>
+                                </div>
+                                <div class="col-md-7">
+                                    <span class="grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam faucibus, quam vel interdum lacinia, lacus justo rutrum lorem, in fermentum ligula est a diam. Nam aliquet arcu est, a malesuada odio laoreet non.</span>
+                                </div>
+                                <div class="col-md-1 offset-0">
+                                    <button onclick="errorMessage()" type="submit" class="btn-search5 right"><span class="glyphicon glyphicon-heart dark"></span></button>
+                                </div>
+                                <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt10" type="button">×</button>
+                                <div class="clearfix"></div>
+                                <div class="line6"></div>
+                            </div>
+                            <div>
+                                <div class="col-md-4 offset-0">
+                                    <a href="#"><img alt="" class="left mr20" src="images/smallthumb-3.jpg"></a>
+                                    <a class="dark" href="#"><b>Hotel Dany</b></a> /
+                                    <span class="dark size12">Greece - Zakynthos</span>
+                                    <br>
+                                    <span class="opensans green bold size14">$36-$160</span> <span class="grey">avg/night</span>
+                                    <br>
+                                    <img alt="" src="images/filter-rating-5.png">
+                                    <br/>
+                                </div>
+                                <div class="col-md-7">
+                                    <span class="grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam faucibus, quam vel interdum lacinia, lacus justo rutrum lorem, in fermentum ligula est a diam. Nam aliquet arcu est, a malesuada odio laoreet non.</span>
+                                </div>
+                                <div class="col-md-1 offset-0">
+                                    <button onclick="errorMessage()" type="submit" class="btn-search5 right"><span class="glyphicon glyphicon-heart"></span></button>
+                                </div>
+                                <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt10" type="button">×</button>
+                                <div class="clearfix"></div>
+                                <div class="line6"></div>
+                            </div>
+                            <div>
+                                <div class="col-md-4 offset-0">
+                                    <a href="#"><img alt="" class="left mr20" src="images/smallthumb-1.jpg"></a>
+                                    <a class="dark" href="#"><b>Hotel Dany</b></a> /
+                                    <span class="dark size12">Greece - Zakynthos</span>
+                                    <br>
+                                    <span class="opensans green bold size14">$36-$160</span> <span class="grey">avg/night</span>
+                                    <br>
+                                    <img alt="" src="images/filter-rating-5.png">
+                                    <br/>
+                                </div>
+                                <div class="col-md-7">
+                                    <span class="grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam faucibus, quam vel interdum lacinia, lacus justo rutrum lorem, in fermentum ligula est a diam. Nam aliquet arcu est, a malesuada odio laoreet non.</span>
+                                </div>
+                                <div class="col-md-1 offset-0">
+                                    <button onclick="errorMessage()" type="submit" class="btn-search5 right"><span class="glyphicon glyphicon-heart dark"></span></button>
+                                </div>
+                                <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt10" type="button">×</button>
+                                <div class="clearfix"></div>
+                                <div class="line6"></div>
+                            </div>
+                            <div>
+                                <div class="col-md-4 offset-0">
+                                    <a href="#"><img alt="" class="left mr20" src="images/smallthumb-2.jpg"></a>
+                                    <a class="dark" href="#"><b>Hotel Dany</b></a> /
+                                    <span class="dark size12">Greece - Zakynthos</span>
+                                    <br>
+                                    <span class="opensans green bold size14">$36-$160</span> <span class="grey">avg/night</span>
+                                    <br>
+                                    <img alt="" src="images/filter-rating-5.png">
+                                    <br/>
+                                </div>
+                                <div class="col-md-7">
+                                    <span class="grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam faucibus, quam vel interdum lacinia, lacus justo rutrum lorem, in fermentum ligula est a diam. Nam aliquet arcu est, a malesuada odio laoreet non.</span>
+                                </div>
+                                <div class="col-md-1 offset-0">
+                                    <button onclick="errorMessage()" type="submit" class="btn-search5 right"><span class="glyphicon glyphicon-heart"></span></button>
+                                </div>
+                                <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt10" type="button">×</button>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="line4"></div>
+                            <ul class="pagination right paddingbtm20">
+                                <li class="disabled"><a href="#">«</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">»</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- END OF TAB 3 -->
+                    <!-- TAB 4 -->
+                    <div class="tab-pane" id="settings">
+                        <div class="padding40 dark">
+                            <span class="dark size18">Settings (NOT DONE)</span>
+                            <div class="line4"></div>
+                            <span class="dark size14 bold">Notifications</span>
+                            <br/> Change the way you recieve notifications.
+                            <div class="checkbox dark">
+                                <label>
+                                    <input type="checkbox" checked> Make my profile private
+                                </label>
+                            </div>
+                            <div class="checkbox dark">
+                                <label>
+                                    <input type="checkbox"> Send an email when someone replyes to one of your comments.
+                                </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <span class="dark size14 bold">Who can contact me?</span>
+                            <br/>
+                            <select class="form-control mySelectBoxClass hasCustomSelect cpwidth">
+                                <option value="">Everyone</option>
+                                <option value="">No one</option>
+                                <option value="">Friends</option>
+                            </select>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <span class="dark size14 bold">Payments</span>
+                            <br/>
+                            <div class="checkbox dark">
+                                <label>
+                                    <input type="checkbox" checked> Auto Payment
+                                </label>
+                            </div>
+                            <br/>
+                            <br/>
+                            <span class="dark size14 bold">Credit Card Details</span>
+                            <div class="line4"></div>
+                            <br/> Card Type
+                            <br/>
+                            <select class="form-control mySelectBoxClass hasCustomSelect cpwidth">
+                                <option value="">Visa</option>
+                                <option value="">MasterCard</option>
+                                <option value="">Discover</option>
+                                <option value="">American Express</option>
+                            </select>
+                            <br/>
+                            <br/> Card Number
+                            <br/>
+                            <input type="text" class="form-control" placeholder="XXXX-XXXX-XXXX-XXX">
+                            <br/> Expiry date
+                            <br/>
+                            <select class="form-control mySelectBoxClass hasCustomSelect cpwidth2">
+                                <option value="">01</option>
+                                <option value="">02</option>
+                                <option value="">03</option>
+                                <option value="">04</option>
+                                <option value="">05</option>
+                                <option value="">06</option>
+                                <option value="">07</option>
+                                <option value="">08</option>
+                                <option value="">09</option>
+                                <option value="">10</option>
+                                <option value="">11</option>
+                                <option value="">12</option>
+                            </select>
+                            /
+                            <select class="form-control mySelectBoxClass hasCustomSelect cpwidth2">
+                                <option value="">2013</option>
+                                <option value="">2014</option>
+                                <option value="">2015</option>
+                                <option value="">2016</option>
+                                <option value="">2017</option>
+                                <option value="">2018</option>
+                            </select>
+                            <br/> CVV
+                            <br/>
+                            <input type="text" class="form-control cpwidth2" placeholder="">
+                            <br/>
+                            <br/>
+                            <button type="submit" class="btn-search5">Save changes</button>
+                        </div>
+                    </div>
+                    <!-- END OF TAB 4 -->
+                    <!-- TAB 5 -->
+                    <div class="tab-pane" id="history">
+                        <div class="padding40">
+                            <span class="dark size18">History (NOT DONE)</span>
+                            <div class="line4"></div>
+                            <br/>
+                            <div class="col-md-3 bold">Date</div>
+                            <div class="col-md-3 bold">Destination</div>
+                            <div class="col-md-3 bold">Service</div>
+                            <div class="col-md-3 bold textright">Action</div>
+                            <div class="clearfix"></div>
+                            <div class="line4"></div>
+                            <div class="col-md-3">01.05.09</div>
+                            <div class="col-md-3">Grece - Zakynthos</div>
+                            <div class="col-md-3">Hotel</div>
+                            <div class="col-md-3 textright">
+                                <button type="submit" class="btn-search5"><span class="glyphicon glyphicon-plus"></span></button>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="line4"></div>
+                            <div class="col-md-3">17.07.10</div>
+                            <div class="col-md-3">Spain - Malaga</div>
+                            <div class="col-md-3">Flight Tickets</div>
+                            <div class="col-md-3 textright">
+                                <button type="submit" class="btn-search5"><span class="glyphicon glyphicon-plus"></span></button>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="line4"></div>
+                            <div class="col-md-3">01.05.09</div>
+                            <div class="col-md-3">Bulgary - Sunny Beach</div>
+                            <div class="col-md-3">Flight Tickets</div>
+                            <div class="col-md-3 textright">
+                                <button type="submit" class="btn-search5"><span class="glyphicon glyphicon-plus"></span></button>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="line4"></div>
+                            <div class="col-md-3">01.05.09</div>
+                            <div class="col-md-3">France - Paris</div>
+                            <div class="col-md-3">Rent a car</div>
+                            <div class="col-md-3 textright">
+                                <button type="submit" class="btn-search5"><span class="glyphicon glyphicon-plus"></span></button>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="line4"></div>
+                            <div class="col-md-3">15.03.11</div>
+                            <div class="col-md-3">U.A.E. - Dubai</div>
+                            <div class="col-md-3">Car + Hotel + Flight</div>
+                            <div class="col-md-3 textright">
+                                <button type="submit" class="btn-search5"><span class="glyphicon glyphicon-plus"></span></button>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="line4"></div>
+                            <div class="col-md-3">15.06.12</div>
+                            <div class="col-md-3">Grand Britain - London</div>
+                            <div class="col-md-3">Car + Hotel + Flight</div>
+                            <div class="col-md-3 textright">
+                                <button type="submit" class="btn-search5"><span class="glyphicon glyphicon-plus"></span></button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <!-- END OF TAB 5 -->
+                    <!-- TAB 6 -->
+                    <div class="tab-pane" id="password">
+                        <div class="padding40">
+                            <form action="" method="post">
+                                <span class="dark size18">Change password</span>
+                                <div class="line4"></div>
+                                Old Password:
+                                <input type="password" class="form-control " name="oldpassword" placeholder="" required>
+                                <br/> New Password:
+                                <input type="password" class="form-control logpadding" name="newpassword" placeholder="New Password" id="passwordw" pattern=".{5,}" required title="5 characters minimum" required>
+                                <br/> Confirm New Password:
+                                <input type="password" class="form-control logpadding" name="confirmpassword" placeholder="New Password" id="confirm_password" pattern=".{5,}" required title="5 characters minimum" required>
+                                <br/>
+                                <br/>
+                                <button type="submit" id="submitButton" class="btn-search5">Save changes</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- END OF TAB 6 -->
+                    <!-- TAB 7 -->
+                    <div class="tab-pane" id="newsletter">
+                        <div class="padding40">
+                            <span class="dark size18">Newsletter</span>
+                            <div class="line4"></div>
+                            <div class="checkbox dark">
+                                <label>
+                                    <input type="checkbox" checked> Check this box to receive a monthly newsletter
+                                </label>
+                            </div>
+                            <br/>
+                            <button type="submit" class="btn-search5">Save changes</button>
+                        </div>
+                    </div>
+                    <!-- END OF TAB 7 -->
+                </div>
+                <!-- End of Tab panes from left menu -->
+            </div>
+            <!-- END OF RIGHT CPNTENT -->
+            <div class="clearfix"></div>
+            <br/>
+            <br/>
+        </div>
+        <!-- END CONTENT -->
+    </div>
+</div>
+<!-- END OF CONTENT -->
+<script>
+$('#confirm_password').on('keyup', function() {
+    if ($(this).val() == $('#passwordw').val()) {
+        $('#submitButton').prop("disabled", false);
+        $('#confirm_password').css('border', '2px solid green');
+    } else {
+        $('#submitButton').prop("disabled", true);
+        $('#confirm_password').css('border', '2px solid red');
+    }
+});
+</script>
+<div ng-include="'/app/views/footer.ejs'"></div>
