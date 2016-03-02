@@ -139,7 +139,7 @@
         });
 
 
-        // Route to retrieve user by token
+        // Route to retrieve user by cookie session
         server.get('/api/user', function(req, res) {
             token.verifySession(req.cookies.session)
                 .then(function(userInfo) {
@@ -148,6 +148,26 @@
                 .catch(function(err) {
                     console.log(err);
                     res.status(406).send(err);
+                });
+
+        });
+
+        // Route to retrieve user by token
+        server.get('/api/user/:token', function(req, res) {
+            token.verifySession(req.cookies.session)
+                .then(function() {
+                    database.retrieveUsrByToken(req.params.token)
+                        .then(function(user) {
+                            res.status(200).send(user);
+                        })
+                        .catch(function() {
+                            console.log(err);
+                            res.status(406).send('err');
+                        });
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    res.status(406).send('err');
                 });
 
         });

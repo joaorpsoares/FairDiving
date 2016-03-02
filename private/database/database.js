@@ -74,8 +74,16 @@
             return databaseUsers.retrieveUsrIDByToken([token]);
         },
 
+        retrieveUsrByToken: function(token) {
+            return databaseUsers.retrieveUsrByToken([token]);
+        },
+
         retrieveUsrById: function(id) {
             return databaseUsers.retrieveUsrById(id);
+        },
+
+        updateUsrById: function(user) {
+            return databaseUsers.updateUsrById(user);
         },
 
         // Function to insert a default role on registered people
