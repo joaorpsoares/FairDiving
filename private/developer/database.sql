@@ -7,6 +7,8 @@ DROP TABLE IF EXISTS packageType CASCADE;
 DROP TABLE IF EXISTS roles CASCADE;
 DROP TABLE IF EXISTS roles_users CASCADE;
 DROP TABLE IF EXISTS reviews CASCADE;
+DROP TABLE IF EXISTS rating CASCADE;
+DROP FUNCTION IF EXISTS relateImagesToPackages(TEXT[], int) CASCADE;
 
 
 CREATE TABLE countries (
@@ -43,13 +45,18 @@ CREATE TABLE packageImage (
 	imageName VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE rating (
+	id BIGSERIAL PRIMARY KEY,
+	description VARCHAR(5) NOT NULL
+);
+
 CREATE TABLE packages (
 	id BIGSERIAL PRIMARY KEY,
 	operatorID BIGINT REFERENCES users(id),
 	--  package info
 	package_type BIGINT REFERENCES packageType(id),
 	certification VARCHAR (140) NOT NULL,
-	difficulty VARCHAR(60) NOT NULL,
+	difficulty BIGINT REFERENCES rating(id),
 	n_dives REAL NOT NULL,
 	dive_sites VARCHAR(100) NOT NULL,
 	title VARCHAR (140) NOT NULL,
@@ -74,10 +81,18 @@ CREATE TABLE roles_users (
 CREATE TABLE reviews (
 	id BIGSERIAL PRIMARY KEY,
 	title VARCHAR (100) NOT NULL,
-	rating REAL NOT NULL,
+	rating BIGINT REFERENCES rating(id),
 	comment VARCHAR (500) NOT NULL,
-	packageid BIGINT REFERENCES packages(id)
+	packageid BIGINT REFERENCES packages(id),
+	userid BIGINT REFERENCES users(id)
 );
+
+-- INSERT rating
+INSERT INTO rating ("description") VALUES (E'1');
+INSERT INTO rating ("description") VALUES (E'2');
+INSERT INTO rating ("description") VALUES (E'3');
+INSERT INTO rating ("description") VALUES (E'4');
+INSERT INTO rating ("description") VALUES (E'5');
 
 -- INSERT packageTypes
 INSERT INTO packageType ("description") VALUES (E'Fundive');

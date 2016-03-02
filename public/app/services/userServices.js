@@ -41,11 +41,10 @@
                 });
 
         };
-        /*
 
-        this.getLoggedUser = function(id) {
+        this.getLoggedUserToken = function() {
 
-            return $http.get('/api/user/' + id)
+            return $http.get('/api/user/')
                 .success(function(res) {
                     deferred.resolve(res);
 
@@ -56,7 +55,35 @@
                 });
 
 
-        };*/
+        };
+
+        this.getLoggedUser = function(token) {
+            return $http.get('/api/user/' + token)
+                .success(function(res) {
+                    deferred.resolve(res);
+
+                })
+                .error(function(err) {
+                    console.log(err);
+                    deferred.reject(err);
+                });
+
+
+        };
+        /*
+                this.updateUserInfo = function(user, updatedUser) {
+                    return $http.post('/api/user/' + user, updatedUser)
+                        .success(function(res) {
+                            deferred.resolve(res);
+
+                        })
+                        .error(function(err) {
+                            console.log(err);
+                            deferred.reject(err);
+                        });
+
+
+                };*/
     };
 
     // Injecting modules used for better minifing later on
