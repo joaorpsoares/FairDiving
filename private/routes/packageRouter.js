@@ -98,12 +98,12 @@
                                 res.status(406).send(err);
                             });
                     } else {
-                        res.status(406).send("Impossible to do this, since you dont have permission.");
+                        res.status(403).send("Impossible to do this, since you dont have permission.");
                     }
                 })
                 .catch(function(err) {
                     console.log(err);
-                    res.status(406).send("You are not allowed to create packages. If you think it is a mistake, contact our support.");
+                    res.status(401).send("You are not allowed to create packages. If you think it is a mistake, contact our support.");
                 });
         });
 
@@ -126,6 +126,49 @@
                 })
                 .catch(function(err) {
                     res.status(406).send(err);
+                });
+        });
+
+        // Route to insert a review
+        server.post('/api/package/review/:id', function(req, res) {
+            cookie.verifySession(req.cookies.session)
+                .then(function(info) {
+
+                    database.retrieveUsrIDByToken(info.token)
+                        .then(function(userID) {
+
+                            database.getPackageCreator(req.params.id)
+                                .then(function(creatorInfo) {
+
+                                    if (creatorInfo.operatorid === userID) {
+                                        res.status(401).send("You cannot evaluate your own packages.");
+                                    } else {
+                                        if (typeof req.body.title === 'string' && req.body.title.length <= 100 &&
+                                            !isNaN(req.body.rating) && req.body.rating > 0 && req.body.rating <= 5 &&
+                                            typeof req.body.comment === 'string' && req.body.comment.length <= 500) {
+
+                                            database.insertReviewOnPackage([req.body.title, req.body.rating, req.body.comment, req.params.id, userID])
+                                                .then(function() {
+                                                    res.status(200).send('OK');
+                                                })
+                                                .catch(function(err) {
+                                                    console.log(err);
+                                                    res.status(406).send('There was an error while adding your review. We\'re sorry');
+                                                });
+                                        } else {
+                                            res.status(406).send('The parameters dont respect the size limits or they are missing.');
+                                        }
+                                    }
+                                }).catch(function(err) {
+                                    res.status(406).send('There was an error retrieving package creator');
+                                });
+                        })
+                        .catch(function(err) {
+                            res.status(406).send('Some error happened on our side. Try again later please.');
+                        });
+                })
+                .catch(function(err) {
+                    res.status(401).send('Do you have permission to do that?!');
                 });
         });
 

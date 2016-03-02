@@ -102,6 +102,11 @@
             return databasePackages.getPackageID([id]);
         },
 
+        // Function to retrieve package creator
+        getPackageCreator: function(id) {
+            return databasePackages.getPackageCreator([id]);
+        },
+
         // Function to retrieve a all reviews from a certain package
         getReviewsByPackage: function(id) {
             return databasePackages.getReviewsByPackage([id]);
@@ -110,8 +115,12 @@
         // Function to update a package imageID
         relateImagesToPackages: function(idPackage, imageNames) {
             return databasePackages.relateImagesToPackages([imageNames, idPackage]);
-        }
+        },
 
+        // Function to insert a review to a package
+        insertReviewOnPackage: function(review) {
+            return databasePackages.insertReviewOnPackage(review);
+        }
     };
 
 }());

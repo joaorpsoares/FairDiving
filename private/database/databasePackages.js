@@ -51,6 +51,32 @@
             });
         },
 
+        // Function to retrieve package creator
+        getPackageCreator: function(id) {
+            return new Promise(function(resolve, reject) {
+                client.query('SELECT operatorID FROM packages WHERE id = $1', id, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result.rows[0]);
+                    }
+                });
+            });
+        },
+
+        // Function to insert a review to a package
+        insertReviewOnPackage: function(review) {
+            return new Promise(function(resolve, reject) {
+                client.query('INSERT INTO reviews(title, rating, comment, packageid, userid) VALUES($1, $2, $3, $4, $5)', review, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                });
+            });
+        },
+
         // Function to retrieve a all reviews from a certain package
         getReviewsByPackage: function(id) {
             return new Promise(function(resolve, reject) {
