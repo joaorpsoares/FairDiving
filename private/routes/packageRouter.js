@@ -53,9 +53,13 @@
 
                                         var _imageNames = [];
 
-                                        req.files.forEach(function(value) {
-                                            _imageNames.push(value.filename);
-                                        });
+                                        if (req.files.length !== 0) {
+                                            req.files.forEach(function(value) {
+                                                _imageNames.push(value.filename);
+                                            });
+                                        } else {
+                                            _imageNames.push('default.jpg');
+                                        }
 
                                         var __transaction = new Transaction(database.getClient());
 
@@ -87,9 +91,9 @@
                                             });
                                     }
                                 }
-
                             })
                             .catch(function(err) {
+                                console.log(err);
                                 res.status(406).send(err);
                             });
                     } else {
