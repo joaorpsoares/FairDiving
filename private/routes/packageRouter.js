@@ -27,8 +27,9 @@
                         database.retrieveUsrIDByToken(info.token)
                             .then(function(usrID) {
                                 var __package = {
-                                    operatorID: usrID,
+                                    operatorID: 1, //Default one
                                     imageID: 1, // Default one
+                                    package_type: req.body.package_type,
                                     title: req.body.title,
                                     price: req.body.price,
                                     description: req.body.description,
