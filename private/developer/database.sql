@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS packageType CASCADE;
 DROP TABLE IF EXISTS roles CASCADE;
 DROP TABLE IF EXISTS roles_users CASCADE;
 DROP TABLE IF EXISTS reviews CASCADE;
+DROP TABLE IF EXISTS rating CASCADE;
 
 
 CREATE TABLE countries (
@@ -32,12 +33,6 @@ CREATE TABLE users (
 	active bit NOT NULL DEFAULT '0'
 );
 
-
-CREATE TABLE operators (
-	id BIGSERIAL PRIMARY KEY,
-	rej_user_id BIGINT REFERENCES users(id)
-);
-
 CREATE TABLE packageType (
 	id BIGSERIAL PRIMARY KEY,
 	description VARCHAR(30) NOT NULL
@@ -45,18 +40,22 @@ CREATE TABLE packageType (
 
 CREATE TABLE packageImage (
 	id BIGSERIAL PRIMARY KEY,
-	imageName VARCHAR(255) NOT NULL,
-	idPackage BIGINT DEFAULT NULL
+	idPackage BIGINT DEFAULT NULL,
+	imageName VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE rating (
+	id BIGSERIAL PRIMARY KEY,
+	description VARCHAR(5) NOT NULL
 );
 
 CREATE TABLE packages (
 	id BIGSERIAL PRIMARY KEY,
-	operatorID BIGINT REFERENCES operators(id),
-	imageID BIGINT REFERENCES packageimage(id),
+	operatorID BIGINT REFERENCES users(id),
 	--  package info
 	package_type BIGINT REFERENCES packageType(id),
 	certification VARCHAR (140) NOT NULL,
-	difficulty VARCHAR(60) NOT NULL,
+	difficulty BIGINT REFERENCES rating(id),
 	n_dives REAL NOT NULL,
 	dive_sites VARCHAR(100) NOT NULL,
 	title VARCHAR (140) NOT NULL,
@@ -74,23 +73,24 @@ CREATE TABLE roles (
 );
 
 CREATE TABLE roles_users (
-	roleid BIGINT REFERENCES roles(id),
-	userid BIGINT REFERENCES users(id)
+	userid BIGINT REFERENCES users(id),
+	roleid BIGINT REFERENCES roles(id)
 );
 
 CREATE TABLE reviews (
 	id BIGSERIAL PRIMARY KEY,
 	title VARCHAR (100) NOT NULL,
-	rating REAL NOT NULL,
+	rating BIGINT REFERENCES rating(id),
 	comment VARCHAR (500) NOT NULL,
 	packageid BIGINT REFERENCES packages(id)
 );
 
-INSERT INTO users("email", "token", "password", "admin", "active") VALUES ('ei12109@fe.up.pt', '1de6cc7a3b3602b98c774f28fbde1778b1e802a321908b1ae1f554e700eee150', '$2a$10$CLSAWw2Z3sJxNuzAPs7jOeww1z9jAq9Hd9Z0fBLMAzL2oONOn9Eky', '1', '1');
-INSERT INTO operators("rej_user_id") VALUES(1);
-
--- INSERT DEFAULT IMAGE
-INSERT INTO packageImage("imagename") VALUES('default.jpg');
+-- INSERT rating
+INSERT INTO rating ("description") VALUES (E'1');
+INSERT INTO rating ("description") VALUES (E'2');
+INSERT INTO rating ("description") VALUES (E'3');
+INSERT INTO rating ("description") VALUES (E'4');
+INSERT INTO rating ("description") VALUES (E'5');
 
 -- INSERT packageTypes
 INSERT INTO packageType ("description") VALUES (E'Fundive');
@@ -359,5 +359,14 @@ INSERT INTO countries ("abrev", "name") VALUES (E'YE', E'Yemen');
 INSERT INTO countries ("abrev", "name") VALUES (E'ZM', E'Zambia');
 INSERT INTO countries ("abrev", "name") VALUES (E'ZW', E'Zimbabwe');
 
--- INSERT DEFAULT PACKAGE
-insert into packages("operatorid","imageid","package_type","certification","difficulty","n_dives", "dive_sites", "title", "price", "description", "country_code") VALUES (1,1,1,'PRO DIVE CERTIFICATE','HARD', 2, 'Maldives sea', 'Dive through Maldives', 2600, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.','AF');
+
+CREATE FUNCTION relateImagesToPackages(TEXT[], int) RETURNS void AS $$
+	DECLARE 
+		x  TEXT; 
+	BEGIN 
+		FOREACH x in ARRAY $1
+		LOOP 
+			INSERT INTO packageImage(imageName, idPackage) VALUES(x,$2); 
+		END LOOP;
+	END;
+$$ LANGUAGE plpgsql;

@@ -15,8 +15,9 @@
         // Function to insert a new package on database
         insertNewPackage: function(divePackage) {
             return new Promise(function(resolve, reject) {
-                client.query('INSERT INTO packages (operatorID, imageID, package_type, title, price, description, certification, difficulty, n_dives, dive_sites, country_code) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id', divePackage, function(err, result) {
-                    //faltam campos
+
+                client.query('INSERT INTO packages (operatorID, package_type, title, price, description, certification, difficulty, n_dives, dive_sites, country_code) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id', divePackage, function(err, result) {
+
                     if (err) {
                         reject(err);
                     } else {
@@ -66,13 +67,13 @@
         },
 
         // Function to update a package imageID
-        updateImageIDPackage: function(info) {
+        relateImagesToPackages: function(relation) {
             return new Promise(function(resolve, reject) {
-                client.query('UPDATE packages SET imageID = $1 WHERE id = $2', info, function(err, result) {
+                client.query('SELECT relateImagesToPackages($1, $2)', relation, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {
-                        resolve(result.rows);
+                        resolve();
                     }
                 });
             });
