@@ -82,7 +82,8 @@ CREATE TABLE reviews (
 	title VARCHAR (100) NOT NULL,
 	rating BIGINT REFERENCES rating(id),
 	comment VARCHAR (500) NOT NULL,
-	packageid BIGINT REFERENCES packages(id)
+	packageid BIGINT REFERENCES packages(id),
+	userid BIGINT REFERENCES users(id)
 );
 
 -- INSERT rating

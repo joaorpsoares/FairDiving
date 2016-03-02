@@ -53,6 +53,7 @@
 
                                         var _imageNames = [];
 
+                                        // If the user didnt upload a single file, then a default one is used.
                                         if (req.files.length !== 0) {
                                             req.files.forEach(function(value) {
                                                 _imageNames.push(value.filename);
@@ -139,5 +140,4 @@
                 });
         });
     };
-
 }());
