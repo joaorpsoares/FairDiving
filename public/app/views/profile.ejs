@@ -1,3 +1,9 @@
+<script src="js/tinymce/tinymce.min.js"></script>
+<script>
+tinymce.init({
+    selector: 'textarea'
+});
+</script>
 <div ng-include="'/app/views/header.ejs'">
 </div>
 <div class="container breadcrub">
@@ -155,7 +161,7 @@
                                     <br/> Title*:
                                     <input ng-model="newPackage.title" type="text" class="form-control" placeholder="Enter the package title" rel="popover" required="required">
                                     </br> Type*:
-                                    <select ng-model="newPackage.package_type" class="form-control" name="country_code" required="required">
+                                    <select ng-model="newPackage.package_type" class="form-control" name="package_type" required="required">
                                         <option value="1" selected="selected">Fun Dive</option>
                                         <option value="2">Dive Course</option>
                                         <option value="3">Complete Package</option>
@@ -165,7 +171,14 @@
                                     <br/> Certification*:
                                     <input ng-model="newPackage.certification" type="text" class="form-control" placeholder="Enter the certification needed to this package" required="required">
                                     <br/> Difficulty*:
-                                    <input ng-model="newPackage.difficulty" type="text" class="form-control" placeholder="Enter the difficulty of this package" required="required">
+                                    <select ng-model="newPackage.difficulty" class="form-control" name="difficulty" placeholder="Enter the difficulty of this package" required="required">
+                                        <option value="1" selected="selected">Easy</option>
+                                        <option value="2">Medium</option>
+                                        <option value="3">Medium Hard</option>
+                                        <option value="4">Hard</option>
+                                        <option value="5">Extreme</option>
+                                    </select>
+                                    <!--<input ng-model="newPackage.difficulty" type="text" class="form-control" placeholder="Enter the difficulty of this package" required="required"> -->
                                     <br/> Number of Dives*:
                                     <input ng-model="newPackage.n_dives" type="number" min="0" class="form-control" placeholder="Enter the number of dives of this package" id="n_dives" name="n_dives" required="required">
                                     <br/> Dive Sites*:
@@ -180,14 +193,14 @@
                                         <!--endfor-->
                                     </select>
                                     <br/>
-                                    <!-- <input type="text" class="form-control" placeholder="Description of the location (address, etc.)" name="location" required="required">-->
+                                    <!-- <input type="text" class="form-control" placeholder="Description of the location (address, etc.)" name="location" required="required">
                                     <br/> Image*:
                                     <br/>
                                     <div class="fileUpload btn btn-default">
                                         <span>Upload</span>
                                         <input type="file" ng-model="newPackage.avatar" class="upload" name="avatar" accept="image/*" multiple>
                                     </div>
-                                    <br/>
+                                    <br/>-->
                                     <button type="submit" class="bluebtn margtop20" ng-click="insertNewPackage(newPackage)">Create</button>
                                 </form>
                             </div>

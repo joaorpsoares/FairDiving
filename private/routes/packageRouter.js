@@ -28,6 +28,8 @@
                         database.retrieveUsrIDByToken(info.token)
                             .then(function(usrID) {
 
+                                console.log(req.body, req.files);
+
                                 var __package = {
                                     operatorID: usrID,
                                     package_type: req.body.package_type,
@@ -55,7 +57,7 @@
                                         var _imageNames = [];
 
                                         // If the user didnt upload a single file, then a default one is used.
-                                        if (req.files.length !== 0) {
+                                        if (typeof req.files !== 'undefined' && req.files.length !== 0) {
                                             req.files.forEach(function(value) {
                                                 _imageNames.push(value.filename);
                                             });
