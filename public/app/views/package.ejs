@@ -30,11 +30,11 @@
                             </div>
                         </div>
                         <!--
-							<div id="pager-wrapper">
-								<div id="pager">
-									<img ng-repeat = "image in packageOnUse.image" src="/package/{{ package.id }}/{{ image.name }}" alt="" />
-								</div>
-							</div>
+                            <div id="pager-wrapper">
+                                <div id="pager">
+                                    <img ng-repeat = "image in packageOnUse.image" src="/package/{{ package.id }}/{{ image.name }}" alt="" />
+                                </div>
+                            </div>
 -->
                     </div>
                     <div class="clearfix"></div>
@@ -57,33 +57,48 @@
             </div>
             <div class="line3 margtop20"></div>
             <!--
-				<div class="col-md-6 bordertype1 padding20">
-					<span class="opensans size30 bold grey2">{{ recommendations }}%</span><br/>
-					of guests<br/>recommend
-				</div>
-				<div class="col-md-6 bordertype2 padding20">
-					<span class="opensans size30 bold grey2">{{ reviewAverage }}</span>/5<br/>
-					guest ratings
-				</div>
-				
-				<div class="col-md-6 bordertype3">
-					{% if reviewAverage < 1.5 %}
-					<img src="/images/smallrating-1.png" alt=""/>
-					{% elseif reviewAverage < 2.5 %}
-					<img src="/images/smallrating-2.png" alt=""/>
-					{% elseif reviewAverage < 3.5 %}
-					<img src="/images/smallrating-3.png" alt=""/>
-					{% elseif reviewAverage < 4.5 %}
-					<img src="/images/smallrating-4.png" alt=""/>
-					{% else %}
-					<img src="/images/smallrating-5.png" alt=""/>
-					{% endif %}
-					<br/>{{ reviews.length }} reviews
-				</div>
+                <div class="col-md-6 bordertype1 padding20">
+                    <span class="opensans size30 bold grey2">{{ recommendations }}%</span><br/>
+                    of guests<br/>recommend
+                </div>
+                <div class="col-md-6 bordertype2 padding20">
+                    <span class="opensans size30 bold grey2">{{ reviewAverage }}</span>/5<br/>
+                    guest ratings
+                </div>
+                
+                <div class="col-md-6 bordertype3">
+                    {% if reviewAverage < 1.5 %}
+                    <img src="/images/smallrating-1.png" alt=""/>
+                    {% elseif reviewAverage < 2.5 %}
+                    <img src="/images/smallrating-2.png" alt=""/>
+                    {% elseif reviewAverage < 3.5 %}
+                    <img src="/images/smallrating-3.png" alt=""/>
+                    {% elseif reviewAverage < 4.5 %}
+                    <img src="/images/smallrating-4.png" alt=""/>
+                    {% else %}
+                    <img src="/images/smallrating-5.png" alt=""/>
+                    {% endif %}
+                    <br/>{{ reviews.length }} reviews
+                </div>
 
-				-->
-            <div class="col-md-6 bordertype3">
-                <img src="images/hard.png" alt="" /> {{packageOnUse.difficulty}}
+                -->
+            <div class="col-md-6 bordertype3" ng-show="{{packageOnUse.difficulty}}==0">
+                <img src="images/user-rating-0.png" alt="" />
+            </div>
+            <div class="col-md-6 bordertype3" ng-show="{{packageOnUse.difficulty}}==0">
+                <img src="images/user-rating-1.png" alt="" /> easy
+            </div>
+            <div class="col-md-6 bordertype3" ng-show="{{packageOnUse.difficulty}}==0">
+                <img src="images/user-rating-2.png" alt="" /> medium
+            </div>
+            <div class="col-md-6 bordertype3" ng-show="{{packageOnUse.difficulty}}==0">
+                <img src="images/user-rating-3.png" alt="" /> medium hard
+            </div>
+            <div class="col-md-6 bordertype3" ng-show="{{packageOnUse.difficulty}}==0">
+                <img src="images/user-rating-4.png" alt="" /> hard
+            </div>
+            <div class="col-md-6 bordertype3" ng-show="{{packageOnUse.difficulty}}==0">
+                <img src="images/user-rating-5.png" alt="" /> expert
             </div>
             <div class="col-md-6 bordertype3">
                 {{packageOnUse.certification}}
@@ -98,17 +113,17 @@
             <div class="clearfix"></div>
             <br/>
             <!--
-				<div class="col-md-6 bordertype3">
-					<span class="grey">Book now or add your review below!</span>
-				</div>
-				<div class="clearfix"></div><br/>
-				-->
+                <div class="col-md-6 bordertype3">
+                    <span class="grey">Book now or add your review below!</span>
+                </div>
+                <div class="clearfix"></div><br/>
+                -->
             <div class="hpadding20">
                 <!--
-					{% if package.operator_id == user.id %}
-					<a href="/package/{{ package.id }}/edit" class="add2fav margtop5">Edit package</a>
-					{% endif %}
-				-->
+                    {% if package.operator_id == user.id %}
+                    <a href="/package/{{ package.id }}/edit" class="add2fav margtop5">Edit package</a>
+                    {% endif %}
+                -->
                 <a href="#" class="add2fav margtop5">Add to wishlist</a>
                 <a href="/book/{{ package.id }}" class="booknow margtop20 btnmarg">Book now</a>
             </div>
@@ -119,11 +134,11 @@
     <div class="container mt25 offset-0" ng-init="tab = 1">
         <div class="col-md-8 pagecontainer2 offset-0">
             <div class="cstyle10"></div>
-            <!--	<ul class="nav nav-tabs" id="myTab">
-					<li onclick="mySelectUpdate()" class="active"><a data-toggle="tab" href="#summary"><span class="summary"></span><span class="hidetext">Description</span></a></li>
-					<li onclick="loadScript()" class=""><a data-toggle="tab" href="#maps"><span class="maps"></span><span class="hidetext">Maps</span></a></li>
-					<li onclick="mySelectUpdate();" class=""><a data-toggle="tab" href="#reviews"><span class="reviews"></span><span class="hidetext">Reviews</span></a></li>
-				</ul> -->
+            <!--    <ul class="nav nav-tabs" id="myTab">
+                    <li onclick="mySelectUpdate()" class="active"><a data-toggle="tab" href="#summary"><span class="summary"></span><span class="hidetext">Description</span></a></li>
+                    <li onclick="loadScript()" class=""><a data-toggle="tab" href="#maps"><span class="maps"></span><span class="hidetext">Maps</span></a></li>
+                    <li onclick="mySelectUpdate();" class=""><a data-toggle="tab" href="#reviews"><span class="reviews"></span><span class="hidetext">Reviews</span></a></li>
+                </ul> -->
             <ul class="nav nav-tabs" id="myTab">
                 <li class="opensans dark size14 bold" ng-class="{active:tab === 1}"><a data-toggle="tab" href ng-click="tab = 1"><span class="summary"></span><span class="hidetext">Description</a></li>
                 <li class="opensans dark size14 bold" ng-class="{active:tab === 2}" onclick="loadScript()"><a data-toggle="tab" href ng-click="tab = 2"><span class="maps"></span><span class="hidetext">Maps</a></li>
@@ -239,16 +254,16 @@
                     </ul>
                 </div>
                 <form name="reviewForm">
-                    <!--	<select>
-								<option value="1">1 star</option>
-								<option value="2">2 star</option>
-								<option value="3">3 star</option>
-								<option value="4">4 star</option>
-								<option value="5">5 star</option>
-							</select>
+                    <!--    <select>
+                                <option value="1">1 star</option>
+                                <option value="2">2 star</option>
+                                <option value="3">3 star</option>
+                                <option value="4">4 star</option>
+                                <option value="5">5 star</option>
+                            </select>
 
-							<textarea></textarea>
-							<input type="submit" value="Submit"></input>
+                            <textarea></textarea>
+                            <input type="submit" value="Submit"></input>
                             
                     <div class="wh66percent right offset-0">
                         <select class="form-control mySelectBoxClass margtop10">
@@ -267,130 +282,130 @@
                 </form>
             </div>-->
                 <!--<div class="tab-content4" >
-					<!-- DESCRIPTION 				
-					<div id="summary" class="tab-pane fade active in">
-						<p class="hpadding20">
-						{{ packageOnUse.description }}
-						</p>				
-					</div>
-					-->
+                    <!-- DESCRIPTION                
+                    <div id="summary" class="tab-pane fade active in">
+                        <p class="hpadding20">
+                        {{ packageOnUse.description }}
+                        </p>                
+                    </div>
+                    -->
                 <!-- LOCATION -->
-                <!--	<div id="maps" class="tab-pane fade">
-						<div class="hpadding20">
-							
-							
-						</div>
-					</div> -->
+                <!--    <div id="maps" class="tab-pane fade">
+                        <div class="hpadding20">
+                            
+                            
+                        </div>
+                    </div> -->
                 <!-- REVIEWS -->
-                <!--				
-					<div id="reviews" class="tab-pane fade ">
-						<div class="hpadding20">
-							<div class="col-md-4 offset-0">
-								<span class="opensans dark size60 slim lh3 ">{{ reviewAverage }}/5</span><br/>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-						
-						<div class="line2"></div>
-						
-						{% for review in reviews %}
-						<div class="hpadding20">							
-							<div class="col-md-4 offset-0 center">
-								<div class="padding20">
-									<div class="bordertype5">
-										<div class="circlewrap">
-											<img src="/images/user-avatar.jpg" class="circleimg" alt=""/>
-											<span>{{ review.score }}</span>
-										</div>
-										<span class="dark">by {{ user.username }}</span><br/>
-										from {{ user.country_code }}<br/>
-										{% if review.recommended %}
-										<img src="/images/check.png" alt=""/><br/>
-										<span class="green">Recommended</span>
-										{% else %}
-										<img src="/images/delete_old.png" alt=""/><br/>
-										<span class="red">Not Recommended</span>
-										{% endif %}
-									</div>
-								</div>
-							</div>
-							<div class="col-md-8 offset-0">
-								<div class="padding20">
-									<span class="opensans size16 dark">{{ review.title }}</span><br/>
-									<span class="opensans size13 lgrey">Posted {{ review.date.toString() }}</span><br/>
-									<p>{{ review.review }}</p>
-								</div>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-						<div class="line2"></div>
-						{% endfor %}
-						
-						{% if user %}
-						<div class="hpadding20">
-							<span class="opensans dark size16 bold">Add your review</span>
-						</div>
-						
-						<div class="line2"></div>
+                <!--                
+                    <div id="reviews" class="tab-pane fade ">
+                        <div class="hpadding20">
+                            <div class="col-md-4 offset-0">
+                                <span class="opensans dark size60 slim lh3 ">{{ reviewAverage }}/5</span><br/>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        <div class="line2"></div>
+                        
+                        {% for review in reviews %}
+                        <div class="hpadding20">                            
+                            <div class="col-md-4 offset-0 center">
+                                <div class="padding20">
+                                    <div class="bordertype5">
+                                        <div class="circlewrap">
+                                            <img src="/images/user-avatar.jpg" class="circleimg" alt=""/>
+                                            <span>{{ review.score }}</span>
+                                        </div>
+                                        <span class="dark">by {{ user.username }}</span><br/>
+                                        from {{ user.country_code }}<br/>
+                                        {% if review.recommended %}
+                                        <img src="/images/check.png" alt=""/><br/>
+                                        <span class="green">Recommended</span>
+                                        {% else %}
+                                        <img src="/images/delete_old.png" alt=""/><br/>
+                                        <span class="red">Not Recommended</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8 offset-0">
+                                <div class="padding20">
+                                    <span class="opensans size16 dark">{{ review.title }}</span><br/>
+                                    <span class="opensans size13 lgrey">Posted {{ review.date.toString() }}</span><br/>
+                                    <p>{{ review.review }}</p>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="line2"></div>
+                        {% endfor %}
+                        
+                        {% if user %}
+                        <div class="hpadding20">
+                            <span class="opensans dark size16 bold">Add your review</span>
+                        </div>
+                        
+                        <div class="line2"></div>
 
-						<div class="wh33percent left ">
-							<ul class="jslidetext2">
-								<li>Rating*</li>
-								<li style="margin-top: 10px;">Recommended*</li>
-								</br>
-								<li>Title</li>
-								</br>
-								<li>Comment</li>
-							</ul>
-						</div>
-						<form action="/api/review" method="post">
-						<div class="wh66percent right offset-0">
-							<div class="padding20 jslidetext2">
-								<input type="hidden" name="userId" value="{{ user.id }}">
-								<input type="hidden" name="packageId" value="{{ package.id }}">
+                        <div class="wh33percent left ">
+                            <ul class="jslidetext2">
+                                <li>Rating*</li>
+                                <li style="margin-top: 10px;">Recommended*</li>
+                                </br>
+                                <li>Title</li>
+                                </br>
+                                <li>Comment</li>
+                            </ul>
+                        </div>
+                        <form action="/api/review" method="post">
+                        <div class="wh66percent right offset-0">
+                            <div class="padding20 jslidetext2">
+                                <input type="hidden" name="userId" value="{{ user.id }}">
+                                <input type="hidden" name="packageId" value="{{ package.id }}">
 
-								<input type="radio" name="score" value="5" required>
-								<label>5</label>
+                                <input type="radio" name="score" value="5" required>
+                                <label>5</label>
 
-								<input type="radio" name="score" value="4">
-								<label>4</label>
+                                <input type="radio" name="score" value="4">
+                                <label>4</label>
 
-								<input type="radio" name="score" value="3" >
-								<label>3</label>
+                                <input type="radio" name="score" value="3" >
+                                <label>3</label>
 
-								<input type="radio" name="score" value="2">
-								<label>2</label>
+                                <input type="radio" name="score" value="2">
+                                <label>2</label>
 
-								<input type="radio" name="score" value="1">
-								<label>1</label>
+                                <input type="radio" name="score" value="1">
+                                <label>1</label>
 
-								</br>
+                                </br>
 
-								<input type="radio" name="recommended" value="1" required>
-								<label>Yes</label>
-								<input type="radio" name="recommended" value="0">
-								<label>No</label>
-								</br>
-								</br>
-								<input type="text" name="title" class="form-control margtop10" placeholder="A brief description of your experience">
-								</br>
-								<textarea name="review" class="form-control margtop10" rows="3" placeholder="Explain your rating"></textarea>
-								
-								<div class="clearfix"></div>
-								<button type="submit" class="btn-search4 margtop20">Submit</button>	
+                                <input type="radio" name="recommended" value="1" required>
+                                <label>Yes</label>
+                                <input type="radio" name="recommended" value="0">
+                                <label>No</label>
+                                </br>
+                                </br>
+                                <input type="text" name="title" class="form-control margtop10" placeholder="A brief description of your experience">
+                                </br>
+                                <textarea name="review" class="form-control margtop10" rows="3" placeholder="Explain your rating"></textarea>
+                                
+                                <div class="clearfix"></div>
+                                <button type="submit" class="btn-search4 margtop20">Submit</button> 
 
-								<br/>
-								<br/>
-								<br/>
-								<br/>
-							</div>							
-						</div>
-					</form>
-					<div class="clearfix"></div>
-					{% endif %}
-					</div>
-					-- >
-					<!-- REVIEWS -->
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </div>                          
+                        </div>
+                    </form>
+                    <div class="clearfix"></div>
+                    {% endif %}
+                    </div>
+                    -- >
+                    <!-- REVIEWS -->
             </div>
         </div>
         <div class="col-md-4">
