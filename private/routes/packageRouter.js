@@ -29,8 +29,8 @@
                             .then(function(usrID) {
 
                                 var __package = {
-                                    package_type: req.body.package_type,
                                     operatorID: usrID,
+                                    package_type: req.body.package_type,
                                     title: req.body.title,
                                     price: req.body.price,
                                     description: req.body.description,

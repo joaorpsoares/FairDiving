@@ -1,0 +1,108 @@
+<div ng-include="'/app/views/header.ejs'">
+</div>
+<div class="container breadcrub">
+    <div>
+        <a class="homebtn left" href="/"></a>
+        <div class="left">
+            <ul class="bcrumbs">
+                <li>/</li>
+                <li><a href="" class="active">Dive Packages</a></li>
+            </ul>
+        </div>
+        <a class="backbtn right" href="/"></a>
+    </div>
+    <div class="clearfix"></div>
+    <div class="brlines"></div>
+</div>
+<!-- CONTENT -->
+<div class="container">
+    <div class="container pagecontainer offset-0">
+        <!-- LIST CONTENT-->
+        <div data-ng-init="getPackages()" class="container breadcrub">
+            <div class="rightcontent col-md-12 offset-0">
+                <br/>
+                <br/>
+                <div class="clearfix"></div>
+                <div ng-repeat="package in packages">
+                    <div class="itemscontainer offset-1">
+                        <div class="offset-2">
+                            <div class="col-md-4 offset-0">
+                                <div class="listitem2">
+                                    <!-- <a href="/package/{{ package.id }}" data-gallery="multiimages" data-toggle="lightbox"><img src="/package/{{ package.id }}/{{ package.image }}" alt="" /></a> --- IMAGES-->
+                                    <div class="liover"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-8 offset-0">
+                                <div class="itemlabel3">
+                                    <div class="labelright">
+                                        <!--{% if package.reviewAverage
+                                    < 1.5 %} <img src="/images/filter-rating-1.png" alt="" /> {% elseif package.reviewAverage
+                                    < 2.5 %} <img src="/images/filter-rating-2.png" alt="" /> {% elseif package.reviewAverage
+                                    < 3.5 %} <img src="/images/filter-rating-3.png" alt="" /> {% elseif package.reviewAverage
+                                    < 4.5 %} <img src="/images/filter-rating-4.png" alt="" /> {% else %}
+                                    <img src="/images/filter-rating-5.png" alt="" /> {% endif %}-->
+                                        <br/>
+                                        <span class="size11 grey">#rat/5 Rating</span>
+                                        <br/>
+                                        </br>
+                                        <span class="size11 grey">#NRev Reviews</span>
+                                        <br/>
+                                        <br/>
+                                        <span class="green size18"><b>${{ package.price }}</b></span>
+                                        <br/>
+                                        <span class="size11 grey">avg/night</span>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <!-- <a href="/package/{{ package.id }}" class="bookbtn mt1">Book</a>-->
+                                    </div>
+                                    <div class="labelleft2">
+                                        <b>{{ package.title }}</b>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <p class="grey">
+                                            {{ package.description }}</p>
+                                        <br/>
+                                        <ul class="hotelpreferences">
+                                            <li class="icohp-internet"></li>
+                                            <li class="icohp-air"></li>
+                                            <li class="icohp-pool"></li>
+                                            <li class="icohp-childcare"></li>
+                                            <li class="icohp-fitness"></li>
+                                            <li class="icohp-breakfast"></li>
+                                            <li class="icohp-parking"></li>
+                                            <li class="icohp-pets"></li>
+                                            <li class="icohp-spa"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="offset-2">
+                        <hr class="featurette-divider3">
+                    </div>
+                </div>
+            </div>
+            <!--{% endfor %}-->
+            <!-- End of offset1-->
+            <div class="hpadding20">
+                <ul class="pagination right paddingbtm20">
+                    <li class="disabled"><a href="#">&laquo;</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- END OF LIST CONTENT-->
+    </div>
+    <!-- END OF container-->
+</div>
+<!-- END OF CONTENT -->
+<div ng-include="'/app/views/footer.ejs'"></div>
