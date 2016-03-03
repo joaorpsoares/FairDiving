@@ -143,6 +143,11 @@
         // Function to insert a review to a package
         insertReviewOnPackage: function(review) {
             return databasePackages.insertReviewOnPackage(review);
+        },
+
+        // Function to get all countries
+        getCountries: function() {
+            return databasePackages.getCountries();
         }
     };
 

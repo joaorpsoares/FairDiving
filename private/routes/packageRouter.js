@@ -183,5 +183,16 @@
                     res.status(406).send(err);
                 });
         });
+
+        // Route to get all countries
+        server.get('/api/countries', function(req, res) {
+            database.getCountries()
+                .then(function(result) {
+                    res.status(200).send(result);
+                })
+                .catch(function(err) {
+                    res.status(406).send('We could not retrieve the countries. Try again later.');
+                });
+        });
     };
 }());
