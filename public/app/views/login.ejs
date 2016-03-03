@@ -33,14 +33,14 @@
                 </div>
                 <input ng-model="user.email" type="email" class="form-control logpadding" placeholder="email" required>
                 <br/>
-                <input ng-model="user.password" type="password" class="form-control logpadding" placeholder="Password" required>
+                <input id="password" ng-model="user.password" type="password" class="form-control logpadding" placeholder="Password" required>
             </div>
         </div>
         <div class="login-c2">
             <div class="logmargfix">
                 <div class="chpadding50">
                     <div class="alignbottom">
-                        <button class="bluebtn margtop20" type="submit" ng-click="login()">Submit</button>
+                        <button class="bluebtn margtop20" type="submit" ng-click="toogle ? login() : forgetPassword()">Submit</button>
                     </div>
                     <div class="alignbottom2">
                         <div class="checkbox">
@@ -54,9 +54,10 @@
         </div>
         <div class="login-c3">
             <div class="left"><a href="#" class="whitelink"><span></span>Website</a></div>
-            <div class="right"><a href="#" class="whitelink">Lost password?</a></div>
+            <div ng-click="toogle = !toogle" class="right" id="lostpassword"><a href="#" class="whitelink">Lost password?</a></div>
         </div>
     </div>
+    <pre>{{toogle}}</pre>
 </div>
 <!-- Javascript  -->
 <script src="../assets/js/initialize-loginpage.js"></script>
@@ -69,4 +70,18 @@ function errorMessage() {
         animation: 'tada'
     });
 }
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('#lostpassword').click(function(){
+            if ($('#lostpassword a').text() != "Login"){
+                $('#password').hide();
+                $('#lostpassword a').text("Login");
+            } else {
+                $('#password').show();
+                $('#lostpassword a').text("Lost password?");
+            }
+        });
+    });
 </script>
