@@ -7,6 +7,17 @@
 
         var deferred = $q.defer();
 
+        this.getPackages = function() {
+
+            return $http.get('/api/package')
+                .success(function(res) {
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    deferred.reject(err);
+                });
+        };
+
         this.getPackageID = function(Id) {
 
             return $http.get('/api/package/' + Id)
@@ -16,7 +27,6 @@
                 .error(function(err) {
                     deferred.reject(err);
                 });
-
         };
 
         this.insertNewPackage = function(newPackage) {

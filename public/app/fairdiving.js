@@ -36,6 +36,10 @@
                 controller: 'PkgCtrl',
                 templateUrl: 'app/views/profile.ejs'
             })
+            .when('/listpackages', {
+                controller: 'PkgCtrl',
+                templateUrl: 'app/views/listpackages.ejs'
+            })
             .otherwise({
                 redirectTo: '/'
             });

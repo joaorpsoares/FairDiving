@@ -10,6 +10,20 @@
             Id: $routeParams.id
         };
 
+        //A function that gets all packages
+        $scope.getPackages = function() {
+
+            pkgServices.getPackages()
+                .then(function(_packages) {
+                    $scope.packages = _packages.data;
+                    console.log("getPackages successful");
+                })
+                .catch(function() {
+                    console.log("getPackages failed");
+                });
+
+        };
+
         //A function that gets a package by id
         $scope.getPackageID = function() {
             if ($scope.packageOnUse.Id === '') {
@@ -25,6 +39,7 @@
                     });
             }
         };
+
 
         //A function that inserts a new package
         $scope.insertNewPackage = function(newPackage) {
