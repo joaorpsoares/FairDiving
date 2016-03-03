@@ -10,6 +10,7 @@
         };
         $scope.updatedUser = {};
         $scope.errorMessage = "";
+        $scope.toogle = true;
 
         $scope.login = function() {
             if ($scope.user.email === '' || $scope.user.password === '') {
@@ -65,6 +66,18 @@
                     console.log("getLoggedUser failed");
                 });
             //    }
+        };
+
+        // Function to reset password
+        $scope.forgetPassword = function() {
+            if ($scope.user.email !== '') {
+                UserServices.forgetPassword({ email: $scope.user.email })
+                    .then(function() {
+                        console.log("check your mail.");
+                    }).catch(function(err) {
+                        console.log(err);
+                    });
+            }
         };
 
         $scope.getLoggedUser();

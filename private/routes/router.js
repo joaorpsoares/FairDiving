@@ -32,6 +32,11 @@
             res.render('index');
         });
 
+        // Route to send packages list page
+        server.get('/listpackages', function(req, res) {
+            res.render('index');
+        });
+
         // Route to send profile page
         server.get('/profile', function(req, res) {
             res.render('index');
@@ -41,6 +46,7 @@
         server.get('/forbidden', function(req, res) {
             res.render('index');
         });
+
 
         // Require the routes related to authentication
         require('./authRouter')(server);

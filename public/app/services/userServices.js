@@ -17,7 +17,7 @@
                         path: '/'
                     });
 
-                    $window.location = '/';
+                    $window.location = '/profile';
 
                     deferred.resolve();
                 })
@@ -69,6 +69,17 @@
                 });
 
 
+        };
+
+        this.forgetPassword = function(email) {
+            return $http.post('/api/user/recover/', email)
+                .success(function(res) {
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    console.log(err);
+                    deferred.reject(err);
+                });
         };
         /*
                 this.updateUserInfo = function(user, updatedUser) {

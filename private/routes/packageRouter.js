@@ -29,8 +29,8 @@
                             .then(function(usrID) {
 
                                 var __package = {
-                                    package_type: req.body.package_type,
                                     operatorID: usrID,
+                                    package_type: req.body.package_type,
                                     title: req.body.title,
                                     price: req.body.price,
                                     description: req.body.description,
@@ -181,6 +181,17 @@
                 })
                 .catch(function(err) {
                     res.status(406).send(err);
+                });
+        });
+
+        // Route to get all countries
+        server.get('/api/countries', function(req, res) {
+            database.getCountries()
+                .then(function(result) {
+                    res.status(200).send(result);
+                })
+                .catch(function(err) {
+                    res.status(406).send('We could not retrieve the countries. Try again later.');
                 });
         });
     };

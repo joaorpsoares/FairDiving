@@ -20,13 +20,13 @@
         // Route to register a user
         server.post('/api/register', function(req, res) {
             if (!validator.matches(req.body.password, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/)) {
-                res.status(406).send('Your password needs to have at least one capital letter, one small letter, one number and a have a size of 6 or more ');
+                res.status(406).send('Your password needs to have at least one capital letter, one lowercase letter, one number and a length of 6 or more.');
             } else if (req.body.password !== req.body.confirmPassword) {
-                res.status(406).send('Your passwords are diferents');
+                res.status(406).send('Your passwords are different.');
             } else {
                 if (validator.isEmail(req.body.email)) {
                     if (!validator.matches(req.body.password, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/))
-                        res.status(406).send('Your password needs to have at least one capital letter, one small letter, one number and a have a size of 6 or more ');
+                        res.status(406).send('Your password needs to have at least one capital letter, one lowercase letter, one number and a length of 6 or more.');
                     else {
                         database.checkExistence(req.body.email.toLowerCase())
                             .then(function() {
@@ -80,7 +80,8 @@
                                 });
                             })
                             .catch(function(err) {
-                                res.status(406).send(err);
+                                res.status(406).send('This email is already in our database.'
+);
                             });
                     }
                 } else {
@@ -106,7 +107,7 @@
                                                 .then(function(token) {
                                                     res.status(200).send(token);
                                                 }).catch(function(err) {
-                                                    res.status(400).send('We could not generate a token for this session');
+                                                    res.status(400).send('We could not generate a token for this session.');
                                                 });
                                         } else {
                                             res.status(406).send('Email or password not correct.');
@@ -149,7 +150,6 @@
                     console.log(err);
                     res.status(406).send(err);
                 });
-
         });
 
         // Route to retrieve user by token
@@ -161,7 +161,6 @@
                             res.status(200).send(user);
                         })
                         .catch(function() {
-                            console.log(err);
                             res.status(406).send('err');
                         });
                 })
@@ -169,7 +168,87 @@
                     console.log(err);
                     res.status(406).send('err');
                 });
+        });
 
+        // Route to send a confirmation email to change password
+        server.post('/api/user/recover', function(req, res) {
+
+            if (validator.isEmail(req.body.email)) {
+                database.checkEmailExistance(req.body.email)
+                    .then(function() {
+                        crypto.randomBytes(32, function(err, buf) {
+                            if (err) {
+                                res.status(406).send(err);
+                            } else {
+                                database.refreshToken(buf.toString('hex'), req.body.email)
+                                    .then(function() {
+                                        email.sendRecover(req.body.email, buf.toString('hex'))
+                                            .then(function() {
+                                                console.log('@authRouter.js : Recover email was sent.');
+                                                res.status(200).send('OK');
+                                            })
+                                            .catch(function(err) {
+                                                console.log('@authRouter.js : Recover email was not sent.');
+                                                res.status(200).send('OK');
+                                            });
+                                    })
+                                    .catch(function(err) {
+                                        res.status(406).send("Something went wrong!");
+                                    });
+                            }
+                        });
+                    })
+                    .catch(function(err) {
+                        console.log(err);
+                        res.status(406).send("We do not recognize this email.");
+                    });
+            } else {
+                res.status(406).send("Email given is not valid.");
+            }
+        });
+
+        // Route to send a new password to a email
+        server.get('/api/user/recover/confirmed/:info', function(req, res) {
+
+            var user = {
+                email: req.params.info.split('+')[0],
+                token: req.params.info.split('+')[1]
+            };
+
+            if (validator.isEmail(user.email)) {
+                database.checkEmailExistance(user.email)
+                    .then(function() {
+                        crypto.randomBytes(8, function(err, buf) {
+                            if (err) {
+                                res.status(406).send(err);
+                            } else {
+                                bcrypt.hash(buf.toString('hex'), null, null, function(err, hash) {
+                                    database.updatePassword(hash, user.email)
+                                        .then(function() {
+                                            email.sendPassword(user.email, buf.toString('hex'))
+                                                .then(function() {
+                                                    console.log("@authRouter.js : Password was changed.");
+                                                    res.render('index');
+                                                    //res.status(200).send("OK");
+                                                })
+                                                .catch(function() {
+                                                    console.log("@authRouter.js : Password was not changed.");
+                                                    res.status(406).send("@authRouter.js : Email was not sent.");
+                                                });
+                                        })
+                                        .catch(function(err) {
+                                            res.status(406).send("It was impossible to change the password.");
+                                        });
+                                });
+                            }
+                        });
+                    })
+                    .catch(function(err) {
+                        res.status(406).send("This email is not recognized by our system. Did you change the url?");
+                    });
+            } else {
+                res.status(406).send("Email is not valid.");
+            }
         });
 
     };

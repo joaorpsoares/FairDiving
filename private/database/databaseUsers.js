@@ -30,6 +30,24 @@
             });
         },
 
+        // Function to check if an email exists
+        checkEmailExistance: function(email) {
+            return new Promise(function(resolve, reject) {
+                client.query('SELECT email FROM users WHERE email = $1', email, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+
+                        if (result.rows.length === 0) {
+                            reject('This email is not on our database.');
+                        } else {
+                            resolve();
+                        }
+                    }
+                });
+            });
+        },
+
         // Function to insert a new user on database.
         insertNewUser: function(user) {
             return new Promise(function(resolve, reject) {
@@ -51,6 +69,19 @@
                         reject(err);
                     } else {
                         resolve(result.rows);
+                    }
+                });
+            });
+        },
+
+        // Function to update password
+        updatePassword: function(info) {
+            return new Promise(function(resolve, reject) {
+                client.query('UPDATE users SET password = $1 WHERE email = $2', info, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve();
                     }
                 });
             });
@@ -102,7 +133,6 @@
                     if (err) {
                         reject(err);
                     } else {
-                        console.log(result.rows);
                         resolve(result.rows);
                     }
                 });
@@ -139,6 +169,19 @@
         insertUsrLevel: function(usrId) {
             return new Promise(function(resolve, reject) {
                 client.query('INSERT INTO roles_users(roleid, userid) VALUES($1,$2)', [2, usrId], function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result.rows);
+                    }
+                });
+            });
+        },
+
+        // Function to update a token of a user
+        refreshToken: function(info) {
+            return new Promise(function(resolve, reject) {
+                client.query('UPDATE users set token = $2 WHERE email = $1', info, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {

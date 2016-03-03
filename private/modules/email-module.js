@@ -31,7 +31,7 @@
                 var welcomeTemplate = new EmailTemplate(path.join(__dirname, '../resources/emailTemplates', 'welcomeMail'));
 
                 welcomeTemplate.render({
-                    code: 'http://localhost:3000/api/confirmation/' + token
+                    code: 'http://52.37.66.121:3000/api/confirmation/' + token
                 }, function(err, results) {
 
                     if (err) {
@@ -42,6 +42,72 @@
                             from: email.name,
                             to: contact,
                             subject: "Welcome to FairDiving!",
+                            html: results.html,
+                            text: results.text
+                        };
+
+                        transporter.sendMail(mailOptions, function(err, info) {
+                            if (err) {
+                                reject(err);
+                            } else {
+                                resolve(contact);
+                            }
+                        });
+                    }
+                });
+            });
+        },
+
+        // Function to send a recover email to the user
+        sendRecover: function(contact, token) {
+            return new Promise(function(resolve, reject) {
+                var recoverMail = new EmailTemplate(path.join(__dirname, '../resources/emailTemplates', 'recoverMail'));
+
+                recoverMail.render({
+                    code: 'http://52.37.66.121:3000/api/user/recover/confirmed/' + encodeURIComponent(contact) + '+' + token
+                }, function(err, results) {
+
+                    if (err) {
+                        reject(err);
+                    } else {
+
+                        var mailOptions = {
+                            from: email.name,
+                            to: contact,
+                            subject: "Recover your password at fairdiving.",
+                            html: results.html,
+                            text: results.text
+                        };
+
+                        transporter.sendMail(mailOptions, function(err, info) {
+                            if (err) {
+                                reject(err);
+                            } else {
+                                resolve(contact);
+                            }
+                        });
+                    }
+                });
+            });
+        },
+
+        // Function to send a new password
+        sendPassword: function(contact, password) {
+            return new Promise(function(resolve, reject) {
+                var recoverMail = new EmailTemplate(path.join(__dirname, '../resources/emailTemplates', 'sendPassword'));
+
+                recoverMail.render({
+                    password: password
+                }, function(err, results) {
+
+                    if (err) {
+                        reject(err);
+                    } else {
+
+                        var mailOptions = {
+                            from: email.name,
+                            to: contact,
+                            subject: "Here it is.. your new password at fairdiving.",
                             html: results.html,
                             text: results.text
                         };

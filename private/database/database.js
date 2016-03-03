@@ -49,6 +49,11 @@
             return databaseUsers.checkExistence([email]);
         },
 
+        // Function to check if an email exists
+        checkEmailExistance: function(email) {
+            return databaseUsers.checkEmailExistance([email]);
+        },
+
         // Function to insert a new user on database
         insertNewUser: function(user) {
             return databaseUsers.insertNewUser(user);
@@ -91,6 +96,16 @@
             return databaseUsers.insertUsrLevel(usrId);
         },
 
+        // Function to refresh token
+        refreshToken: function(token, email) {
+            return databaseUsers.refreshToken([token, email]);
+        },
+
+        // Function to update password
+        updatePassword: function(newpassword, email) {
+            return databaseUsers.updatePassword([newpassword, email]);
+        },
+
         /*
                 PACKAGE RELATED FUNCTIONS
         */
@@ -128,6 +143,11 @@
         // Function to insert a review to a package
         insertReviewOnPackage: function(review) {
             return databasePackages.insertReviewOnPackage(review);
+        },
+
+        // Function to get all countries
+        getCountries: function() {
+            return databasePackages.getCountries();
         }
     };
 
