@@ -74,8 +74,16 @@
             return databaseUsers.retrieveUsrIDByToken([token]);
         },
 
+        retrieveUsrByToken: function(token) {
+            return databaseUsers.retrieveUsrByToken([token]);
+        },
+
         retrieveUsrById: function(id) {
             return databaseUsers.retrieveUsrById(id);
+        },
+
+        updateUsrById: function(user) {
+            return databaseUsers.updateUsrById(user);
         },
 
         // Function to insert a default role on registered people
@@ -89,7 +97,6 @@
 
         // Function to insert a new package
         insertNewPackage: function(divePackage) {
-            console.log(divePackage);
             return databasePackages.insertNewPackage(divePackage);
         },
 
@@ -103,6 +110,11 @@
             return databasePackages.getPackageID([id]);
         },
 
+        // Function to retrieve package creator
+        getPackageCreator: function(id) {
+            return databasePackages.getPackageCreator([id]);
+        },
+
         // Function to retrieve a all reviews from a certain package
         getReviewsByPackage: function(id) {
             return databasePackages.getReviewsByPackage([id]);
@@ -111,8 +123,12 @@
         // Function to update a package imageID
         relateImagesToPackages: function(idPackage, imageNames) {
             return databasePackages.relateImagesToPackages([imageNames, idPackage]);
-        }
+        },
 
+        // Function to insert a review to a package
+        insertReviewOnPackage: function(review) {
+            return databasePackages.insertReviewOnPackage(review);
+        }
     };
 
 }());

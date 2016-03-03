@@ -5,7 +5,10 @@
     // Created the controller to the user view
     var UserCtrl = function($scope, UserServices) {
 
-        $scope.user = {};
+        $scope.user = {
+            token: null
+        };
+        $scope.updatedUser = {};
         $scope.errorMessage = "";
 
         $scope.login = function() {
@@ -41,22 +44,62 @@
                     });
             }
         };
-        /*
-                //A function that gets a package by id
-                $scope.getLoggedUser = function() {
-                    //     if ($scope.user.Id === '') {
-                    //       // TODO: Show error
-                    //  } else {
-                    UserServices.getLoggedUser($scope.user.Id)
-                        .then(function() {
-                            console.log("getLoggedUser successful");
+
+        //A function that gets a package by id
+        $scope.getLoggedUser = function() {
+            //     if ($scope.user.Id === '') {
+            //       // TODO: Show error
+            //  } else {
+            UserServices.getLoggedUserToken()
+                .then(function(token) {
+                    UserServices.getLoggedUser(token.data)
+                        .then(function(user) {
+                            $scope.user = user.data[0];
                         })
                         .catch(function() {
-                            console.log("getLoggedUser failed");
+                            console.log(err);
                         });
-                    //    }
-                };
-        */
+                    console.log("getLoggedUser successful");
+                })
+                .catch(function() {
+                    console.log("getLoggedUser failed");
+                });
+            //    }
+        };
+
+        $scope.getLoggedUser();
+
+        //A function that updates userInfo
+        /*   $scope.updateUserInfo = function() {
+               //faltam verificacoes
+
+               UserServices.getLoggedUserToken()
+                   .then(function(token) {
+                       UserServices.getLoggedUser(token.data)
+                           .then(function(user) {
+                               $scope.user = user.data[0];
+                               $scope.user.token = token.data;
+                               console.log(token.data);
+                               UserServices.updateUserInfo($scope.user, $scope.updatedUser)
+                                   .then(function() {
+                                       $scope.user = $scope.updatedUser;
+                                       console.log("updateUserInfo successful");
+                                   })
+                                   .catch(function() {
+                                       console.log("updateUserInfo failed");
+                                   });
+                           })
+                           .catch(function() {
+                               console.log(err);
+                           });
+                       console.log("getLoggedUser successful");
+                   })
+                   .catch(function() {
+                       console.log("getLoggedUser failed");
+                   });
+           };*/
+
+
 
     };
 
