@@ -107,7 +107,7 @@
                                 <br /> First Name*:
                                 <input type="text" class="form-control" value="{{user.firstname}}" placeholder="{{user.firstname}}" rel="popover" name="firstname" />
                                 <br /> Last Name*:
-                                <input type="text" class="form-control" value="{{user.lastname}}" placeholder="{user.lastname}}" rel="popover" name="lastname" />
+                                <input type="text" class="form-control" value="{{user.lastname}}" placeholder="{{user.lastname}}" rel="popover" name="lastname" />
                                 <br /> Email address*:
                                 <input type="text" class="form-control" value="{{user.email}}" placeholder="{{user.email}}" name="email" />
                                 <br /> Phone number:
@@ -151,7 +151,7 @@
                             <div class="line2"></div>
                             <!-- COL 1 -->
                             <div class="col-md-12 offset-0">
-                                <form>
+                                <form enctype="multipart/form-data">
                                     <br/> Title*:
                                     <input ng-model="newPackage.title" type="text" class="form-control" placeholder="Enter the package title" rel="popover" required="required">
                                     </br> Type*:
@@ -181,13 +181,13 @@
                                     </select>
                                     <br/>
                                     <!-- <input type="text" class="form-control" placeholder="Description of the location (address, etc.)" name="location" required="required">-->
-                                    <!-- <br/> Image*:
+                                    <br/> Image*:
                                     <br/>
                                     <div class="fileUpload btn btn-default">
                                         <span>Upload</span>
-                                        <input type="file" class="upload" name="image" accept="image/*">
+                                        <input type="file" ng-model="newPackage.avatar" class="upload" name="avatar" accept="image/*" multiple>
                                     </div>
-                                    <br/> -->
+                                    <br/>
                                     <button type="submit" class="bluebtn margtop20" ng-click="insertNewPackage(newPackage)">Create</button>
                                 </form>
                             </div>

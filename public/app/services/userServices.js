@@ -17,7 +17,7 @@
                         path: '/'
                     });
 
-                    $window.location = '/';
+                    $window.location = '/profile';
 
                     deferred.resolve();
                 })
