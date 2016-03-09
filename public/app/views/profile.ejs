@@ -151,7 +151,7 @@ tinymce.init({
                     <!-- END OF TAB 1 -->
                     <!-- if role == operator -->
                     <!-- TAB 2 PACKAGES-->
-                    <div class="tab-pane" id="packages">
+                    <div class="tab-pane" id="packages" data-ng-init="getCountries()">
                         <div class="padding40">
                             <span class="size16 bold">Create a package</span>
                             <div class="line2"></div>
@@ -187,9 +187,9 @@ tinymce.init({
                                     <input ng-model="newPackage.description" type="text" class="form-control" placeholder="Enter the package description" required="required">
                                     <br/> Location*:
                                     <select ng-model="newPackage.country_code" class="form-control" name="country_code" required="required">
-                                        <option value="" selected="selected" disabled="disabled">Country...</option>
                                         <!--for each country-->
-                                        <option value="AF">AF</option>
+
+                                        <option ng-repeat="country in countries" value="country.abrev">{{country.name}}</option>
                                         <!--endfor-->
                                     </select>
                                     <br/>

@@ -41,6 +41,16 @@
 
         };
 
+        this.getCountries = function() {
+            return $http.get('/api/countries/')
+                .success(function(res) {
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    deferred.reject(err);
+                });
+        };
+
 
     };
 
