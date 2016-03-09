@@ -47,6 +47,10 @@
             res.render('index');
         });
 
+        server.get('/resetPassword/:id', function(req, res) {
+            res.render('index');
+        });
+
 
         // Require the routes related to authentication
         require('./authRouter')(server);

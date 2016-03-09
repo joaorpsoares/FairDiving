@@ -51,7 +51,6 @@
                 });
         };
 
-
     };
 
     // Injecting modules used for better minifing later on

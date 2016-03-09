@@ -80,8 +80,7 @@
                                 });
                             })
                             .catch(function(err) {
-                                res.status(406).send('This email is already in our database.'
-);
+                                res.status(406).send('This email is already in our database.');
                             });
                     }
                 } else {
@@ -208,46 +207,31 @@
         });
 
         // Route to send a new password to a email
-        server.get('/api/user/recover/confirmed/:info', function(req, res) {
+        server.get('/api/user/recover/confirmed/', function(req, res) {
 
             var user = {
-                email: req.params.info.split('+')[0],
-                token: req.params.info.split('+')[1]
+                password: req.body.password,
+                passwordconfirm: req.body.passwordconfirm,
+                email: req.body.email,
+                token: req.body.token
             };
 
-            if (validator.isEmail(user.email)) {
+            if (validator.isEmail(user.email) && user.password === user.passwordconfirm) {
                 database.checkEmailExistance(user.email)
                     .then(function() {
-                        crypto.randomBytes(8, function(err, buf) {
-                            if (err) {
-                                res.status(406).send(err);
-                            } else {
-                                bcrypt.hash(buf.toString('hex'), null, null, function(err, hash) {
-                                    database.updatePassword(hash, user.email)
-                                        .then(function() {
-                                            email.sendPassword(user.email, buf.toString('hex'))
-                                                .then(function() {
-                                                    console.log("@authRouter.js : Password was changed.");
-                                                    res.render('index');
-                                                    //res.status(200).send("OK");
-                                                })
-                                                .catch(function() {
-                                                    console.log("@authRouter.js : Password was not changed.");
-                                                    res.status(406).send("@authRouter.js : Email was not sent.");
-                                                });
-                                        })
-                                        .catch(function(err) {
-                                            res.status(406).send("It was impossible to change the password.");
-                                        });
-                                });
-                            }
-                        });
+                        database.updatePassword(user.password, user.email)
+                            .then(function() {
+                                res.status(200).send("Password was changed.");
+                            })
+                            .catch(function() {
+                                res.status(406).send('It was impossible to change the password.');
+                            });
                     })
                     .catch(function(err) {
                         res.status(406).send("This email is not recognized by our system. Did you change the url?");
                     });
             } else {
-                res.status(406).send("Email is not valid.");
+                res.status(406).send("Email is not valid or passwords dont match.");
             }
         });
 

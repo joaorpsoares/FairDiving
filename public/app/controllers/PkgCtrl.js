@@ -33,7 +33,6 @@
                 pkgServices.getPackageID($scope.packageOnUse.Id)
                     .then(function(_packageOnUse) {
                         $scope.packageOnUse = _packageOnUse.data;
-                        console.log("getPackageID successful");
                     })
                     .catch(function() {
                         console.log("getPackageID failed");
@@ -69,7 +68,6 @@
                     console.log('It was impossible to retrieve the countries');
                 });
         };
-
 
     };
 
