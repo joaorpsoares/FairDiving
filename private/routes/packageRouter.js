@@ -82,7 +82,7 @@
                                                 database.relateImagesToPackages(packageID.id, _imageNames)
                                                     .then(function() {
                                                         __transaction.commit();
-                                                        res.status(200).send('OK');
+                                                        res.status(200).send(packageID);
                                                     })
                                                     .catch(function(err) {
                                                         __transaction.rollback("_beforeInsertUser");

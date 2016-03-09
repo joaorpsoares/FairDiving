@@ -46,7 +46,7 @@
             }
         };
 
-        //A function that gets a package by id
+        //A function that gets the logged user
         $scope.getLoggedUser = function() {
             //     if ($scope.user.Id === '') {
             //       // TODO: Show error
@@ -79,8 +79,6 @@
                     });
             }
         };
-
-        $scope.getLoggedUser();
 
         //A function that updates userInfo
         /*   $scope.updateUserInfo = function() {

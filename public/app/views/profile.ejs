@@ -108,7 +108,7 @@ tinymce.init({
                         <!-- End of Admin top -->
                         <span class="size16 bold">Personal details</span>
                         <div class="line2"></div>
-                        <div class="col-md-12 offset-0" ng-controller="UserCtrl">
+                        <div class="col-md-12 offset-0" ng-controller="UserCtrl" data-ng-init="getLoggedUser()">
                             <form>
                                 <br /> First Name*:
                                 <input type="text" class="form-control" value="{{user.firstname}}" placeholder="{{user.firstname}}" rel="popover" name="firstname" />
