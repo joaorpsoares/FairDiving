@@ -87,7 +87,7 @@
                     $scope.errorMessage = "Your password was changed. You can now login.";
                 })
                 .catch(function(err) {
-                    $scope.errorMessage = err;
+                    $scope.errorMessage = err.data;
                 });
         };
 

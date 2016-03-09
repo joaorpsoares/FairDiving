@@ -181,7 +181,7 @@
         // Function to update a token of a user
         refreshToken: function(info) {
             return new Promise(function(resolve, reject) {
-                client.query('UPDATE users set token = $2 WHERE email = $1', info, function(err, result) {
+                client.query('UPDATE users set token = $1 WHERE email = $2', info, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {

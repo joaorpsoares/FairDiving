@@ -207,7 +207,7 @@
         });
 
         // Route to send a new password to a email
-        server.get('/api/user/recover/confirmed/', function(req, res) {
+        server.post('/api/user/recover/confirmed/', function(req, res) {
 
             var user = {
                 password: req.body.password,
@@ -219,12 +219,22 @@
             if (validator.isEmail(user.email) && user.password === user.passwordconfirm) {
                 database.checkEmailExistance(user.email)
                     .then(function() {
-                        database.updatePassword(user.password, user.email)
-                            .then(function() {
-                                res.status(200).send("Password was changed.");
+                        database.getSensetiveData(user.email)
+                            .then(function(result) {
+                                if (result[0].token === user.token) {
+                                    database.updatePassword(user.password, user.email)
+                                        .then(function() {
+                                            res.status(200).send("Password was changed.");
+                                        })
+                                        .catch(function() {
+                                            res.status(406).send('It was impossible to change the password.');
+                                        });
+                                } else {
+                                    res.status(406).send('Token is not valid. Ask again for your password.');
+                                }
                             })
-                            .catch(function() {
-                                res.status(406).send('It was impossible to change the password.');
+                            .catch(function(err) {
+                                res.status(406).send("This token is not valid anymore.");
                             });
                     })
                     .catch(function(err) {
