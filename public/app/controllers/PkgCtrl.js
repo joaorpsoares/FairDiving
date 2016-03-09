@@ -9,7 +9,8 @@
         $scope.packageOnUse = {
             Id: $routeParams.id
         };
-        $scope.countries = {};
+
+        $scope.countries = [];
 
         //A function that gets all packages
         $scope.getPackages = function() {
@@ -33,7 +34,6 @@
                 pkgServices.getPackageID($scope.packageOnUse.Id)
                     .then(function(_packageOnUse) {
                         $scope.packageOnUse = _packageOnUse.data;
-                        console.log("getPackageID successful");
                     })
                     .catch(function() {
                         console.log("getPackageID failed");
@@ -47,7 +47,6 @@
             //  if ($scope.newPackage.title === "" || $scope.newPackage.certification === "" || $scope.newPackage.difficulty === "" || $scope.newPackage.n_dives === "" || $scope.newPackage.dive_sites === "" || $scope.newPackage.description === "" || $scope.newPackage.price === "") {
             // TODO: Show error
             // } else {
-            console.log(newPackage);
             pkgServices.insertNewPackage(newPackage)
                 .then(function() {
                     console.log("Insert new package successful");
@@ -56,7 +55,6 @@
                     console.log("Insert new package failed");
                 });
             //}
-
         };
 
         $scope.getCountries = function() {
@@ -73,6 +71,18 @@
 
         };
 
+
+        // A function to retrieve a country
+        $scope.getCountries = function() {
+
+            pkgServices.getCountries()
+                .then(function(result) {
+                    $scope.countries = result.data;
+                })
+                .catch(function(err) {
+                    console.log('It was impossible to retrieve the countries');
+                });
+        };
 
     };
 

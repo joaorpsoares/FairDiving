@@ -110,16 +110,18 @@ tinymce.init({
                         <div class="line2"></div>
                         <div class="col-md-12 offset-0" ng-controller="UserCtrl" data-ng-init="getLoggedUser()">
                             <form>
-                                <br /> First Name*:
+                                <br /> Name*:
                                 <input type="text" class="form-control" value="{{user.firstname}}" placeholder="{{user.firstname}}" rel="popover" name="firstname" />
-                                <br /> Last Name*:
-                                <input type="text" class="form-control" value="{{user.lastname}}" placeholder="{{user.lastname}}" rel="popover" name="lastname" />
-                                <br /> Email address*:
-                                <input type="text" class="form-control" value="{{user.email}}" placeholder="{{user.email}}" name="email" />
                                 <br /> Phone number:
                                 <input type="text" class="form-control" value="{{user.telephone}}" placeholder="{{user.telephone}}" name="telephone">
+                                <br /> Email address*:
+                                <input type="text" class="form-control" value="{{user.email}}" placeholder="{{user.email}}" name="email" />
                                 <br/> Birthday:
                                 <input type="text" class="form-control mySelectCalendar" ng-model="updatedUser.birthdate" value="{{user.birthdate}}" placeholder="{{user.birthdate}}" name="birthday" id="datepicker3" />
+                                <br /> Name of the shop*:
+                                <input type="text" class="form-control" value="{{user.shopname}}" placeholder="{{user.shopname}}" rel="popover" name="lastname" />
+                                <br/> Link to your website:
+                                <input type="text" class="form-contro" value="{{user.websitelink}}" placeholder="{{user.websitelink}}" name="websitelink" id="datepicker3" />
                                 <!--  <br/>
                                 <br/>
                                 <span class="size16 bold">Your address</span>
@@ -151,7 +153,7 @@ tinymce.init({
                     <!-- END OF TAB 1 -->
                     <!-- if role == operator -->
                     <!-- TAB 2 PACKAGES-->
-                    <div class="tab-pane" id="packages">
+                    <div class="tab-pane" id="packages" data-ng-init="getCountries()">
                         <div class="padding40">
                             <span class="size16 bold">Create a package</span>
                             <div class="line2"></div>
@@ -166,10 +168,20 @@ tinymce.init({
                                         <option value="2">Dive Course</option>
                                         <option value="3">Complete Package</option>
                                     </select>
+                                    <br/> Currency*:
+                                    <select ng-model="newPackage.currency" class="form-control " name="package_type" required="required">
+                                        <option value="€" selected="selected">€ EUR</option>
+                                        <option value="$">$ USD</option>
+                                        <option value="£">£ GBP</option>
+                                    </select>
                                     <br/> Price*:
                                     <input ng-model="newPackage.price" type="number" min="0" class="form-control" placeholder="Enter the package price" rel="popover" required="required">
                                     <br/> Certification*:
-                                    <input ng-model="newPackage.certification" type="text" class="form-control" placeholder="Enter the certification needed to this package" required="required">
+                                    <select ng-model="newPackage.certification" class="form-control " name="package_type" required="required">
+                                        <option value="None Required" selected="selected">None Required</option>
+                                        <option value="Open Water Diver">Open Water Diver</option>
+                                        <option value="Advanced Open Water Diver">Advanced Open Water Diver</option>
+                                    </select>
                                     <br/> Difficulty*:
                                     <select ng-model="newPackage.difficulty" class="form-control" name="difficulty" placeholder="Enter the difficulty of this package" required="required">
                                         <option value="1" selected="selected">Easy</option>
@@ -184,12 +196,12 @@ tinymce.init({
                                     <br/> Dive Sites*:
                                     <input ng-model="newPackage.dive_sites" type="text" class="form-control" placeholder="Enter the dive sites of this package" required="required">
                                     <br/> Description*:
-                                    <input ng-model="newPackage.description" type="text" class="form-control" placeholder="Enter the package description" required="required">
+                                    <input ng-model="newPackage.description" type="text" class="form-control" placeholder="Enter the package description" required="required">  
                                     <br/> Location*:
                                     <select ng-model="newPackage.country_code" class="form-control" name="country_code" required="required">
-                                        <option value="" selected="selected" disabled="disabled">Country...</option>
                                         <!--for each country-->
-                                        <option value="AF">AF</option>
+
+                                        <option ng-repeat="country in countries" value="country.abrev">{{country.name}}</option>
                                         <!--endfor-->
                                     </select>
                                     <br/>

@@ -60,7 +60,6 @@
                         .catch(function() {
                             console.log(err);
                         });
-                    console.log("getLoggedUser successful");
                 })
                 .catch(function() {
                     console.log("getLoggedUser failed");
@@ -78,6 +77,18 @@
                         console.log(err);
                     });
             }
+        };
+
+
+        // Function to trigger a reset password
+        $scope.resetPassword = function(reset) {
+            UserServices.resetPassword(reset)
+                .then(function() {
+                    $scope.errorMessage = "Your password was changed. You can now login.";
+                })
+                .catch(function(err) {
+                    $scope.errorMessage = err;
+                });
         };
 
         //A function that updates userInfo

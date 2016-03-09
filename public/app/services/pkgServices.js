@@ -43,7 +43,6 @@
         };
 
         this.getCountries = function() {
-
             return $http.get('/api/countries')
                 .success(function(res) {
                     deferred.resolve(res);
@@ -52,7 +51,6 @@
                     deferred.reject(err);
                 });
         };
-
 
     };
 

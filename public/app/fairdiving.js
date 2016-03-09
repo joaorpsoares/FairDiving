@@ -40,6 +40,10 @@
                 controller: 'PkgCtrl',
                 templateUrl: 'app/views/listpackages.ejs'
             })
+            .when('/resetPassword/:rest', {
+                controller: 'UserCtrl',
+                templateUrl: 'app/views/newPassword.ejs'
+            })
             .otherwise({
                 redirectTo: '/'
             });
