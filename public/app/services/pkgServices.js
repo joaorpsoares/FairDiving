@@ -33,6 +33,7 @@
 
             return $http.post('/api/package/', newPackage)
                 .success(function(res) {
+                    $window.location = '/package/' + res.id;
                     deferred.resolve(res);
                 })
                 .error(function(err) {
