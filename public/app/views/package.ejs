@@ -53,7 +53,7 @@
             </div>
             <div class="line3"></div>
             <div class="hpadding20">
-                <h2 class="opensans slim green2">${{ packageOnUse.price }}</h2>
+                <h2 class="opensans slim green2">{{ packageOnUse.currency }}{{ packageOnUse.price }}</h2>
             </div>
             <div class="line3 margtop20"></div>
             <!--
@@ -82,25 +82,30 @@
                 </div>
 
                 -->
-            <div class="col-md-6 bordertype3" ng-show="{{packageOnUse.difficulty}}==0">
+            <!--<div class="col-md-6 bordertype3" ng-show="packageOnUse.difficulty == 0">
                 <img src="images/user-rating-0.png" alt="" />
             </div>
-            <div class="col-md-6 bordertype3" ng-show="{{packageOnUse.difficulty}}==0">
-                <img src="images/user-rating-1.png" alt="" /> easy
+            <div class="col-md-6 bordertype3" ng-show="packageOnUse.difficulty == 1">
+                <img src="images/user-rating-1.png" alt="" />
+                <br>Easy
             </div>
-            <div class="col-md-6 bordertype3" ng-show="{{packageOnUse.difficulty}}==0">
-                <img src="images/user-rating-2.png" alt="" /> medium
+            <div class="col-md-6 bordertype3" ng-show="packageOnUse.difficulty == 2">
+                <img src="images/user-rating-2.png" alt="" />
+                <br>Medium
             </div>
-            <div class="col-md-6 bordertype3" ng-show="{{packageOnUse.difficulty}}==0">
-                <img src="images/user-rating-3.png" alt="" /> medium hard
+            <div class="col-md-6 bordertype3" ng-show="packageOnUse.difficulty == 3">
+                <img src="images/user-rating-3.png" alt="" />
+                <br>Medium Hard
             </div>
-            <div class="col-md-6 bordertype3" ng-show="{{packageOnUse.difficulty}}==0">
-                <img src="images/user-rating-4.png" alt="" /> hard
+            <div class="col-md-6 bordertype3" ng-show="packageOnUse.difficulty == 4">
+                <img src="images/user-rating-4.png" alt="" />
+                <br>Hard
             </div>
-            <div class="col-md-6 bordertype3" ng-show="{{packageOnUse.difficulty}}==0">
-                <img src="images/user-rating-5.png" alt="" /> expert
-            </div>
-            <div class="col-md-6 bordertype3">
+            <div class="col-md-6 bordertype3" ng-show="packageOnUse.difficulty == 5">
+                <img src="images/user-rating-5.png" alt="" />
+                <br>Expert
+            </div>-->
+            <div class="col-md-12 bordertype3">
                 {{packageOnUse.certification}}
             </div>
             <div class="col-md-6 bordertype1 padding20">

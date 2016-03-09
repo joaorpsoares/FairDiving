@@ -9,6 +9,7 @@
         $scope.packageOnUse = {
             Id: $routeParams.id
         };
+
         $scope.countries = [];
 
         //A function that gets all packages
@@ -54,6 +55,20 @@
                     console.log("Insert new package failed");
                 });
             //}
+        };
+
+        $scope.getCountries = function() {
+
+            pkgServices.getCountries()
+                .then(function(_countries) {
+                    console.log(_countries);
+                    $scope.countries = _countries.data;
+                    console.log("getPackages successful");
+                })
+                .catch(function() {
+                    console.log("getPackages failed");
+                });
+
         };
 
 
