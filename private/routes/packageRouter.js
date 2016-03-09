@@ -36,6 +36,7 @@
                                     title: req.body.title,
                                     price: req.body.price,
                                     description: req.body.description,
+                                    currency: req.body.currency,
                                     certification: req.body.certification,
                                     difficulty: req.body.difficulty,
                                     n_dives: req.body.n_dives,
