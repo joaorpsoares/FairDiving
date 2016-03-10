@@ -3,7 +3,7 @@
     'use strict';
 
     // Created the controller to the package view
-    var PkgCtrl = function($scope, pkgServices, $routeParams) {
+    var PkgCtrl = function($scope, pkgServices, $routeParams, Upload) {
 
         $scope.packages = {};
         $scope.packageOnUse = {
@@ -84,10 +84,45 @@
                 });
         };
 
+        $scope.submit = function() {
+            if ($scope.form.file.$valid && $scope.newPackage.pickFile) {
+                $scope.upload($scope.newPackage.pickFile);
+
+            }
+        };
+
+        // upload on file select or drop
+        $scope.upload = function(file) {
+
+            console.log(file);
+            $scope.newPackage.avatar = file;
+            delete $scope.newPackage.pickFile;
+
+            pkgServices.insertNewPackage($scope.newPackage)
+                .then(function() {
+                    console.log("Insert new package successful");
+                })
+                .catch(function() {
+                    console.log("Insert new package failed");
+                });
+
+            console.log($scope.newPackage);
+            /*
+            Upload.upload({
+                url: '/api/package/',
+                data: $scope.newPackage,
+                method: 'POST',
+                disableProgress: true
+            }).then(function(resp) {
+                console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+            });
+            */
+        };
+
     };
 
     // Injecting modules used for better minifing later on
-    PkgCtrl.$inject = ['$scope', 'pkgServices', '$routeParams'];
+    PkgCtrl.$inject = ['$scope', 'pkgServices', '$routeParams', 'Upload'];
 
     // Enabling the controller in the app
     angular.module('fairdiving').controller('PkgCtrl', PkgCtrl);

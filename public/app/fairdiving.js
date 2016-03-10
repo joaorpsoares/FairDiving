@@ -3,7 +3,7 @@
     'use strict';
 
     // Creation of the app, named 'fairdiving'
-    var app = angular.module('fairdiving', ['ngRoute', 'ngCookies']);
+    var app = angular.module('fairdiving', ['ngRoute', 'ngCookies', 'ngFileUpload']);
 
     app.config(function($routeProvider, $locationProvider) {
 

@@ -22,14 +22,12 @@
 
         // Route to insert a new package
         server.post('/api/package', upload.array('avatar'), function(req, res) {
+            console.log(req.body);
             cookie.verifySession(req.cookies.session)
                 .then(function(info) {
                     if (info.role === "OPERATOR" || info.role === "ADMIN") {
                         database.retrieveUsrIDByToken(info.token)
                             .then(function(usrID) {
-
-                                console.log(req.body, req.files);
-
                                 var __package = {
                                     operatorID: usrID,
                                     package_type: req.body.package_type,

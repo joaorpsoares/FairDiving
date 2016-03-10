@@ -1,9 +1,4 @@
-<script src="js/tinymce/tinymce.min.js"></script>
-<script>
-tinymce.init({
-    selector: 'textarea'
-});
-</script>
+
 <div ng-include="'/app/views/header.ejs'">
 </div>
 <div class="container breadcrub">
@@ -159,7 +154,7 @@ tinymce.init({
                             <div class="line2"></div>
                             <!-- COL 1 -->
                             <div class="col-md-12 offset-0">
-                                <form enctype="multipart/form-data">
+                                <form enctype="multipart/form-data" name="form">
                                     <br/> Title*:
                                     <input ng-model="newPackage.title" type="text" class="form-control" placeholder="Enter the package title" rel="popover" required="required">
                                     </br> Type*:
@@ -201,10 +196,17 @@ tinymce.init({
                                     <select ng-model="newPackage.country_code" class="form-control" name="country_code" required="required">
                                         <!--for each country-->
 
-                                        <option ng-repeat="country in countries" value="country.abrev">{{country.name}}</option>
+                                        <option ng-repeat="country in countries" value={{country.abrev}}>{{country.name}}</option>
                                         <!--endfor-->
                                     </select>
                                     <br/>
+                                    <div class="button" ngf-select ng-model="newPackage.pickFile" name="file" ngf-pattern="'image/*'"
+    ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
+    ngf-resize="{width: 100, height: 100}">Select</div>
+    <br/>
+    <br/>
+    <br/>
+             <pre>{{newPackage.picFile}}</pre>
                                     <!-- <input type="text" class="form-control" placeholder="Description of the location (address, etc.)" name="location" required="required">
                                     <br/> Image*:
                                     <br/>
@@ -213,7 +215,8 @@ tinymce.init({
                                         <input type="file" ng-model="newPackage.avatar" class="upload" name="avatar" accept="image/*" multiple>
                                     </div>
                                     <br/>-->
-                                    <button type="submit" class="bluebtn margtop20" ng-click="insertNewPackage(newPackage)">Create</button>
+                                    <!-- insertNewPackage(newPackage) -->
+                                    <button type="submit" class="bluebtn margtop20" ng-click="submit()">Create</button>
                                 </form>
                             </div>
                             <div class="clearfix"></div>

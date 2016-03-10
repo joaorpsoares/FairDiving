@@ -222,13 +222,20 @@
                         database.getSensetiveData(user.email)
                             .then(function(result) {
                                 if (result[0].token === user.token) {
-                                    database.updatePassword(user.password, user.email)
-                                        .then(function() {
-                                            res.status(200).send("Password was changed.");
-                                        })
-                                        .catch(function() {
-                                            res.status(406).send('It was impossible to change the password.');
-                                        });
+                                    bcrypt.hash(req.body.password, null, null, function(err, hash) {
+
+                                        if (err) {
+                                            res.status(406).send('There was a problem with hashing your password.');
+                                        } else {
+                                            database.updatePassword(hash, user.email)
+                                                .then(function() {
+                                                    res.status(200).send("Password was changed.");
+                                                })
+                                                .catch(function() {
+                                                    res.status(406).send('It was impossible to change the password.');
+                                                });
+                                        }
+                                    });
                                 } else {
                                     res.status(406).send('Token is not valid. Ask again for your password.');
                                 }
