@@ -111,7 +111,7 @@ tinymce.init({
                         <div class="col-md-12 offset-0" ng-controller="UserCtrl" data-ng-init="getLoggedUser()">
                             <form>
                                 <br /> Name*:
-                                <input type="text" class="form-control" value="{{user.firstname}}" placeholder="{{user.firstname}}" rel="popover" name="firstname" />
+                                <input type="text" class="form-control" value="{{user.name}}" placeholder="{{user.name}}" rel="popover" name="name" />
                                 <br /> Phone number:
                                 <input type="text" class="form-control" value="{{user.telephone}}" placeholder="{{user.telephone}}" name="telephone">
                                 <br /> Email address*:
@@ -119,7 +119,7 @@ tinymce.init({
                                 <br/> Birthday:
                                 <input type="text" class="form-control mySelectCalendar" ng-model="updatedUser.birthdate" value="{{user.birthdate}}" placeholder="{{user.birthdate}}" name="birthday" id="datepicker3" />
                                 <br /> Name of the shop*:
-                                <input type="text" class="form-control" value="{{user.shopname}}" placeholder="{{user.shopname}}" rel="popover" name="lastname" />
+                                <input type="text" class="form-control" value="{{user.shopname}}" placeholder="{{user.shopname}}" rel="popover" name="shopname" />
                                 <br/> Link to your website:
                                 <input type="text" class="form-contro" value="{{user.websitelink}}" placeholder="{{user.websitelink}}" name="websitelink" id="datepicker3" />
                                 <!--  <br/>
@@ -202,7 +202,7 @@ tinymce.init({
                                     <br/> Location*:
                                     <select ng-model="newPackage.country_code" class="form-control" name="country_code" required="required">
                                         <!--for each country-->
-                                        <option ng-repeat="country in countries" value="country.abrev">{{country.name}}</option>
+                                        <option ng-repeat="country in countries" value="{{country.abrev}}">{{country.name}}</option>
                                         <!--endfor-->
                                     </select>
                                     <br/>

@@ -51,7 +51,8 @@
                 .then(function() {
                     console.log("Insert new package successful");
                 })
-                .catch(function() {
+                .catch(function(err) {
+                    console.log(err);
                     console.log("Insert new package failed");
                 });
             //}

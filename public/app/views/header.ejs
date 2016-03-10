@@ -72,7 +72,7 @@
                     </ul>
                     {% else %}-->
                             <a ng-if="user.logged == false" data-toggle="dropdown" class="dropdown-toggle">Not Logged In<b class="lightcaret mt-3"></b></a>
-                            <a ng-if="user.logged == true" data-toggle="dropdown" class="dropdown-toggle">{{user.firstname}}<b class="lightcaret mt-3"></b></a>
+                            <a ng-if="user.logged == true" data-toggle="dropdown" class="dropdown-toggle">{{user.name}}<b class="lightcaret mt-3"></b></a>
                             <ul ng-if="user.logged == false" class="dropdown-menu posright-0">
                                 <li>
                                     <div class="row dropwidth01">

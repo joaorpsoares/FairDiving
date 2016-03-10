@@ -62,7 +62,7 @@
                                 $scope.user = user.data[0];
                                 $scope.user.logged = true;
                             })
-                            .catch(function() {
+                            .catch(function(err) {
                                 console.log(err);
                             });
                     })

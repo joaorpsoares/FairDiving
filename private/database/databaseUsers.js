@@ -129,7 +129,7 @@
         // Function to retrieve user from token
         retrieveUsrByToken: function(token) {
             return new Promise(function(resolve, reject) {
-                client.query('SELECT id, firstname, lastname, birthdate, country, email, telephone FROM users WHERE token = $1', token, function(err, result) {
+                client.query('SELECT id, name, birthdate, country, email, telephone FROM users WHERE token = $1', token, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {
@@ -142,7 +142,7 @@
         // Function to retrieve user from userID
         retrieveUsrById: function(id) {
             return new Promise(function(resolve, reject) {
-                client.query('SELECT firstname, lastname, birthdate, country, email, telephone FROM users WHERE id = $1', id, function(err, result) {
+                client.query('SELECT name, birthdate, country, email, telephone FROM users WHERE id = $1', id, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {
@@ -155,7 +155,7 @@
         // Function to update user from token
         updateUsrById: function(user) {
             return new Promise(function(resolve, reject) {
-                client.query('UPDATE users SET firstname = $1, lastname = $2, email = $3, telephone = $4, birthdate = $5 WHERE token = $6', user, function(err, result) {
+                client.query('UPDATE users SET name = $1, email = $2, telephone = $3, birthdate = $4 WHERE token = $5', user, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {

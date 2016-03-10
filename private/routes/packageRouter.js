@@ -28,7 +28,7 @@
                         database.retrieveUsrIDByToken(info.token)
                             .then(function(usrID) {
 
-                                console.log(req.body, req.files);
+                                console.log(req.body);
 
                                 var __package = {
                                     operatorID: usrID,

@@ -19,7 +19,7 @@ CREATE TABLE countries (
 CREATE TABLE users (
 	id BIGSERIAL PRIMARY KEY,
 	-- personal data
-	firstName VARCHAR(60) DEFAULT 'Sea Explorer',
+	name VARCHAR(60) DEFAULT 'Sea Explorer',
 	birthDate timestamp,
 	country VARCHAR(2) REFERENCES countries(abrev),
 	-- contact information
