@@ -59,7 +59,6 @@
                     if (err) {
                         reject(err);
                     } else {
-                        console.log(result.rows);
                         resolve(result.rows);
                     }
                 });

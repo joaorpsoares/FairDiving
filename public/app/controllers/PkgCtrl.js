@@ -72,20 +72,6 @@
             //}
         };
 
-        $scope.getCountries = function() {
-
-            pkgServices.getCountries()
-                .then(function(_countries) {
-                    console.log(_countries);
-                    $scope.countries = _countries.data;
-                    console.log("getPackages successful");
-                })
-                .catch(function() {
-                    console.log("getPackages failed");
-                });
-
-        };
-
 
         // A function to retrieve a country
         $scope.getCountries = function() {
