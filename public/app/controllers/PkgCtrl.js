@@ -6,6 +6,7 @@
     var PkgCtrl = function($scope, pkgServices, $routeParams, Upload) {
 
         $scope.packages = {};
+        $scope.reviews = {};
         $scope.packageOnUse = {
             Id: $routeParams.id
         };
@@ -119,6 +120,31 @@
             });
             */
         };
+
+    };
+
+    $scope.insertNewReview = function(review) {
+        pkgServices.insertNewReview($routeParams.id, review)
+            .then(function() {
+                $scope.errorMessage = "";
+                console.log("New review added");
+            })
+            .catch(function(err) {
+                $scope.errorMessage = err.data;
+                console.log("New review failed");
+            });
+    };
+
+    $scope.getReviews = function() {
+
+        pkgServices.getReviews($routeParams.id)
+            .then(function(_reviews) {
+                $scope.reviews = _reviews.data;
+                console.log("getReviews successful");
+            })
+            .catch(function() {
+                console.log("getReviews failed");
+            });
 
     };
 

@@ -66,6 +66,29 @@
 
     };
 
+    this.insertNewReview = function(id, review) {
+
+        return $http.post('/api/package/review/' + id, review)
+            .success(function(res) {
+                deferred.resolve(res);
+            })
+            .error(function(err) {
+                deferred.reject(err);
+            });
+
+    };
+
+    this.getReviews = function(id) {
+
+        return $http.get('/api/package/' + id + 'reviews')
+            .success(function(res) {
+                deferred.resolve(res);
+            })
+            .error(function(err) {
+                deferred.reject(err);
+            });
+    };
+
     // Injecting modules used for better minifing later on
     pkgServices.$inject = ['$http', '$q', '$cookies', '$window'];
 
