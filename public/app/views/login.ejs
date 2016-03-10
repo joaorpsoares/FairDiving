@@ -28,7 +28,7 @@
                 <br/>
                 <div ng-if="errorMessage">
                     <div class="alert alert-warning">
-                        <strong>Warning!</strong> {{errorMessage}}
+                        <strong>Info:</strong> {{errorMessage}}
                     </div>
                 </div>
                 <input ng-model="user.email" type="email" class="form-control logpadding" placeholder="email" required>
@@ -60,7 +60,6 @@
             <div ng-click="toogle = !toogle" class="right" id="lostpassword"><a href="#" class="whitelink">Lost password?</a></div>
         </div>
     </div>
-    <pre>{{toogle}}</pre>
 </div>
 <!-- Javascript  -->
 <script src="../assets/js/initialize-loginpage.js"></script>

@@ -125,6 +125,10 @@
             return databasePackages.getPackageID([id]);
         },
 
+        getPackagesByOperator: function(operatorID) {
+            return databasePackages.getPackagesByOperator([operatorID]);
+        },
+
         // Function to retrieve package creator
         getPackageCreator: function(id) {
             return databasePackages.getPackageCreator([id]);

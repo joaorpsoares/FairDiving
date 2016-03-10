@@ -29,10 +29,23 @@
                 });
         };
 
+        this.getPackagesOfLoggedUser = function() {
+
+            return $http.get('/api/myPackages')
+                .success(function(res) {
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    console.log(err);
+                    deferred.reject(err);
+                });
+        };
+
         this.insertNewPackage = function(newPackage) {
 
             return $http.post('/api/package/', newPackage)
                 .success(function(res) {
+                    $window.location = '/package/' + res.id;
                     deferred.resolve(res);
                 })
                 .error(function(err) {
@@ -41,6 +54,15 @@
 
         };
 
+        this.getCountries = function() {
+            return $http.get('/api/countries')
+                .success(function(res) {
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    deferred.reject(err);
+                });
+        };
 
     };
 

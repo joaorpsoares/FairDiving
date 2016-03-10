@@ -64,7 +64,7 @@
                 var recoverMail = new EmailTemplate(path.join(__dirname, '../resources/emailTemplates', 'recoverMail'));
 
                 recoverMail.render({
-                    code: 'http://52.37.66.121:3000/api/user/recover/confirmed/' + encodeURIComponent(contact) + '+' + token
+                    code: 'http://52.37.66.121:3000/resetPassword/' + encodeURIComponent(contact) + '+' + token
                 }, function(err, results) {
 
                     if (err) {

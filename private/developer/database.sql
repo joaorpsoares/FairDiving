@@ -19,13 +19,15 @@ CREATE TABLE countries (
 CREATE TABLE users (
 	id BIGSERIAL PRIMARY KEY,
 	-- personal data
-	firstName VARCHAR(60) DEFAULT 'Sea',
-	lastName VARCHAR(60) DEFAULT 'Explorer',
+	name VARCHAR(60) DEFAULT 'Sea Explorer',
 	birthDate timestamp,
 	country VARCHAR(2) REFERENCES countries(abrev),
 	-- contact information
 	email VARCHAR(255) NOT NULL UNIQUE,
 	telephone VARCHAR(60),
+    -- company information
+	shopName VARCHAR(60) DEFAULT 'Explorer',
+	websiteLink VARCHAR(255) DEFAULT 'No website',
 	-- security
 	password VARCHAR(255) NOT NULL,
 	token VARCHAR(64) NOT NULL,
@@ -38,6 +40,7 @@ CREATE TABLE packageType (
 	id BIGSERIAL PRIMARY KEY,
 	description VARCHAR(30) NOT NULL
 );
+
 
 CREATE TABLE packageImage (
 	id BIGSERIAL PRIMARY KEY,
@@ -56,16 +59,24 @@ CREATE TABLE packages (
 	--  package info
 	package_type BIGINT REFERENCES packageType(id),
 	certification VARCHAR (140) NOT NULL,
-	difficulty BIGINT REFERENCES rating(id),
+	currency VARCHAR (140) NOT NULL,
 	n_dives REAL NOT NULL,
 	dive_sites VARCHAR(100) NOT NULL,
 	title VARCHAR (140) NOT NULL,
 	price REAL NOT NULL,
-	description VARCHAR(500) NOT NULL, -- resume, duration, included, not included, what you'll see, duration, max depth, visibility, best-season, special
+	description VARCHAR(500) NOT NULL, -- description, duration, included, not included, what you'll see, duration, max depth, visibility, best-season, special
 	-- Geolocation
 	country_code VARCHAR(2) REFERENCES countries(abrev),
 	lat REAL NOT NULL DEFAULT 0,
 	lng REAL NOT NULL DEFAULT 0
+);
+
+CREATE TABLE description (
+	id BIGSERIAL PRIMARY KEY,
+	package_type BIGINT REFERENCES packageType(id),
+	certification VARCHAR (140) NOT NULL,
+	difficulty BIGINT REFERENCES rating(id),
+	currency VARCHAR (140) NOT NULL
 );
 
 CREATE TABLE roles (

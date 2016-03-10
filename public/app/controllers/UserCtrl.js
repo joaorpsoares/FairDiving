@@ -6,7 +6,8 @@
     var UserCtrl = function($scope, UserServices) {
 
         $scope.user = {
-            token: null
+            token: null,
+            logged: false
         };
         $scope.updatedUser = {};
         $scope.errorMessage = "";
@@ -19,6 +20,7 @@
                 UserServices.login($scope.user)
                     .then(function() {
                         $scope.errorMessage = "";
+                        $scope.user.logged = true;
                         console.log("Login successful");
                     })
                     .catch(function(err) {
@@ -46,25 +48,28 @@
             }
         };
 
-        //A function that gets a package by id
+        //A function that gets the logged user
         $scope.getLoggedUser = function() {
             //     if ($scope.user.Id === '') {
             //       // TODO: Show error
             //  } else {
-            UserServices.getLoggedUserToken()
-                .then(function(token) {
-                    UserServices.getLoggedUser(token.data)
-                        .then(function(user) {
-                            $scope.user = user.data[0];
-                        })
-                        .catch(function() {
-                            console.log(err);
-                        });
-                    console.log("getLoggedUser successful");
-                })
-                .catch(function() {
-                    console.log("getLoggedUser failed");
-                });
+            var cookies = document.cookie;
+            if (document.cookie.match(/session\=(\w|.)*/)) {
+                UserServices.getLoggedUserToken()
+                    .then(function(token) {
+                        UserServices.getLoggedUser(token.data)
+                            .then(function(user) {
+                                $scope.user = user.data[0];
+                                $scope.user.logged = true;
+                            })
+                            .catch(function(err) {
+                                console.log(err);
+                            });
+                    })
+                    .catch(function() {
+                        console.log("getLoggedUser failed");
+                    });
+            } else $scope.user.logged = false;
             //    }
         };
 
@@ -80,8 +85,17 @@
             }
         };
 
-        $scope.getLoggedUser();
 
+        // Function to trigger a reset password
+        $scope.resetPassword = function(reset) {
+            UserServices.resetPassword(reset)
+                .then(function() {
+                    $scope.errorMessage = "Your password was changed. You can now login.";
+                })
+                .catch(function(err) {
+                    $scope.errorMessage = err.data;
+                });
+        };
         //A function that updates userInfo
         /*   $scope.updateUserInfo = function() {
                //faltam verificacoes

@@ -3,7 +3,7 @@
     'use strict';
 
     // Creation of the app, named 'fairdiving'
-    var app = angular.module('fairdiving', ['ngRoute', 'ngCookies']);
+    var app = angular.module('fairdiving', ['ngRoute', 'ngCookies', 'ngFileUpload']);
 
     app.config(function($routeProvider, $locationProvider) {
 
@@ -39,6 +39,10 @@
             .when('/listpackages', {
                 controller: 'PkgCtrl',
                 templateUrl: 'app/views/listpackages.ejs'
+            })
+            .when('/resetPassword/:rest', {
+                controller: 'UserCtrl',
+                templateUrl: 'app/views/newPassword.ejs'
             })
             .otherwise({
                 redirectTo: '/'

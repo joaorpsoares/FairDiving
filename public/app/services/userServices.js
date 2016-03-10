@@ -3,7 +3,7 @@
     'use strict';
 
     // Created the services related to users
-    var UserServices = function($http, $q, $cookies, $window) {
+    var UserServices = function($http, $q, $cookies, $window, $location) {
 
         var deferred = $q.defer();
 
@@ -81,6 +81,25 @@
                     deferred.reject(err);
                 });
         };
+
+
+        this.resetPassword = function(reset) {
+
+            var url = $location.url().split('/')[2].split('+');
+
+            reset.email = url[0];
+            reset.token = url[1];
+
+            console.log(reset);
+
+            return $http.post('api/user/recover/confirmed', reset)
+                .success(function(res) {
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    deferred.resolve(err);
+                });
+        };
         /*
                 this.updateUserInfo = function(user, updatedUser) {
                     return $http.post('/api/user/' + user, updatedUser)
@@ -98,7 +117,7 @@
     };
 
     // Injecting modules used for better minifing later on
-    UserServices.$inject = ['$http', '$q', '$cookies', '$window'];
+    UserServices.$inject = ['$http', '$q', '$cookies', '$window', '$location'];
 
     // Enabling the service in the app
     angular.module('fairdiving').service('UserServices', UserServices);

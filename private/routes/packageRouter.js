@@ -27,15 +27,15 @@
                     if (info.role === "OPERATOR" || info.role === "ADMIN") {
                         database.retrieveUsrIDByToken(info.token)
                             .then(function(usrID) {
-
+                                console.log(req.body);
                                 var __package = {
                                     operatorID: usrID,
                                     package_type: req.body.package_type,
                                     title: req.body.title,
                                     price: req.body.price,
                                     description: req.body.description,
+                                    currency: req.body.currency,
                                     certification: req.body.certification,
-                                    difficulty: req.body.difficulty,
                                     n_dives: req.body.n_dives,
                                     dive_sites: req.body.dive_sites,
                                     country_code: req.body.country_code
@@ -55,7 +55,7 @@
                                         var _imageNames = [];
 
                                         // If the user didnt upload a single file, then a default one is used.
-                                        if (req.files.length !== 0) {
+                                        if (typeof req.files !== 'undefined' && req.files.length !== 0) {
                                             req.files.forEach(function(value) {
                                                 _imageNames.push(value.filename);
                                             });
@@ -80,7 +80,7 @@
                                                 database.relateImagesToPackages(packageID.id, _imageNames)
                                                     .then(function() {
                                                         __transaction.commit();
-                                                        res.status(200).send('OK');
+                                                        res.status(200).send(packageID);
                                                     })
                                                     .catch(function(err) {
                                                         __transaction.rollback("_beforeInsertUser");
@@ -88,7 +88,6 @@
                                                     });
                                             })
                                             .catch(function(err) {
-                                                console.log(err);
                                                 res.status(406).send(err);
                                             });
                                     }
@@ -127,6 +126,29 @@
                 })
                 .catch(function(err) {
                     res.status(406).send(err);
+                });
+        });
+
+        // Route to get all packages from the logged operator
+        server.get('/api/myPackages', function(req, res) {
+            cookie.verifySession(req.cookies.session)
+                .then(function(info) {
+                    database.retrieveUsrIDByToken(info.token)
+                        .then(function(userID) {
+                            database.getPackagesByOperator(userID)
+                                .then(function(result) {
+                                    res.status(200).send(result);
+                                })
+                                .catch(function(err) {
+                                    res.status(406).send(err);
+                                });
+                        })
+                        .catch(function(err) {
+                            res.status(406).send('Some error happened on our side. Try again later please.');
+                        });
+                })
+                .catch(function(err) {
+                    res.status(401).send('Do you have permission to do that?!');
                 });
         });
 

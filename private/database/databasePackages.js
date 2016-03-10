@@ -16,7 +16,7 @@
         insertNewPackage: function(divePackage) {
             return new Promise(function(resolve, reject) {
 
-                client.query('INSERT INTO packages (operatorID, package_type, title, price, description, certification, difficulty, n_dives, dive_sites, country_code) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id', divePackage, function(err, result) {
+                client.query('INSERT INTO packages (operatorID, package_type, title, price, description, currency, certification, n_dives, dive_sites, country_code) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id', divePackage, function(err, result) {
 
                     if (err) {
                         reject(err);
@@ -48,6 +48,18 @@
                         reject(err);
                     } else {
                         resolve(result.rows[0]);
+                    }
+                });
+            });
+        },
+
+        getPackagesByOperator: function(operatorID) {
+            return new Promise(function(resolve, reject) {
+                client.query('SELECT * FROM packages WHERE operatorID = $1', operatorID, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result.rows);
                     }
                 });
             });
