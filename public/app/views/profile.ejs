@@ -106,7 +106,7 @@
                         <div class="col-md-12 offset-0" ng-controller="UserCtrl" data-ng-init="getLoggedUser()">
                             <form>
                                 <br /> Name*:
-                                <input type="text" class="form-control" value="{{user.firstname}}" placeholder="{{user.firstname}}" rel="popover" name="firstname" />
+                                <input type="text" class="form-control" value="{{user.name}}" placeholder="{{user.name}}" rel="popover" name="name" />
                                 <br /> Phone number:
                                 <input type="text" class="form-control" value="{{user.telephone}}" placeholder="{{user.telephone}}" name="telephone">
                                 <br /> Email address*:
@@ -114,7 +114,7 @@
                                 <br/> Birthday:
                                 <input type="text" class="form-control mySelectCalendar" ng-model="updatedUser.birthdate" value="{{user.birthdate}}" placeholder="{{user.birthdate}}" name="birthday" id="datepicker3" />
                                 <br /> Name of the shop*:
-                                <input type="text" class="form-control" value="{{user.shopname}}" placeholder="{{user.shopname}}" rel="popover" name="lastname" />
+                                <input type="text" class="form-control" value="{{user.shopname}}" placeholder="{{user.shopname}}" rel="popover" name="shopname" />
                                 <br/> Link to your website:
                                 <input type="text" class="form-contro" value="{{user.websitelink}}" placeholder="{{user.websitelink}}" name="websitelink" id="datepicker3" />
                                 <!--  <br/>
@@ -137,6 +137,8 @@
                                 <div class="line2"></div>
                                 <br/> Description:
                                 <input type="text" class="form-control" value="" name="aboutme"> -->
+                                <br />
+                                <br />
                                 <button type="submit" class="bluebtn margtop20">Update</button>
                             </form>
                         </div>
@@ -177,25 +179,24 @@
                                         <option value="Open Water Diver">Open Water Diver</option>
                                         <option value="Advanced Open Water Diver">Advanced Open Water Diver</option>
                                     </select>
-                                    <br/> Difficulty*:
+                                    <!-- <br/> Difficulty*:
                                     <select ng-model="newPackage.difficulty" class="form-control" name="difficulty" placeholder="Enter the difficulty of this package" required="required">
                                         <option value="1" selected="selected">Easy</option>
                                         <option value="2">Medium</option>
                                         <option value="3">Medium Hard</option>
                                         <option value="4">Hard</option>
                                         <option value="5">Extreme</option>
-                                    </select>
+                                    </select>-->
                                     <!--<input ng-model="newPackage.difficulty" type="text" class="form-control" placeholder="Enter the difficulty of this package" required="required"> -->
                                     <br/> Number of Dives*:
                                     <input ng-model="newPackage.n_dives" type="number" min="0" class="form-control" placeholder="Enter the number of dives of this package" id="n_dives" name="n_dives" required="required">
                                     <br/> Dive Sites*:
                                     <input ng-model="newPackage.dive_sites" type="text" class="form-control" placeholder="Enter the dive sites of this package" required="required">
                                     <br/> Description*:
-                                    <input ng-model="newPackage.description" type="text" class="form-control" placeholder="Enter the package description" required="required">  
+                                    <input ng-model="newPackage.description" type="text" class="form-control" placeholder="Enter the package description" required="required">
                                     <br/> Location*:
                                     <select ng-model="newPackage.country_code" class="form-control" name="country_code" required="required">
                                         <!--for each country-->
-
                                         <option ng-repeat="country in countries" value={{country.abrev}}>{{country.name}}</option>
                                         <!--endfor-->
                                     </select>

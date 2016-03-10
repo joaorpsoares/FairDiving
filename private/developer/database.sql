@@ -19,7 +19,7 @@ CREATE TABLE countries (
 CREATE TABLE users (
 	id BIGSERIAL PRIMARY KEY,
 	-- personal data
-	firstName VARCHAR(60) DEFAULT 'Sea Explorer',
+	name VARCHAR(60) DEFAULT 'Sea Explorer',
 	birthDate timestamp,
 	country VARCHAR(2) REFERENCES countries(abrev),
 	-- contact information
@@ -59,17 +59,24 @@ CREATE TABLE packages (
 	--  package info
 	package_type BIGINT REFERENCES packageType(id),
 	certification VARCHAR (140) NOT NULL,
-	difficulty BIGINT REFERENCES rating(id),
 	currency VARCHAR (140) NOT NULL,
 	n_dives REAL NOT NULL,
 	dive_sites VARCHAR(100) NOT NULL,
 	title VARCHAR (140) NOT NULL,
 	price REAL NOT NULL,
-	description VARCHAR(500) NOT NULL, -- resume, duration, included, not included, what you'll see, duration, max depth, visibility, best-season, special
+	description VARCHAR(500) NOT NULL, -- description, duration, included, not included, what you'll see, duration, max depth, visibility, best-season, special
 	-- Geolocation
 	country_code VARCHAR(2) REFERENCES countries(abrev),
 	lat REAL NOT NULL DEFAULT 0,
 	lng REAL NOT NULL DEFAULT 0
+);
+
+CREATE TABLE description (
+	id BIGSERIAL PRIMARY KEY,
+	package_type BIGINT REFERENCES packageType(id),
+	certification VARCHAR (140) NOT NULL,
+	difficulty BIGINT REFERENCES rating(id),
+	currency VARCHAR (140) NOT NULL
 );
 
 CREATE TABLE roles (

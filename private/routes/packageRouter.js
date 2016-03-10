@@ -28,6 +28,7 @@
                     if (info.role === "OPERATOR" || info.role === "ADMIN") {
                         database.retrieveUsrIDByToken(info.token)
                             .then(function(usrID) {
+                                console.log(req.body);
                                 var __package = {
                                     operatorID: usrID,
                                     package_type: req.body.package_type,
@@ -36,7 +37,6 @@
                                     description: req.body.description,
                                     currency: req.body.currency,
                                     certification: req.body.certification,
-                                    difficulty: req.body.difficulty,
                                     n_dives: req.body.n_dives,
                                     dive_sites: req.body.dive_sites,
                                     country_code: req.body.country_code

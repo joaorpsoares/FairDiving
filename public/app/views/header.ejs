@@ -46,7 +46,7 @@
                     </button>
                     <a href="/" class="navbar-brand"><img src="/images/logo.png" alt="Travel Agency Logo" class="logo" /></a>
                 </div>
-                <div class="navbar-collapse collapse">
+                <div class="navbar-collapse collapse" ng-controller="UserCtrl" data-ng-init="getLoggedUser()">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/packages">Dive Packages</a></li>
                         <li><a href="#">Marine Conservation</a></li>
@@ -55,24 +55,25 @@
                         <li><a href="/contact">Contact</a></li>
                         <li class="dropdown active">
                             <!--
-					{% if user %}
-					<a data-toggle="dropdown" class="dropdown-toggle">{{ user.username }} <b class="lightcaret mt-3"></b></a>
+                    {% if user %}
+                    <a data-toggle="dropdown" class="dropdown-toggle">{{ user.username }} <b class="lightcaret mt-3"></b></a>
                     <ul class="dropdown-menu posright-0">
-						<li>
-							<div class="row dropwidth01">
-								<ul class="droplist col-md-6">
-									<li><a href="/profile">Profile</a></li>
-								</ul>
-								<ul class="droplist col-md-6">
-									<li class="dropdown-header">If not, create one!</li>
-									<li><a href="/logout">Logout</a></li>
-								</ul>
-							</div>
-						</li>
+                        <li>
+                            <div class="row dropwidth01">
+                                <ul class="droplist col-md-6">
+                                    <li><a href="/profile">Profile</a></li>
+                                </ul>
+                                <ul class="droplist col-md-6">
+                                    <li class="dropdown-header">If not, create one!</li>
+                                    <li><a href="/logout">Logout</a></li>
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
-					{% else %}-->
-                            <a data-toggle="dropdown" class="dropdown-toggle">Not logged in <b class="lightcaret mt-3"></b></a>
-                            <ul class="dropdown-menu posright-0">
+                    {% else %}-->
+                            <a ng-if="user.logged == false" data-toggle="dropdown" class="dropdown-toggle">Not Logged In<b class="lightcaret mt-3"></b></a>
+                            <a ng-if="user.logged == true" data-toggle="dropdown" class="dropdown-toggle">{{user.name}}<b class="lightcaret mt-3"></b></a>
+                            <ul ng-if="user.logged == false" class="dropdown-menu posright-0">
                                 <li>
                                     <div class="row dropwidth01">
                                         <ul class="droplist col-md-6">
@@ -85,6 +86,22 @@
                                             <li class="dropdown-header">If not, create one!</li>
                                             <a href="/register">
                                                 <li>Register</li>
+                                            </a>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul ng-if="user.logged == true" class="dropdown-menu posright-0">
+                                <li>
+                                    <div class="row dropwidth01">
+                                        <ul class="droplist col-md-6">
+                                            <a href="/profile">
+                                                <li>Profile</li>
+                                            </a>
+                                        </ul>
+                                        <ul class="droplist col-md-6">
+                                            <a href="/logout">
+                                                <li>Logout</li>
                                             </a>
                                         </ul>
                                     </div>

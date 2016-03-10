@@ -159,7 +159,8 @@
                         .then(function(user) {
                             res.status(200).send(user);
                         })
-                        .catch(function() {
+                        .catch(function(err) {
+                            console.log(err);
                             res.status(406).send('err');
                         });
                 })
