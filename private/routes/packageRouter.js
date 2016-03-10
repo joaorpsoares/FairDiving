@@ -38,7 +38,6 @@
                                     description: req.body.description,
                                     currency: req.body.currency,
                                     certification: req.body.certification,
-                                    difficulty: req.body.difficulty,
                                     n_dives: req.body.n_dives,
                                     dive_sites: req.body.dive_sites,
                                     country_code: req.body.country_code
