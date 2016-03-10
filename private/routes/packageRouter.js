@@ -131,6 +131,29 @@
                 });
         });
 
+        // Route to get all packages from the logged operator
+        server.get('/api/myPackages', function(req, res) {
+            cookie.verifySession(req.cookies.session)
+                .then(function(info) {
+                    database.retrieveUsrIDByToken(info.token)
+                        .then(function(userID) {
+                            database.getPackagesByOperator(userID)
+                                .then(function(result) {
+                                    res.status(200).send(result);
+                                })
+                                .catch(function(err) {
+                                    res.status(406).send(err);
+                                });
+                        })
+                        .catch(function(err) {
+                            res.status(406).send('Some error happened on our side. Try again later please.');
+                        });
+                })
+                .catch(function(err) {
+                    res.status(401).send('Do you have permission to do that?!');
+                });
+        });
+
         // Route to insert a review
         server.post('/api/package/review/:id', function(req, res) {
             cookie.verifySession(req.cookies.session)

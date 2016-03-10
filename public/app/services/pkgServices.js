@@ -29,6 +29,18 @@
                 });
         };
 
+        this.getPackagesOfLoggedUser = function() {
+
+            return $http.get('/api/myPackages')
+                .success(function(res) {
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    console.log(err);
+                    deferred.reject(err);
+                });
+        };
+
         this.insertNewPackage = function(newPackage) {
 
             return $http.post('/api/package/', newPackage)

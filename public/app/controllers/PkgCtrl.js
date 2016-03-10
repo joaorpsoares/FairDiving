@@ -41,6 +41,20 @@
             }
         };
 
+        $scope.getPackagesOfLoggedUser = function() {
+            // if ($scope.packageOnUse.Id === '') {
+            // TODO: Show error
+            //  } else {
+            pkgServices.getPackagesOfLoggedUser()
+                .then(function(_packages) {
+                    $scope.packages = _packages.data;
+                })
+                .catch(function() {
+                    console.log("getPackageOfLoggedUser failed");
+                });
+            //  }
+        };
+
 
         //A function that inserts a new package
         $scope.insertNewPackage = function(newPackage) {

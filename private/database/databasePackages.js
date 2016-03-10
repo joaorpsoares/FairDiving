@@ -53,6 +53,19 @@
             });
         },
 
+        getPackagesByOperator: function(operatorID) {
+            return new Promise(function(resolve, reject) {
+                client.query('SELECT * FROM packages WHERE operatorID = $1', operatorID, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        console.log(result.rows);
+                        resolve(result.rows);
+                    }
+                });
+            });
+        },
+
         // Function to retrieve package creator
         getPackageCreator: function(id) {
             return new Promise(function(resolve, reject) {
