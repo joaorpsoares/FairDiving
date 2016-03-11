@@ -105,30 +105,31 @@
                         <div class="col-md-12 offset-0" ng-controller="UserCtrl" data-ng-init="getLoggedUser()">
                             <form>
                                 <br /> Name*:
-                                <input type="text" class="form-control" value="{{user.name}}" placeholder="{{user.name}}" rel="popover" name="name" />
+                                <input type="text" class="form-control" ng-model="updatedUser.name" placeholder="{{user.name}}" />
                                 <br /> Phone number:
-                                <input type="text" class="form-control" value="{{user.telephone}}" placeholder="{{user.telephone}}" name="telephone">
+                                <input type="text" class="form-control" ng-model="updatedUser.telephone" placeholder="{{user.telephone}}">
                                 <br /> Email address*:
-                                <input type="text" class="form-control" value="{{user.email}}" placeholder="{{user.email}}" name="email" />
-                                <br/> Birthday:
-                                <input type="text" class="form-control mySelectCalendar" ng-model="updatedUser.birthdate" value="{{user.birthdate}}" placeholder="{{user.birthdate}}" name="birthday" id="datepicker3" />
+                                <input type="text" class="form-control" ng-model="updatedUser.email" placeholder="{{user.email}}" />
+                                <!-- <br/> Birthday:
+                                <input type="text" onfocus="(type='date')" onblur="(type='text')" class="form-control" ng-model="updatedUser.birthdate" placeholder="{{user.birthdate}}" /> -->
                                 <br /> Name of the shop*:
-                                <input type="text" class="form-control" value="{{user.shopname}}" placeholder="{{user.shopname}}" rel="popover" name="shopname" />
+                                <input type="text" class="form-control" ng-model="updatedUser.shopname" placeholder="{{user.shopname}}" rel="popover" />
                                 <br/>
                                 <br/> Link to your website:
-                                <input type="text" class="form-contro" value="{{user.websitelink}}" placeholder="{{user.websitelink}}" name="websitelink" />
+                                <input type="text" class="form-contro" ng-model="updatedUser.websitelink" placeholder="{{user.websitelink}}" />
                                 <br/>
                                 <br/>
                                 <br/>
                                 <span class="size16 bold">Your address</span>
                                 <div class="line2"></div>
                                 <br/> Address:
-                                <input type="text" class="form-control" value="" name="address">
+                                <input type="text" class="form-control" ng-model="updatedUser.address" placeholder="{{user.address}}" />
                                 <br/> Zip Code:
-                                <input type="text" class="form-control" value="" name="zipcode">
+                                <input type="text" class="form-control" ng-model="updatedUser.zipcode" placeholder="{{user.zipcode}}" />
                                 <br/> Country:
-                                <select class="form-control" name="country_code">
-                                    <option ng-repeat="country in countries" value="{{country.abrev}}">{{country.name}}</option>
+                                <select class="form-control" name="country_code" ng-model="updatedUser.country">
+                                    <option value="" disabled selected>{{user.cname}}</option>
+                                    <option ng-repeat="country in countries" value={{country.abrev}}> {{country.name}}</option>
                                 </select>
                                 <!--  <br/>
                                 <br/>
@@ -137,7 +138,7 @@
                                 <br/> Description:
                                 <input type="text" class="form-control" value="" name="aboutme"> -->
                                 <br />
-                                <button type="submit" class="bluebtn margtop20">Update</button>
+                                <button type="submit" ng-click="updateUserInfo(updatedUser)" class="bluebtn margtop20">Update</button>
                             </form>
                         </div>
                         <div class="clearfix"></div>
