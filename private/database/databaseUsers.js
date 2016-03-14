@@ -156,7 +156,7 @@
         // Function to update user from id
         updateUsrByID: function(user) {
             return new Promise(function(resolve, reject) {
-                client.query('UPDATE users SET name = $1, email = $2, telephone = $3, shopname = $4, websitelink = $5, address = $6, zipcode = $7, country = $8 WHERE id = $9', [user['name'], user['email'], user['telephone'], user['shopname'], user['websitelink'], user['address'], user['zipcode'], user['country'], user['id']], function(err, result) {
+                client.query('UPDATE users SET name = $1, birthdate = $2, email = $3, telephone = $4, shopname = $5, websitelink = $6, address = $7, zipcode = $8, country = $9 WHERE id = $10', [user['name'], user['birthdate'], user['email'], user['telephone'], user['shopname'], user['websitelink'], user['address'], user['zipcode'], user['country'], user['id']], function(err, result) {
                     if (err) {
                         reject(err);
                     } else {

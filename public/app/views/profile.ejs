@@ -110,8 +110,8 @@
                                 <input type="text" class="form-control" ng-model="updatedUser.telephone" placeholder="{{user.telephone}}">
                                 <br /> Email address*:
                                 <input type="text" class="form-control" ng-model="updatedUser.email" placeholder="{{user.email}}" />
-                                <!-- <br/> Birthday:
-                                <input type="text" onfocus="(type='date')" onblur="(type='text')" class="form-control" ng-model="updatedUser.birthdate" placeholder="{{user.birthdate}}" /> -->
+                                <br/> Birthday:
+                                <input type="text" onfocus="(type='date')" class="form-control" ng-model="updatedUser.birthdate" placeholder="{{user.birthdate | date:'dd/MM/yyyy'}}" />
                                 <br /> Name of the shop*:
                                 <input type="text" class="form-control" ng-model="updatedUser.shopname" placeholder="{{user.shopname}}" rel="popover" />
                                 <br/>

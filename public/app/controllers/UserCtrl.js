@@ -59,8 +59,8 @@
                         UserServices.getLoggedUser(token.data)
                             .then(function(user) {
                                 //  console.log(user.data[0]);
-                                //  var res = user.data[0]['birthdate'].substring(0, 10);
-                                //  user.data[0]['birthdate'] = res;
+                                var res = user.data[0]['birthdate'].substring(0, 10);
+                                user.data[0]['birthdate'] = res;
                                 $scope.user = user.data[0];
                                 $scope.user.logged = true;
                             })
@@ -103,8 +103,8 @@
             //faltam verificacoes
             UserServices.updateUserInfo(updatedUser)
                 .then(function(updUser) {
-                    //  var res = updUser.data['birthdate'].substring(0, 10);
-                    //  updUser.data['birthdate'] = res;
+                    var res = updUser.data['birthdate'].substring(0, 10);
+                    updUser.data['birthdate'] = res;
                     //console.log(updUser.data);
                     $scope.user = updUser.data;
                     console.log("updateUserInfo successful");

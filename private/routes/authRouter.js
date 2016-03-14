@@ -187,7 +187,7 @@
 
                                     req.body.telephone == undefined || req.body.telephone == '' ? __user['telephone'] = user[0]['telephone'] : __user['telephone'] = req.body.telephone;
 
-                                    //  req.body.birthdate == undefined || req.body.birthdate == '' ? __user['birthdate'] = user[0]['birthdate'] : __user['birthdate'] = req.body.birthdate;
+                                    req.body.birthdate == undefined || req.body.birthdate == '' ? __user['birthdate'] = user[0]['birthdate'] : __user['birthdate'] = req.body.birthdate;
 
                                     req.body.shopname == undefined || req.body.shopname == '' ? __user['shopname'] = user[0]['shopname'] : __user['shopname'] = req.body.shopname;
 
@@ -199,11 +199,14 @@
 
                                     req.body.country == undefined || req.body.country == '' ? __user['country'] = user[0]['country'] : __user['country'] = req.body.country;
 
+                                    console.log(__user);
+
                                     database.updateUsrByID(__user)
                                         .then(function(updatedUser) {
                                             res.status(200).send(updatedUser);
                                         })
                                         .catch(function(err) {
+                                            console.log(err);
                                             res.status(406).send(err);
                                         });
 
