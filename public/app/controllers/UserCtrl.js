@@ -58,7 +58,6 @@
                     .then(function(token) {
                         UserServices.getLoggedUser(token.data)
                             .then(function(user) {
-                                console.log(user.data[0]);
                                 //  console.log(user.data[0]);
                                 //  var res = user.data[0]['birthdate'].substring(0, 10);
                                 //  user.data[0]['birthdate'] = res;

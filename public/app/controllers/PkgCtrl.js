@@ -121,31 +121,32 @@
             */
         };
 
-    };
 
-    $scope.insertNewReview = function(review) {
-        pkgServices.insertNewReview($routeParams.id, review)
-            .then(function() {
-                $scope.errorMessage = "";
-                console.log("New review added");
-            })
-            .catch(function(err) {
-                $scope.errorMessage = err.data;
-                console.log("New review failed");
-            });
-    };
 
-    $scope.getReviews = function() {
+        $scope.insertNewReview = function(review) {
+            pkgServices.insertNewReview($routeParams.id, review)
+                .then(function() {
+                    $scope.errorMessage = "";
+                    console.log("New review added");
+                })
+                .catch(function(err) {
+                    $scope.errorMessage = err.data;
+                    console.log("New review failed");
+                });
+        };
 
-        pkgServices.getReviews($routeParams.id)
-            .then(function(_reviews) {
-                $scope.reviews = _reviews.data;
-                console.log("getReviews successful");
-            })
-            .catch(function() {
-                console.log("getReviews failed");
-            });
+        $scope.getReviews = function() {
 
+            pkgServices.getReviews($routeParams.id)
+                .then(function(_reviews) {
+                    $scope.reviews = _reviews.data;
+                    console.log("getReviews successful");
+                })
+                .catch(function() {
+                    console.log("getReviews failed");
+                });
+
+        };
     };
 
     // Injecting modules used for better minifing later on
