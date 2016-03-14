@@ -140,7 +140,6 @@
             pkgServices.getReviews($routeParams.id)
                 .then(function(_reviews) {
                     $scope.reviews = _reviews.data;
-                    console.log("getReviews successful");
                 })
                 .catch(function() {
                     console.log("getReviews failed");

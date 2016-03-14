@@ -70,6 +70,7 @@
 
             return $http.post('/api/package/review/' + id, review)
                 .success(function(res) {
+                    $window.location = '/package/' + id;
                     deferred.resolve(res);
                 })
                 .error(function(err) {
@@ -80,7 +81,7 @@
 
         this.getReviews = function(id) {
 
-            return $http.get('/api/package/' + id + 'reviews')
+            return $http.get('/api/package/' + id + '/reviews')
                 .success(function(res) {
                     deferred.resolve(res);
                 })
