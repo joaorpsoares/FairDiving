@@ -99,7 +99,7 @@ CREATE TABLE reviews (
 	comment VARCHAR (500) NOT NULL,
 	packageid BIGINT REFERENCES packages(id),
 	userid BIGINT REFERENCES users(id),
-	reviewDate VARCHAR (100) NOT NULL DEFAULT NOW()
+	reviewdate VARCHAR (100) NOT NULL DEFAULT NOW()
 );
 
 -- INSERT rating

@@ -6,6 +6,7 @@
     var PkgCtrl = function($scope, pkgServices, $routeParams, Upload) {
 
         $scope.packages = {};
+        $scope.user = {};
         $scope.reviews = {};
         $scope.packageOnUse = {
             Id: $routeParams.id
@@ -143,6 +144,18 @@
                 })
                 .catch(function() {
                     console.log("getReviews failed");
+                });
+
+        };
+
+        //Returns a user information based in userid
+        $scope.getUserID = function(userId) {
+            pkgServices.getUserID(userId)
+                .then(function(_user) {
+                    $scope.user = _user.data;
+                })
+                .catch(function() {
+                    console.log("getUserID failed");
                 });
 
         };

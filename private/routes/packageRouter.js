@@ -167,6 +167,7 @@
                                         res.status(401).send("You cannot evaluate your own packages.");
                                     } else {
                                         if (typeof req.body.title === 'string' && req.body.title.length <= 100 &&
+                                            typeof req.body.title === 'string' && req.body.title.length <= 100 &&
                                             !isNaN(req.body.rating) && req.body.rating > 0 && req.body.rating <= 5 &&
                                             typeof req.body.comment === 'string' && req.body.comment.length <= 500) {
 
@@ -216,5 +217,17 @@
                     res.status(406).send('We could not retrieve the countries. Try again later.');
                 });
         });
+
+        // Route to get a unique user informaton by id
+        server.get('/api/userw/:id', function(req, res) {
+            database.retrieveUsrById(req.params.id)
+                .then(function(result) {
+                    res.status(200).send(result);
+                })
+                .catch(function(err) {
+                    res.status(406).send(err);
+                });
+        });
+
     };
 }());

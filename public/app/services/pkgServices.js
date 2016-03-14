@@ -89,6 +89,17 @@
                     deferred.reject(err);
                 });
         };
+
+        this.getUserID = function(Id) {
+
+            return $http.get('/api/userw/' + Id)
+                .success(function(res) {
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    deferred.reject(err);
+                });
+        };
     };
 
     // Injecting modules used for better minifing later on

@@ -185,8 +185,11 @@
                                         <img src="images/user-avatar.jpg" class="circleimg" alt="" />
                                         <span>{{ review.rating }}</span>
                                     </div>
-                                    <span class="dark">by Sena</span>
-                                    <br/> from London, UK
+                                    <div data-ng-init="getUserID(  review.userid  )">
+                                        <span class="dark">{{ user[0].name }}</span>
+                                        <br/>
+                                        <div ng-show="user[0].country">from {{ user[0].country }}</div>
+                                    </div>
                                     <br/>
                                     <img src="images/check.png" alt="" />
                                 </div>
@@ -196,7 +199,7 @@
                             <div class="padding20">
                                 <span class="opensans size16 dark">{{ review.title }}</span>
                                 <br/>
-                                <span class="opensans size13 lgrey">Posted {{ review.reviewDate }}</span>
+                                <span class="opensans size13 lgrey">Posted {{ review.reviewdate }}</span>
                                 <br/>
                                 <p>{{ review.comment }}</p>
                             </div>
