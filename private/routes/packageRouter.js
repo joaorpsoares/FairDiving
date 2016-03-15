@@ -164,7 +164,7 @@
                                 .then(function(creatorInfo) {
 
                                     if (creatorInfo.operatorid === userID) {
-                                        res.status(401).send("You cannot evaluate your own packages.");
+                                        res.status(401).send("You cannot rate your own packages.");
                                     } else {
                                         if (typeof req.body.title === 'string' && req.body.title.length <= 100 &&
                                             !isNaN(req.body.rating) && req.body.rating > 0 && req.body.rating <= 5 &&

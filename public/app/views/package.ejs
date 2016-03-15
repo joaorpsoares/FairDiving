@@ -241,6 +241,12 @@
                             </br>
                             <textarea ng-model="newReview.comment" name="comment" class="form-control margtop10" rows="3" placeholder="Explain your rating"></textarea>
                             <div class="clearfix"></div>
+                            <div ng-if="errorMessage">
+                                <br/>
+                                <div class="alert alert-warning">
+                                    <strong>Info:</strong> {{errorMessage}}
+                                </div>
+                            </div>
                             <button ng-click="insertNewReview(newReview)" type="submit" class="btn-search4 margtop20">Submit</button>
                             <br/>
                         </div>
