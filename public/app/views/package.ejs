@@ -108,9 +108,12 @@
             <div class="col-md-12 bordertype3">
                 {{packageOnUse.certification}}
             </div>
-            <div class="col-md-6 bordertype1 padding20">
+            <div class="col-md-6 bordertype1 padding20" ng-show="packageOnUse.show">
                 <span class="opensans size30 bold grey2">{{packageOnUse.avg}}</span>/5
-                <br/> guest ratings
+                <br/> divers ratings
+            </div>
+            <div class="col-md-6 bordertype1 padding20" ng-hide="packageOnUse.show">
+                <span class="opensans size20 grey2">This package dont have reviews yet.</span>
             </div>
             <div class="col-md-6 bordertype1 padding20">
                 </br> Package Includes: </br> {{packageOnUse.n_dives}} dives

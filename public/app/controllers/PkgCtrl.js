@@ -10,7 +10,8 @@
         $scope.reviews = {};
         $scope.packageOnUse = {
             Id: $routeParams.id,
-            avg: 0
+            avg: 0,
+            show: false
         };
 
         $scope.countries = [];
@@ -149,7 +150,9 @@
                     }
 
                     $scope.packageOnUse.avg = Math.round((total / _reviews.data.length) * 10) / 10;
-
+                    if (!isNaN($scope.packageOnUse.avg)) {
+                        $scope.packageOnUse.show = true;
+                    }
                     $scope.reviews = _reviews.data;
                 })
                 .catch(function() {
