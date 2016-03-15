@@ -107,7 +107,7 @@
                 });
         };
 
-        this.getUserID = function(Id) {
+        /*this.getUserID = function(Id) {
 
             return $http.get('/api/userw/' + Id)
                 .success(function(res) {
@@ -116,7 +116,7 @@
                 .error(function(err) {
                     deferred.reject(err);
                 });
-        };
+        };*/
     };
 
     // Injecting modules used for better minifing later on

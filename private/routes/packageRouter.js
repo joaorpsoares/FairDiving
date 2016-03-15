@@ -218,15 +218,15 @@
         });
 
         // Route to get a unique user informaton by id
-        server.get('/api/userw/:id', function(req, res) {
-            database.retrieveUsrById(req.params.id)
-                .then(function(result) {
-                    res.status(200).send(result);
-                })
-                .catch(function(err) {
-                    res.status(406).send(err);
-                });
-        });
+        /* server.get('/api/userw/:id', function(req, res) {
+             database.retrieveUsrById(req.params.id)
+                 .then(function(result) {
+                     res.status(200).send(result);
+                 })
+                 .catch(function(err) {
+                     res.status(406).send(err);
+                 });
+         });*/
 
     };
 }());

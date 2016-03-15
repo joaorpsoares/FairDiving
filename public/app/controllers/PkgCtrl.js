@@ -158,7 +158,7 @@
         };
 
         //Returns a user information based in userid
-        $scope.getUserID = function(userId) {
+        /*$scope.getUserID = function(userId) {
             pkgServices.getUserID(userId)
                 .then(function(_user) {
                     $scope.user = _user.data;
@@ -167,7 +167,7 @@
                     console.log("getUserID failed");
                 });
 
-        };
+        };*/
     };
 
     // Injecting modules used for better minifing later on

@@ -185,11 +185,9 @@
                                         <img src="images/user-avatar.jpg" class="circleimg" alt="" />
                                         <span>{{ review.rating }}</span>
                                     </div>
-                                    <div data-ng-init="getUserID(  review.userid  )">
-                                        <span class="dark">{{ user[0].name }}</span>
-                                        <br/>
-                                        <div ng-show="user[0].country">from {{ user[0].country }}</div>
-                                    </div>
+                                    <span class="dark">{{ review.name }}</span>
+                                    <br/>
+                                    <div ng-show="review.country">from {{ review.country }}</div>
                                     <br/>
                                     <img src="images/check.png" alt="" />
                                 </div>
