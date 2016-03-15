@@ -65,7 +65,7 @@
             </div>
             <!-- LEFT MENU -->
             <!-- RIGHT CPNTENT -->
-            <div class="col-md-11 offset-0" data-ng-init="getCountries()">
+            <div class="col-md-11 offset-0" ng-controller="UserCtrl" data-ng-init="getCountries(); getLoggedUser()">
                 <!-- Tab panes from left menu -->
                 <div class="tab-content5">
                     <!-- TAB 1 -->
@@ -74,7 +74,7 @@
                         <div class="col-md-4 offset-0">
                             <img src="images/user.png" alt="" class="left margright20" />
                             <p class="size12 grey margtop10">
-                                Hi, <span class="lred"> </span>
+                                Hi, <span class="lblue">{{user.name}}</span>
                             </p>
                             <div class="clearfix"></div>
                         </div>
@@ -102,7 +102,7 @@
                         <!-- End of Admin top -->
                         <span class="size16 bold">Personal details</span>
                         <div class="line2"></div>
-                        <div class="col-md-12 offset-0" ng-controller="UserCtrl" data-ng-init="getLoggedUser()">
+                        <div class="col-md-12 offset-0">
                             <form>
                                 <br /> Name*:
                                 <input type="text" class="form-control" ng-model="updatedUser.name" placeholder="{{user.name}}" />
