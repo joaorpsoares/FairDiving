@@ -201,13 +201,11 @@
                                         <!--endfor-->
                                     </select>
                                     <br/>
-                                    <div class="button" ngf-select ng-model="newPackage.pickFile" name="file" ngf-pattern="'image/*'"
+                                    <div class="button" ngf-select ngf-resize-if="$width > 2000" ngf-resize="{width: 800, quality:0.9}" ng-model="newPackage.pickFile" name="file" ngf-pattern="'image/*'"
     ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
     ngf-resize="{width: 100, height: 100}">Select</div>
     <br/>
     <br/>
-    <br/>
-             <pre>{{newPackage.picFile}}</pre>
                                     <!-- <input type="text" class="form-control" placeholder="Description of the location (address, etc.)" name="location" required="required">
                                     <br/> Image*:
                                     <br/>

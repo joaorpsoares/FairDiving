@@ -22,7 +22,6 @@
 
         // Route to insert a new package
         server.post('/api/package', upload.array('avatar'), function(req, res) {
-            console.log(req.body);
             cookie.verifySession(req.cookies.session)
                 .then(function(info) {
                     if (info.role === "OPERATOR" || info.role === "ADMIN") {
