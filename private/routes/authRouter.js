@@ -181,6 +181,7 @@
                                     var __user = {
                                         id: userID
                                     };
+
                                     req.body.name == undefined || req.body.name == '' ? __user['name'] = user[0]['name'] : __user['name'] = req.body.name;
 
                                     req.body.email == undefined || req.body.email == '' ? __user['email'] = user[0]['email'] : __user['email'] = req.body.email;
@@ -198,8 +199,6 @@
                                     req.body.zipcode == undefined || req.body.zipcode == '' ? __user['zipcode'] = user[0]['zipcode'] : __user['zipcode'] = req.body.zipcode;
 
                                     req.body.country == undefined || req.body.country == '' ? __user['country'] = user[0]['country'] : __user['country'] = req.body.country;
-
-                                    console.log(__user);
 
                                     database.updateUsrByID(__user)
                                         .then(function(updatedUser) {
@@ -283,30 +282,30 @@
                                     bcrypt.hash(req.body.password, null, null, function(err, hash) {
 
                                         if (err) {
-                                            res.status(406).send('There was a problem with hashing your password.');
+                                            res.status(406).send('WARNING: There was a problem with hashing your password.');
                                         } else {
                                             database.updatePassword(hash, user.email)
                                                 .then(function() {
-                                                    res.status(200).send("Password was changed.");
+                                                    res.status(200).send("ALL GOOD : Password was changed.");
                                                 })
                                                 .catch(function() {
-                                                    res.status(406).send('It was impossible to change the password.');
+                                                    res.status(406).send('WARNING : It was impossible to change the password.');
                                                 });
                                         }
                                     });
                                 } else {
-                                    res.status(406).send('Token is not valid. Ask again for your password.');
+                                    res.status(406).send('WARNING: Token is not valid. Ask again for your password.');
                                 }
                             })
                             .catch(function(err) {
-                                res.status(406).send("This token is not valid anymore.");
+                                res.status(406).send("WARNING: This token is not valid anymore.");
                             });
                     })
                     .catch(function(err) {
-                        res.status(406).send("This email is not recognized by our system. Did you change the url?");
+                        res.status(406).send("WARNING: This email is not recognized by our system. Did you change the url?");
                     });
             } else {
-                res.status(406).send("Email is not valid or passwords dont match.");
+                res.status(406).send("WARNING: Email is not valid or passwords dont match.");
             }
         });
 
