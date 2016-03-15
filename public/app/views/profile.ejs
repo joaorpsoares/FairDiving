@@ -128,8 +128,7 @@
                                 <input type="text" class="form-control" ng-model="updatedUser.zipcode" placeholder="{{user.zipcode}}" />
                                 <br/> Country:
                                 <select class="form-control" name="country_code" ng-model="updatedUser.country">
-                                    <option value="" disabled selected>{{user.country}}</option>
-                                    <option ng-repeat="country in countries" value={{country.abrev}}> {{country.name}}</option>
+                                    <option class="countryNames" ng-repeat="country in countries" value={{country.abrev}}> {{country.name}}</option>
                                 </select>
                                 <!--  <br/>
                                 <br/>

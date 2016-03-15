@@ -58,8 +58,16 @@
                     .then(function(token) {
                         UserServices.getLoggedUser(token.data)
                             .then(function(user) {
+
                                 $scope.user = user.data[0];
                                 $scope.user.logged = true;
+
+                                var cElement = document.getElementsByClassName('countryNames');
+                                for (var i = 0; i < cElement.length; i++) {
+                                    if (cElement[i].value === $scope.user.country) {
+                                        cElement[i].setAttribute("selected", "selected");
+                                    }
+                                }
                             })
                             .catch(function(err) {
                                 console.log(err);
