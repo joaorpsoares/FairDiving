@@ -55,6 +55,8 @@
             fd.append('description', newPackage.description);
             fd.append('country_code', newPackage.country_code);
 
+            console.log(fd.avatar);
+
             return $http.post('/api/package/', fd, {
                     transformRequest: angular.identity,
                     headers: {
@@ -63,7 +65,7 @@
                     enctype: 'multipart/form-data'
                 })
                 .success(function(res) {
-                    $window.location = '/package/' + res.id;
+                    //$window.location = '/package/' + res.id;
                     deferred.resolve(res);
                 })
                 .error(function(err) {

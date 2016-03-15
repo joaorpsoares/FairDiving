@@ -64,6 +64,7 @@
             //  if ($scope.newPackage.title === "" || $scope.newPackage.certification === "" || $scope.newPackage.difficulty === "" || $scope.newPackage.n_dives === "" || $scope.newPackage.dive_sites === "" || $scope.newPackage.description === "" || $scope.newPackage.price === "") {
             // TODO: Show error
             // } else {
+            console.log(newPackage);
             pkgServices.insertNewPackage(newPackage)
                 .then(function() {
                     console.log("Insert new package successful");
