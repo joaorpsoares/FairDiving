@@ -29,6 +29,18 @@
                 });
         };
 
+        this.getPackagesOfLoggedUser = function() {
+
+            return $http.get('/api/myPackages')
+                .success(function(res) {
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    console.log(err);
+                    deferred.reject(err);
+                });
+        };
+
         this.insertNewPackage = function(newPackage) {
 
             var fd = new FormData();
@@ -69,6 +81,42 @@
                 });
         };
 
+
+
+        this.insertNewReview = function(id, review) {
+
+            return $http.post('/api/package/review/' + id, review)
+                .success(function(res) {
+                    $window.location = '/package/' + id;
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    deferred.reject(err);
+                });
+
+        };
+
+        this.getReviews = function(id) {
+
+            return $http.get('/api/package/' + id + '/reviews')
+                .success(function(res) {
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    deferred.reject(err);
+                });
+        };
+
+        this.getUserID = function(Id) {
+
+            return $http.get('/api/userw/' + Id)
+                .success(function(res) {
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    deferred.reject(err);
+                });
+        };
     };
 
     // Injecting modules used for better minifing later on

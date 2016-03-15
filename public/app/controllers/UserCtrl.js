@@ -9,7 +9,6 @@
             token: null,
             logged: false
         };
-        $scope.updatedUser = {};
         $scope.errorMessage = "";
         $scope.toogle = true;
 
@@ -59,6 +58,9 @@
                     .then(function(token) {
                         UserServices.getLoggedUser(token.data)
                             .then(function(user) {
+                                //  console.log(user.data[0]);
+                                var res = user.data[0]['birthdate'].substring(0, 10);
+                                user.data[0]['birthdate'] = res;
                                 $scope.user = user.data[0];
                                 $scope.user.logged = true;
                             })
@@ -97,34 +99,22 @@
                 });
         };
         //A function that updates userInfo
-        /*   $scope.updateUserInfo = function() {
-               //faltam verificacoes
+        $scope.updateUserInfo = function(updatedUser) {
+            //faltam verificacoes
+            UserServices.updateUserInfo(updatedUser)
+                .then(function(updUser) {
+                    var res = updUser.data['birthdate'].substring(0, 10);
+                    updUser.data['birthdate'] = res;
+                    //console.log(updUser.data);
+                    $scope.user = updUser.data;
+                    console.log("updateUserInfo successful");
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    console.log("updateUserInfo failed");
+                });
 
-               UserServices.getLoggedUserToken()
-                   .then(function(token) {
-                       UserServices.getLoggedUser(token.data)
-                           .then(function(user) {
-                               $scope.user = user.data[0];
-                               $scope.user.token = token.data;
-                               console.log(token.data);
-                               UserServices.updateUserInfo($scope.user, $scope.updatedUser)
-                                   .then(function() {
-                                       $scope.user = $scope.updatedUser;
-                                       console.log("updateUserInfo successful");
-                                   })
-                                   .catch(function() {
-                                       console.log("updateUserInfo failed");
-                                   });
-                           })
-                           .catch(function() {
-                               console.log(err);
-                           });
-                       console.log("getLoggedUser successful");
-                   })
-                   .catch(function() {
-                       console.log("getLoggedUser failed");
-                   });
-           };*/
+        };
 
 
 

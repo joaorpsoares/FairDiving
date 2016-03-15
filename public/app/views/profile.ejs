@@ -1,4 +1,3 @@
-
 <div ng-include="'/app/views/header.ejs'">
 </div>
 <div class="container breadcrub">
@@ -66,7 +65,7 @@
             </div>
             <!-- LEFT MENU -->
             <!-- RIGHT CPNTENT -->
-            <div class="col-md-11 offset-0">
+            <div class="col-md-11 offset-0" ng-controller="UserCtrl" data-ng-init="getCountries(); getLoggedUser()">
                 <!-- Tab panes from left menu -->
                 <div class="tab-content5">
                     <!-- TAB 1 -->
@@ -75,7 +74,7 @@
                         <div class="col-md-4 offset-0">
                             <img src="images/user.png" alt="" class="left margright20" />
                             <p class="size12 grey margtop10">
-                                Hi, <span class="lred"> </span>
+                                Hi, <span class="lblue">{{user.name}}</span>
                             </p>
                             <div class="clearfix"></div>
                         </div>
@@ -103,34 +102,35 @@
                         <!-- End of Admin top -->
                         <span class="size16 bold">Personal details</span>
                         <div class="line2"></div>
-                        <div class="col-md-12 offset-0" ng-controller="UserCtrl" data-ng-init="getLoggedUser()">
+                        <div class="col-md-12 offset-0">
                             <form>
                                 <br /> Name*:
-                                <input type="text" class="form-control" value="{{user.name}}" placeholder="{{user.name}}" rel="popover" name="name" />
+                                <input type="text" class="form-control" ng-model="updatedUser.name" placeholder="{{user.name}}" />
                                 <br /> Phone number:
-                                <input type="text" class="form-control" value="{{user.telephone}}" placeholder="{{user.telephone}}" name="telephone">
+                                <input type="text" class="form-control" ng-model="updatedUser.telephone" placeholder="{{user.telephone}}">
                                 <br /> Email address*:
-                                <input type="text" class="form-control" value="{{user.email}}" placeholder="{{user.email}}" name="email" />
+                                <input type="text" class="form-control" ng-model="updatedUser.email" placeholder="{{user.email}}" />
                                 <br/> Birthday:
-                                <input type="text" class="form-control mySelectCalendar" ng-model="updatedUser.birthdate" value="{{user.birthdate}}" placeholder="{{user.birthdate}}" name="birthday" id="datepicker3" />
+                                <input type="text" onfocus="(type='date')" class="form-control" ng-model="updatedUser.birthdate" placeholder="{{user.birthdate | date:'dd/MM/yyyy'}}" />
                                 <br /> Name of the shop*:
-                                <input type="text" class="form-control" value="{{user.shopname}}" placeholder="{{user.shopname}}" rel="popover" name="shopname" />
+                                <input type="text" class="form-control" ng-model="updatedUser.shopname" placeholder="{{user.shopname}}" rel="popover" />
+                                <br/>
                                 <br/> Link to your website:
-                                <input type="text" class="form-contro" value="{{user.websitelink}}" placeholder="{{user.websitelink}}" name="websitelink" id="datepicker3" />
-                                <!--  <br/>
+                                <input type="text" class="form-contro" ng-model="updatedUser.websitelink" placeholder="{{user.websitelink}}" />
+                                <br/>
+                                <br/>
                                 <br/>
                                 <span class="size16 bold">Your address</span>
                                 <div class="line2"></div>
                                 <br/> Address:
-                                <input type="text" class="form-control" value="" name="address">
+                                <input type="text" class="form-control" ng-model="updatedUser.address" placeholder="{{user.address}}" />
                                 <br/> Zip Code:
-                                <input type="text" class="form-control" value="" name="zipcode">
+                                <input type="text" class="form-control" ng-model="updatedUser.zipcode" placeholder="{{user.zipcode}}" />
                                 <br/> Country:
-                                <select class="form-control" name="country_code">
-                                     for each country se countrycode == country code do user selecionar
-                                    <option value="" selected="selected"></option>
-                                    end for 
-                                </select>-->
+                                <select class="form-control" name="country_code" ng-model="updatedUser.country">
+                                    <option value="" disabled selected>{{user.country}}</option>
+                                    <option ng-repeat="country in countries" value={{country.abrev}}> {{country.name}}</option>
+                                </select>
                                 <!--  <br/>
                                 <br/>
                                 <span class="size16 bold">About Me</span>
@@ -138,8 +138,7 @@
                                 <br/> Description:
                                 <input type="text" class="form-control" value="" name="aboutme"> -->
                                 <br />
-                                <br />
-                                <button type="submit" class="bluebtn margtop20">Update</button>
+                                <button type="submit" ng-click="updateUserInfo(updatedUser)" class="bluebtn margtop20">Update</button>
                             </form>
                         </div>
                         <div class="clearfix"></div>
@@ -150,7 +149,7 @@
                     <!-- END OF TAB 1 -->
                     <!-- if role == operator -->
                     <!-- TAB 2 PACKAGES-->
-                    <div class="tab-pane" id="packages" data-ng-init="getCountries()">
+                    <div class="tab-pane" id="packages">
                         <div class="padding40">
                             <span class="size16 bold">Create a package</span>
                             <div class="line2"></div>
@@ -202,10 +201,15 @@
                                     </select>
                                     <br/>
                                     <div class="button" ngf-select ngf-resize-if="$width > 2000" ngf-resize="{width: 800, quality:0.9}" ng-model="newPackage.pickFile" name="file" ngf-pattern="'image/*'"
-    ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
-    ngf-resize="{width: 100, height: 100}">Select</div>
+    ngf-accept="'image/*'" ngf-max-size="20MB">Select</div>
     <br/>
     <br/>
+                                    <!--
+                                    <div class="button" ngf-select ng-model="newPackage.pickFile" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 100, height: 100}">Select</div>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <pre>{{newPackage.picFile}}</pre>-->
                                     <!-- <input type="text" class="form-control" placeholder="Description of the location (address, etc.)" name="location" required="required">
                                     <br/> Image*:
                                     <br/>
@@ -215,7 +219,7 @@
                                     </div>
                                     <br/>-->
                                     <!-- insertNewPackage(newPackage) -->
-                                    <button type="submit" class="bluebtn margtop20" ng-click="submit()">Create</button>
+                                    <button type="submit" class="bluebtn margtop20" ng-click="insertNewPackage(newPackage)">Create</button>
                                 </form>
                             </div>
                             <div class="clearfix"></div>
@@ -240,8 +244,75 @@
                             </div>
                             <div class="line4"></div>
                             <br/>
+                            <div class="rightcontent col-md-12 offset-0" data-ng-init="getPackagesOfLoggedUser()">
+                                <br/>
+                                <br/>
+                                <div class="clearfix"></div>
+                                <div ng-repeat="package in packages">
+                                    <div class="itemscontainer offset-1">
+                                        <div class="offset-2">
+                                            <div class="col-md-4 offset-0">
+                                                <div class="listitem2">
+                                                    <!-- <a href="/package/{{ package.id }}" data-gallery="multiimages" data-toggle="lightbox"><img src="/package/{{ package.id }}/{{ package.image }}" alt="" /></a> - IMAGES-->
+                                                    <div class="liover"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 offset-0">
+                                                <div class="itemlabel3">
+                                                    <div class="labelright">
+                                                        <!--{% if package.reviewAverage
+                                    < 1.5 %} <img src="/images/filter-rating-1.png" alt="" /> {% elseif package.reviewAverage
+                                    < 2.5 %} <img src="/images/filter-rating-2.png" alt="" /> {% elseif package.reviewAverage
+                                    < 3.5 %} <img src="/images/filter-rating-3.png" alt="" /> {% elseif package.reviewAverage
+                                    < 4.5 %} <img src="/images/filter-rating-4.png" alt="" /> {% else %}
+                                    <img src="/images/filter-rating-5.png" alt="" /> {% endif %}-->
+                                                        <br/>
+                                                        <span class="size11 grey">#rat/5 Rating</span>
+                                                        <br/>
+                                                        </br>
+                                                        <span class="size11 grey">#NRev Reviews</span>
+                                                        <br/>
+                                                        <br/>
+                                                        <span class="green size18"><b>${{ package.price }}</b></span>
+                                                        <br/>
+                                                        <span class="size11 grey">avg/night</span>
+                                                        <br/>
+                                                        <br/>
+                                                        <br/>
+                                                        <!-- <a href="/package/{{ package.id }}" class="bookbtn mt1">Book</a>-->
+                                                    </div>
+                                                    <div class="labelleft2">
+                                                        <b>{{ package.title }}</b>
+                                                        <br/>
+                                                        <br/>
+                                                        <br/>
+                                                        <p class="grey">
+                                                            {{ package.description }}</p>
+                                                        <br/>
+                                                        <ul class="hotelpreferences">
+                                                            <li class="icohp-internet"></li>
+                                                            <li class="icohp-air"></li>
+                                                            <li class="icohp-pool"></li>
+                                                            <li class="icohp-childcare"></li>
+                                                            <li class="icohp-fitness"></li>
+                                                            <li class="icohp-breakfast"></li>
+                                                            <li class="icohp-parking"></li>
+                                                            <li class="icohp-pets"></li>
+                                                            <li class="icohp-spa"></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="offset-2">
+                                        <hr class="featurette-divider3">
+                                    </div>
+                                </div>
+                            </div>
                             <!-- for each package 
-                            <div class="col-md-4 offset-0">
+                            <div class="col-md-4 offset-0" data-ng-init="getPackages()">
                                 <a href=""><img alt="" class="left mr20" src="" width="20%"></a>
                                 <a class="dark" href="#"><b></b></a> /
                                 <span class="dark size12"></span>

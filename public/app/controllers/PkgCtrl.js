@@ -6,6 +6,8 @@
     var PkgCtrl = function($scope, pkgServices, $routeParams, Upload) {
 
         $scope.packages = {};
+        $scope.user = {};
+        $scope.reviews = {};
         $scope.packageOnUse = {
             Id: $routeParams.id
         };
@@ -41,6 +43,20 @@
             }
         };
 
+        $scope.getPackagesOfLoggedUser = function() {
+            // if ($scope.packageOnUse.Id === '') {
+            // TODO: Show error
+            //  } else {
+            pkgServices.getPackagesOfLoggedUser()
+                .then(function(_packages) {
+                    $scope.packages = _packages.data;
+                })
+                .catch(function() {
+                    console.log("getPackageOfLoggedUser failed");
+                });
+            //  }
+        };
+
 
         //A function that inserts a new package
         $scope.insertNewPackage = function(newPackage) {
@@ -56,20 +72,6 @@
                     console.log("Insert new package failed");
                 });
             //}
-        };
-
-        $scope.getCountries = function() {
-
-            pkgServices.getCountries()
-                .then(function(_countries) {
-                    console.log(_countries);
-                    $scope.countries = _countries.data;
-                    console.log("getPackages successful");
-                })
-                .catch(function() {
-                    console.log("getPackages failed");
-                });
-
         };
 
 
@@ -120,6 +122,43 @@
             */
         };
 
+
+
+        $scope.insertNewReview = function(review) {
+            pkgServices.insertNewReview($routeParams.id, review)
+                .then(function() {
+                    $scope.errorMessage = "";
+                    console.log("New review added");
+                })
+                .catch(function(err) {
+                    $scope.errorMessage = err.data;
+                    console.log("New review failed");
+                });
+        };
+
+        $scope.getReviews = function() {
+
+            pkgServices.getReviews($routeParams.id)
+                .then(function(_reviews) {
+                    $scope.reviews = _reviews.data;
+                })
+                .catch(function() {
+                    console.log("getReviews failed");
+                });
+
+        };
+
+        //Returns a user information based in userid
+        $scope.getUserID = function(userId) {
+            pkgServices.getUserID(userId)
+                .then(function(_user) {
+                    $scope.user = _user.data;
+                })
+                .catch(function() {
+                    console.log("getUserID failed");
+                });
+
+        };
     };
 
     // Injecting modules used for better minifing later on

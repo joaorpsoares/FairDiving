@@ -87,8 +87,8 @@
             return databaseUsers.retrieveUsrById(id);
         },
 
-        updateUsrById: function(user) {
-            return databaseUsers.updateUsrById(user);
+        updateUsrByID: function(user) {
+            return databaseUsers.updateUsrByID(user);
         },
 
         // Function to insert a default role on registered people
@@ -123,6 +123,10 @@
         // Function to retrieve a certain package
         getPackageID: function(id) {
             return databasePackages.getPackageID([id]);
+        },
+
+        getPackagesByOperator: function(operatorID) {
+            return databasePackages.getPackagesByOperator([operatorID]);
         },
 
         // Function to retrieve package creator

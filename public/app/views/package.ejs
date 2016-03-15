@@ -176,33 +176,36 @@
                 <h4 class="opensans dark size16 bold">Reviews</h4>
                 <p></p>
                 <div class="line2"></div>
-                <div class="hpadding20">
-                    <div class="col-md-4 offset-0 center">
-                        <div class="padding20">
-                            <div class="bordertype5">
-                                <div class="circlewrap">
-                                    <img src="images/user-avatar.jpg" class="circleimg" alt="" />
-                                    <span>4.5</span>
+                <div data-ng-init="getReviews()">
+                    <div ng-repeat="review in reviews" class="hpadding20">
+                        <div class="col-md-4 offset-0 center">
+                            <div class="padding20">
+                                <div class="bordertype5">
+                                    <div class="circlewrap">
+                                        <img src="images/user-avatar.jpg" class="circleimg" alt="" />
+                                        <span>{{ review.rating }}</span>
+                                    </div>
+                                    <div data-ng-init="getUserID(  review.userid  )">
+                                        <span class="dark">{{ user[0].name }}</span>
+                                        <br/>
+                                        <div ng-show="user[0].country">from {{ user[0].country }}</div>
+                                    </div>
+                                    <br/>
+                                    <img src="images/check.png" alt="" />
                                 </div>
-                                <span class="dark">by Sena</span>
-                                <br/> from London, UK
-                                <br/>
-                                <img src="images/check.png" alt="" />
-                                <br/>
-                                <span class="green">Recommended<br/>for Everyone</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-8 offset-0">
-                        <div class="padding20">
-                            <span class="opensans size16 dark">Great experience</span>
-                            <br/>
-                            <span class="opensans size13 lgrey">Posted Jun 02, 2013</span>
-                            <br/>
-                            <p>Excellent hotel, friendly staff would def go there again!</p>
+                        <div class="col-md-8 offset-0">
+                            <div class="padding20">
+                                <span class="opensans size16 dark">{{ review.title }}</span>
+                                <br/>
+                                <span class="opensans size13 lgrey">Posted {{ review.reviewdate }}</span>
+                                <br/>
+                                <p>{{ review.comment }}</p>
+                            </div>
                         </div>
+                        <div class="clearfix"></div>
                     </div>
-                    <div class="clearfix"></div>
                 </div>
                 <div class="line2"></div>
                 <div class="hpadding20">
@@ -213,39 +216,31 @@
                     <ul class="jslidetext2">
                         <li>Rating*</li>
                         </br>
-                        <li style="margin-top: 10px;">Recommended*</li>
                         <li>Title</li>
                         </br>
                         <li>Comment</li>
                     </ul>
                 </div>
-                <form action="/api/review" method="post">
+                <form>
                     <div class="wh66percent right offset-0">
                         <div class="padding20 jslidetext2">
-                            <input type="hidden" name="userId" value="{{ user.id }}">
-                            <input type="hidden" name="packageId" value="{{ package.id }}">
-                            <input type="radio" name="score" value="5" required>
+                            <input ng-model="newReview.rating" type="radio" name="rating" value="5" required>
                             <label>5</label>
-                            <input type="radio" name="score" value="4">
+                            <input ng-model="newReview.rating" type="radio" name="rating" value="4">
                             <label>4</label>
-                            <input type="radio" name="score" value="3">
+                            <input ng-model="newReview.rating" type="radio" name="rating" value="3">
                             <label>3</label>
-                            <input type="radio" name="score" value="2">
+                            <input ng-model="newReview.rating" type="radio" name="rating" value="2">
                             <label>2</label>
-                            <input type="radio" name="score" value="1">
+                            <input ng-model="newReview.rating" type="radio" name="rating" value="1">
                             <label>1</label>
                             </br>
                             </br>
-                            <input type="radio" name="recommended" value="1" required>
-                            <label>Yes</label>
-                            <input type="radio" name="recommended" value="0">
-                            <label>No</label>
+                            <input ng-model="newReview.title" type="text" name="title" class="form-control margtop10" placeholder="A brief description of your experience">
                             </br>
-                            <input type="text" name="title" class="form-control margtop10" placeholder="A brief description of your experience">
-                            </br>
-                            <textarea name="review" class="form-control margtop10" rows="3" placeholder="Explain your rating"></textarea>
+                            <textarea ng-model="newReview.comment" name="comment" class="form-control margtop10" rows="3" placeholder="Explain your rating"></textarea>
                             <div class="clearfix"></div>
-                            <button type="submit" class="btn-search4 margtop20">Submit</button>
+                            <button ng-click="insertNewReview(newReview)" type="submit" class="btn-search4 margtop20">Submit</button>
                             <br/>
                         </div>
                     </div>

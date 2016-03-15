@@ -53,6 +53,18 @@
             });
         },
 
+        getPackagesByOperator: function(operatorID) {
+            return new Promise(function(resolve, reject) {
+                client.query('SELECT * FROM packages WHERE operatorID = $1', operatorID, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result.rows);
+                    }
+                });
+            });
+        },
+
         // Function to retrieve package creator
         getPackageCreator: function(id) {
             return new Promise(function(resolve, reject) {
@@ -82,7 +94,7 @@
         // Function to retrieve a all reviews from a certain package
         getReviewsByPackage: function(id) {
             return new Promise(function(resolve, reject) {
-                client.query('SELECT title, comment, rating FROM reviews WHERE packageid = $1', id, function(err, result) {
+                client.query('SELECT title, comment, rating, reviewdate, userid FROM reviews WHERE packageid = $1', id, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {

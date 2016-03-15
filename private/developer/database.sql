@@ -20,14 +20,17 @@ CREATE TABLE users (
 	id BIGSERIAL PRIMARY KEY,
 	-- personal data
 	name VARCHAR(60) DEFAULT 'Sea Explorer',
-	birthDate timestamp,
-	country VARCHAR(2) REFERENCES countries(abrev),
+	birthDate date,
 	-- contact information
 	email VARCHAR(255) NOT NULL UNIQUE,
 	telephone VARCHAR(60),
     -- company information
 	shopName VARCHAR(60) DEFAULT 'Explorer',
 	websiteLink VARCHAR(255) DEFAULT 'No website',
+	--address
+	address VARCHAR(255),
+	zipcode VARCHAR(255),
+	country VARCHAR(2) REFERENCES countries(abrev),
 	-- security
 	password VARCHAR(255) NOT NULL,
 	token VARCHAR(64) NOT NULL,
@@ -95,7 +98,8 @@ CREATE TABLE reviews (
 	rating BIGINT REFERENCES rating(id),
 	comment VARCHAR (500) NOT NULL,
 	packageid BIGINT REFERENCES packages(id),
-	userid BIGINT REFERENCES users(id)
+	userid BIGINT REFERENCES users(id),
+	reviewdate VARCHAR (100) NOT NULL DEFAULT NOW()
 );
 
 -- INSERT rating
