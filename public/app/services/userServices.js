@@ -113,6 +113,16 @@
 
 
         };
+
+        this.logout = function() {
+            $cookies.remove('session', {
+                path: '/'
+            });
+
+            $window.location.href = '/';
+
+
+        };
     };
 
     // Injecting modules used for better minifing later on

@@ -9,7 +9,8 @@
         $scope.user = {};
         $scope.reviews = {};
         $scope.packageOnUse = {
-            Id: $routeParams.id
+            Id: $routeParams.id,
+            avg: 0
         };
 
         $scope.countries = [];
@@ -140,6 +141,14 @@
 
             pkgServices.getReviews($routeParams.id)
                 .then(function(_reviews) {
+                    var total = 0;
+                    var i;
+                    for (i = 0; i < _reviews.data.length; i++) {
+                        total += parseInt(_reviews.data[i].rating);
+                    }
+
+                    $scope.packageOnUse.avg = Math.round((total / _reviews.data.length) * 10) / 10;
+
                     $scope.reviews = _reviews.data;
                 })
                 .catch(function() {

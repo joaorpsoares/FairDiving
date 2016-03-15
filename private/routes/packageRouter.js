@@ -167,7 +167,6 @@
                                         res.status(401).send("You cannot evaluate your own packages.");
                                     } else {
                                         if (typeof req.body.title === 'string' && req.body.title.length <= 100 &&
-                                            typeof req.body.title === 'string' && req.body.title.length <= 100 &&
                                             !isNaN(req.body.rating) && req.body.rating > 0 && req.body.rating <= 5 &&
                                             typeof req.body.comment === 'string' && req.body.comment.length <= 500) {
 

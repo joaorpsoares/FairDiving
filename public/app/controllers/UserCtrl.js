@@ -116,6 +116,12 @@
 
         };
 
+        $scope.logout = function() {
+
+            UserServices.logout();
+
+        };
+
 
 
     };
