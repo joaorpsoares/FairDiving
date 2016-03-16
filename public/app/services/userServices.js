@@ -90,8 +90,6 @@
             reset.email = url[0];
             reset.token = url[1];
 
-            console.log(reset);
-
             return $http.post('api/user/recover/confirmed', reset)
                 .success(function(res) {
                     deferred.resolve(res);
