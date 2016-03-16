@@ -12,7 +12,14 @@
         $scope.errorMessage = "";
         $scope.toogle = true;
 
+
+        $scope.$watch('toogle', function() {
+            $scope.errorMessage = '';
+        });
+
         $scope.login = function() {
+
+            $scope.errorMessage = '';
             if ($scope.user.email === '' || $scope.user.password === '') {
                 // TODO: Show error
             } else {
@@ -31,7 +38,6 @@
 
 
         $scope.register = function() {
-            console.log($scope.user);
             if ($scope.user.email === '' || $scope.user.password === '' || $scope.user.confirmPassword === '') {
                 $scope.errorMessage = "Email and passwords fields cannot be empty.";
             } else {
@@ -82,11 +88,13 @@
 
         // Function to reset password
         $scope.forgetPassword = function() {
+            $scope.errorMessage = '';
             if ($scope.user.email !== '') {
                 UserServices.forgetPassword({ email: $scope.user.email })
                     .then(function() {
-                        console.log("check your mail.");
+                        $scope.errorMessage = "It was sent to your email a recover link.";
                     }).catch(function(err) {
+                        $scope.errorMessage = "Oops, something happened.";
                         console.log(err);
                     });
             }
