@@ -131,10 +131,10 @@
 
             database.updateActiveAtribute(req.params.id)
                 .then(function() {
-                    res.status(200).send('OK');
+                    res.render('index');
                 })
                 .catch(function(err) {
-                    res.status(406).send(err);
+                    res.render('index');
                 });
         });
 
