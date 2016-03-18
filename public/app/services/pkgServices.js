@@ -43,15 +43,32 @@
 
         this.insertNewPackage = function(newPackage) {
 
-            return $http.post('/api/package/', newPackage)
+            var fd = new FormData();
+            fd.append('avatar', newPackage.avatar);
+            fd.append('title', newPackage.title);
+            fd.append('package_type', newPackage.package_type);
+            fd.append('currency', newPackage.currency);
+            fd.append('price', newPackage.price);
+            fd.append('certification', newPackage.certification);
+            fd.append('dive_sites', newPackage.dive_sites);
+            fd.append('n_dives', newPackage.n_dives);
+            fd.append('description', newPackage.description);
+            fd.append('country_code', newPackage.country_code);
+
+            return $http.post('/api/package/', fd, {
+                    transformRequest: angular.identity,
+                    headers: {
+                        'Content-Type': undefined
+                    },
+                    enctype: 'multipart/form-data'
+                })
                 .success(function(res) {
-                    $window.location = '/package/' + res.id;
+                    //$window.location = '/package/' + res.id;
                     deferred.resolve(res);
                 })
                 .error(function(err) {
                     deferred.reject(err);
                 });
-
         };
 
         this.getCountries = function() {
@@ -64,6 +81,42 @@
                 });
         };
 
+
+
+        this.insertNewReview = function(id, review) {
+
+            return $http.post('/api/package/review/' + id, review)
+                .success(function(res) {
+                    $window.location = '/package/' + id;
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    deferred.reject(err);
+                });
+
+        };
+
+        this.getReviews = function(id) {
+
+            return $http.get('/api/package/' + id + '/reviews')
+                .success(function(res) {
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    deferred.reject(err);
+                });
+        };
+
+        /*this.getUserID = function(Id) {
+
+            return $http.get('/api/userw/' + Id)
+                .success(function(res) {
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    deferred.reject(err);
+                });
+        };*/
     };
 
     // Injecting modules used for better minifing later on

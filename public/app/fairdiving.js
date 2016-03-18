@@ -44,6 +44,10 @@
                 controller: 'UserCtrl',
                 templateUrl: 'app/views/newPassword.ejs'
             })
+            .when('/api/confirmation/:id', {
+                controller: 'UserCtrl',
+                templateUrl: 'app/views/confirmation.ejs'
+            })
             .otherwise({
                 redirectTo: '/'
             });

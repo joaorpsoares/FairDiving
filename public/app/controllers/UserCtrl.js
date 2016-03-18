@@ -9,11 +9,17 @@
             token: null,
             logged: false
         };
-        $scope.updatedUser = {};
         $scope.errorMessage = "";
         $scope.toogle = true;
 
+
+        $scope.$watch('toogle', function() {
+            $scope.errorMessage = '';
+        });
+
         $scope.login = function() {
+
+            $scope.errorMessage = '';
             if ($scope.user.email === '' || $scope.user.password === '') {
                 // TODO: Show error
             } else {
@@ -32,7 +38,6 @@
 
 
         $scope.register = function() {
-            console.log($scope.user);
             if ($scope.user.email === '' || $scope.user.password === '' || $scope.user.confirmPassword === '') {
                 $scope.errorMessage = "Email and passwords fields cannot be empty.";
             } else {
@@ -59,8 +64,16 @@
                     .then(function(token) {
                         UserServices.getLoggedUser(token.data)
                             .then(function(user) {
+
                                 $scope.user = user.data[0];
                                 $scope.user.logged = true;
+
+                                var cElement = document.getElementsByClassName('countryNames');
+                                for (var i = 0; i < cElement.length; i++) {
+                                    if (cElement[i].value === $scope.user.country) {
+                                        cElement[i].setAttribute("selected", "selected");
+                                    }
+                                }
                             })
                             .catch(function(err) {
                                 console.log(err);
@@ -75,11 +88,13 @@
 
         // Function to reset password
         $scope.forgetPassword = function() {
+            $scope.errorMessage = '';
             if ($scope.user.email !== '') {
                 UserServices.forgetPassword({ email: $scope.user.email })
                     .then(function() {
-                        console.log("check your mail.");
+                        $scope.errorMessage = "It was sent to your email a recover link.";
                     }).catch(function(err) {
+                        $scope.errorMessage = "Oops, something happened.";
                         console.log(err);
                     });
             }
@@ -97,34 +112,25 @@
                 });
         };
         //A function that updates userInfo
-        /*   $scope.updateUserInfo = function() {
-               //faltam verificacoes
+        $scope.updateUserInfo = function(updatedUser) {
+            //faltam verificacoes
+            UserServices.updateUserInfo(updatedUser)
+                .then(function(updUser) {
+                    $scope.user = updUser.data;
+                    console.log("updateUserInfo successful");
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    console.log("updateUserInfo failed");
+                });
 
-               UserServices.getLoggedUserToken()
-                   .then(function(token) {
-                       UserServices.getLoggedUser(token.data)
-                           .then(function(user) {
-                               $scope.user = user.data[0];
-                               $scope.user.token = token.data;
-                               console.log(token.data);
-                               UserServices.updateUserInfo($scope.user, $scope.updatedUser)
-                                   .then(function() {
-                                       $scope.user = $scope.updatedUser;
-                                       console.log("updateUserInfo successful");
-                                   })
-                                   .catch(function() {
-                                       console.log("updateUserInfo failed");
-                                   });
-                           })
-                           .catch(function() {
-                               console.log(err);
-                           });
-                       console.log("getLoggedUser successful");
-                   })
-                   .catch(function() {
-                       console.log("getLoggedUser failed");
-                   });
-           };*/
+        };
+
+        $scope.logout = function() {
+
+            UserServices.logout();
+
+        };
 
 
 

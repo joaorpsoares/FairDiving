@@ -90,8 +90,6 @@
             reset.email = url[0];
             reset.token = url[1];
 
-            console.log(reset);
-
             return $http.post('api/user/recover/confirmed', reset)
                 .success(function(res) {
                     deferred.resolve(res);
@@ -100,20 +98,29 @@
                     deferred.resolve(err);
                 });
         };
-        /*
-                this.updateUserInfo = function(user, updatedUser) {
-                    return $http.post('/api/user/' + user, updatedUser)
-                        .success(function(res) {
-                            deferred.resolve(res);
 
-                        })
-                        .error(function(err) {
-                            console.log(err);
-                            deferred.reject(err);
-                        });
+        this.updateUserInfo = function(updatedUser) {
+            return $http.post('/api/updateUser', updatedUser)
+                .success(function(res) {
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    console.log(err);
+                    deferred.reject(err);
+                });
 
 
-                };*/
+        };
+
+        this.logout = function() {
+            $cookies.remove('session', {
+                path: '/'
+            });
+
+            $window.location.href = '/';
+
+
+        };
     };
 
     // Injecting modules used for better minifing later on

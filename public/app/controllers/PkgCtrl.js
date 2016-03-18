@@ -6,8 +6,12 @@
     var PkgCtrl = function($scope, pkgServices, $routeParams, Upload) {
 
         $scope.packages = {};
+        $scope.user = {};
+        $scope.reviews = {};
         $scope.packageOnUse = {
-            Id: $routeParams.id
+            Id: $routeParams.id,
+            avg: 0,
+            show: false
         };
 
         $scope.countries = [];
@@ -61,6 +65,7 @@
             //  if ($scope.newPackage.title === "" || $scope.newPackage.certification === "" || $scope.newPackage.difficulty === "" || $scope.newPackage.n_dives === "" || $scope.newPackage.dive_sites === "" || $scope.newPackage.description === "" || $scope.newPackage.price === "") {
             // TODO: Show error
             // } else {
+            console.log(newPackage);
             pkgServices.insertNewPackage(newPackage)
                 .then(function() {
                     console.log("Insert new package successful");
@@ -120,6 +125,53 @@
             */
         };
 
+
+
+        $scope.insertNewReview = function(review) {
+            pkgServices.insertNewReview($routeParams.id, review)
+                .then(function() {
+                    $scope.errorMessage = "";
+                    console.log("New review added");
+                })
+                .catch(function(err) {
+                    $scope.errorMessage = err.data;
+                    console.log("New review failed");
+                });
+        };
+
+        $scope.getReviews = function() {
+
+            pkgServices.getReviews($routeParams.id)
+                .then(function(_reviews) {
+                    var total = 0;
+                    var i;
+                    for (i = 0; i < _reviews.data.length; i++) {
+                        total += parseInt(_reviews.data[i].rating);
+                    }
+
+                    $scope.packageOnUse.avg = Math.round((total / _reviews.data.length) * 10) / 10;
+                    if (!isNaN($scope.packageOnUse.avg)) {
+                        $scope.packageOnUse.show = true;
+                    }
+                    $scope.reviews = _reviews.data;
+                })
+                .catch(function() {
+                    console.log("getReviews failed");
+                });
+
+        };
+
+        //Returns a user information based in userid
+        /*$scope.getUserID = function(userId) {
+            pkgServices.getUserID(userId)
+                .then(function(_user) {
+                    $scope.user = _user.data;
+                })
+                .catch(function() {
+                    console.log("getUserID failed");
+                });
+
+        };*/
     };
 
     // Injecting modules used for better minifing later on

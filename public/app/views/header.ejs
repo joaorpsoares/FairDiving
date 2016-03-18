@@ -48,7 +48,7 @@
                 </div>
                 <div class="navbar-collapse collapse" ng-controller="UserCtrl" data-ng-init="getLoggedUser()">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/packages">Dive Packages</a></li>
+                        <li><a href="/listpackages">Dive Packages</a></li>
                         <li><a href="#">Marine Conservation</a></li>
                         <!-- <li><a href="#">Become a Partner</a></li> -->
                         <li><a href="/about">About Us</a></li>
@@ -100,7 +100,7 @@
                                             </a>
                                         </ul>
                                         <ul class="droplist col-md-6">
-                                            <a href="/logout">
+                                            <a ng-click="logout()">
                                                 <li>Logout</li>
                                             </a>
                                         </ul>

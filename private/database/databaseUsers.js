@@ -129,7 +129,7 @@
         // Function to retrieve user from token
         retrieveUsrByToken: function(token) {
             return new Promise(function(resolve, reject) {
-                client.query('SELECT id, name, birthdate, country, email, telephone FROM users WHERE token = $1', token, function(err, result) {
+                client.query('SELECT id, name, birthdate, country, email, telephone, shopname, websitelink, address, zipcode FROM users WHERE token = $1', token, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {
@@ -142,8 +142,9 @@
         // Function to retrieve user from userID
         retrieveUsrById: function(id) {
             return new Promise(function(resolve, reject) {
-                client.query('SELECT name, birthdate, country, email, telephone FROM users WHERE id = $1', id, function(err, result) {
+                client.query('SELECT name, birthdate, country, email, telephone, shopname, websitelink, address, zipcode FROM users WHERE id = $1', id, function(err, result) {
                     if (err) {
+                        console.log(err);
                         reject(err);
                     } else {
                         resolve(result.rows);
@@ -152,14 +153,14 @@
             });
         },
 
-        // Function to update user from token
-        updateUsrById: function(user) {
+        // Function to update user from id
+        updateUsrByID: function(user) {
             return new Promise(function(resolve, reject) {
-                client.query('UPDATE users SET name = $1, email = $2, telephone = $3, birthdate = $4 WHERE token = $5', user, function(err, result) {
+                client.query('UPDATE users SET name = $1, birthdate = $2, email = $3, telephone = $4, shopname = $5, websitelink = $6, address = $7, zipcode = $8, country = $9 WHERE id = $10', [user['name'], user['birthdate'], user['email'], user['telephone'], user['shopname'], user['websitelink'], user['address'], user['zipcode'], user['country'], user['id']], function(err, result) {
                     if (err) {
                         reject(err);
                     } else {
-                        resolve(result.rows);
+                        resolve(user);
                     }
                 });
             });
