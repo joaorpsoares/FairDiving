@@ -103,6 +103,7 @@
             return $http.post('/api/updateUser', updatedUser)
                 .success(function(res) {
                     deferred.resolve(res);
+                    $window.location = '/profile/';
                 })
                 .error(function(err) {
                     console.log(err);
