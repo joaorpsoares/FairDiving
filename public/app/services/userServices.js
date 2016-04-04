@@ -8,8 +8,6 @@
         var deferred = $q.defer();
 
         this.login = function(user) {
-
-            console.log(user);
             return $http.post('/api/login', user)
                 .success(function(res) {
 

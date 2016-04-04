@@ -7,7 +7,9 @@
 
         $scope.user = {
             token: null,
-            logged: false
+            logged: false,
+            email: '',
+            password: ''
         };
         $scope.errorMessage = "";
         $scope.toogle = true;
@@ -18,9 +20,10 @@
 
         $scope.login = function() {
 
+            console.log($scope.user);
             $scope.errorMessage = '';
             if ($scope.user.email === '' || $scope.user.password === '') {
-                // TODO: Show error
+                $scope.errorMessage = "Email or password field cannot be empty.";
             } else {
                 UserServices.login($scope.user)
                     .then(function() {
@@ -95,6 +98,8 @@
                         $scope.errorMessage = "Oops, something happened.";
                         console.log(err);
                     });
+            } else {
+                $scope.errorMessage = "Email field cannot be empty.";
             }
         };
 
