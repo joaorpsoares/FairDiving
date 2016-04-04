@@ -140,7 +140,7 @@
         <!-- END OF RIGHT INFO -->
     </div>
     <!-- END OF container-->
-    <div class="container mt25 offset-0" ng-init="tab = 1">
+    <div class="container mt25 offset-0" data-ng-init="tab = 1; getReviews()">
         <div class="col-md-8 pagecontainer2 offset-0">
             <div class="cstyle10"></div>
             <!--    <ul class="nav nav-tabs" id="myTab">
@@ -180,7 +180,7 @@
                 <h4 class="opensans dark size16 bold">Reviews</h4>
                 <p></p>
                 <div class="line2"></div>
-                <div data-ng-init="getReviews()">
+                <div>
                     <div ng-repeat="review in reviews" class="hpadding20">
                         <div class="col-md-4 offset-0 center">
                             <div class="padding20">
@@ -418,7 +418,8 @@
             <div class="pagecontainer2 testimonialbox">
                 <div class="cpadding0 mt-10">
                     <span class="icon-quote"></span>
-                    <p class="opensans size16 grey2 bold">Reviews about random users
+                    <p class="opensans size16 grey2 bold">{{reviews[0].title}}</p>
+                    <span class="opensans size13 lgrey">{{ reviews[0].name }}</span>
                 </div>
             </div>
             <div class="pagecontainer2 mt20 needassistancebox">
