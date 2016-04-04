@@ -12,7 +12,6 @@
         $scope.errorMessage = "";
         $scope.toogle = true;
 
-
         $scope.$watch('toogle', function() {
             $scope.errorMessage = '';
         });
@@ -106,6 +105,7 @@
             UserServices.resetPassword(reset)
                 .then(function() {
                     $scope.errorMessage = "Your password was changed. You can now login.";
+                    $scope.showUrlLogin = true;
                 })
                 .catch(function(err) {
                     $scope.errorMessage = err.data;

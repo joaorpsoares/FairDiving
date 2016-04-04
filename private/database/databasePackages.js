@@ -53,9 +53,22 @@
             });
         },
 
+        // Function to retrieve all images from a package
+        getPackageImage: function(id) {
+            return new Promise(function(resolve, reject) {
+                client.query('SELECT imageName FROM packageImage WHERE idPackage = $1', id, function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result.rows);
+                    }
+                });
+            });
+        },
+
         getPackagesByOperator: function(operatorID) {
             return new Promise(function(resolve, reject) {
-                client.query('SELECT * FROM packages WHERE operatorID = $1', operatorID, function(err, result) {
+                client.query('SELECT * FROM package WHERE operatorID = $1', operatorID, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {

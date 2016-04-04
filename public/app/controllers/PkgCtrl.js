@@ -38,6 +38,14 @@
                 pkgServices.getPackageID($scope.packageOnUse.Id)
                     .then(function(_packageOnUse) {
                         $scope.packageOnUse = _packageOnUse.data;
+                        // Get image
+                        pkgServices.getPackageImage($scope.packageOnUse.id)
+                            .then(function(res) {
+                                $scope.packageOnUse.image = "../../../images/packages/" + res.data[0].imagename;
+                                console.log('Image was successful retrieved');
+                            }).catch(function() {
+                                console.log('Impossible to retrieve an image');
+                            });
                     })
                     .catch(function() {
                         console.log("getPackageID failed");
@@ -65,7 +73,6 @@
             //  if ($scope.newPackage.title === "" || $scope.newPackage.certification === "" || $scope.newPackage.difficulty === "" || $scope.newPackage.n_dives === "" || $scope.newPackage.dive_sites === "" || $scope.newPackage.description === "" || $scope.newPackage.price === "") {
             // TODO: Show error
             // } else {
-            console.log(newPackage);
             pkgServices.insertNewPackage(newPackage)
                 .then(function() {
                     console.log("Insert new package successful");

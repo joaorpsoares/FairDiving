@@ -125,6 +125,11 @@
             return databasePackages.getPackageID([id]);
         },
 
+        // Function to retrive all images from a certain package
+        getPackageImage: function(id) {
+            return databasePackages.getPackageImage([id]);
+        },
+
         getPackagesByOperator: function(operatorID) {
             return databasePackages.getPackagesByOperator([operatorID]);
         },

@@ -217,6 +217,17 @@
                 });
         });
 
+        // Route to get all images of a package
+        server.get('/api/package/image/:id', function(req, res) {
+            database.getPackageImage(req.params.id)
+                .then(function(result) {
+                    res.status(200).send(result);
+                })
+                .catch(function(err) {
+                    res.status(406).send('Impossible to retrieve an image.');
+                });
+        });
+
         // Route to get a unique user informaton by id
         /* server.get('/api/userw/:id', function(req, res) {
              database.retrieveUsrById(req.params.id)
