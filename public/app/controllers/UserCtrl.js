@@ -26,7 +26,6 @@
                     .then(function() {
                         $scope.errorMessage = "";
                         $scope.user.logged = true;
-                        console.log("Login successful");
                     })
                     .catch(function(err) {
                         $scope.errorMessage = err.data;
