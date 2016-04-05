@@ -98,7 +98,7 @@
                                 res.status(406).send(err);
                             });
                     } else {
-                        res.status(403).send("Impossible to do this, since you dont have permission.");
+                        res.status(403).send("Impossible to do this, since you don't have permission.");
                     }
                 })
                 .catch(function(err) {
@@ -110,12 +110,33 @@
         // Route to get all packages from database
         server.get('/api/package', function(req, res) {
             database.getPackages()
-                .then(function(packs) {
-                    res.status(200).send(packs);
+            .then(function(packs) {
+
+
+
+                database.getAvgReviews()
+                .then(function(result){
+                    console.log('result'+result);
+                for(var j = 0; j < packs.length;j++){
+                    for(var i = 0; i < result.length; i++){
+                        if(parseInt(result[i]['packageid'])===parseInt(packs[j]['id'])){
+                            packs[j]['avg'] = null;
+                            packs[j]['avg'] = parseInt(result[i]['avg']);
+                        }
+                    }
+                    console.log('packs'+j+packs[j]['avg']);
+                }
+                
+                res.status(200).send(packs);
                 })
-                .catch(function(err) {
-                    res.status(406).send('It was impossible to retrieve the packages.');
+                .catch(function(err) {console.log(err);
                 });
+
+ 
+            })
+            .catch(function(err) {
+                res.status(406).send('It was impossible to retrieve the packages.');
+            });
         });
 
         // Route to get a unique package informaton

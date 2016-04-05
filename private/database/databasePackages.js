@@ -107,11 +107,26 @@
         // Function to retrieve a all reviews from a certain package
         getReviewsByPackage: function(id) {
             return new Promise(function(resolve, reject) {
-                client.query('SELECT title, comment, rating, reviewdate, name, country FROM reviews JOIN users ON reviews.userid=users.id WHERE packageid = $1', id, function(err, result) {
+                client.query('SELECT title, comment, rating, reviewdate, name, country, reviews.packageid as packid FROM reviews JOIN users ON reviews.userid=users.id WHERE packageid = $1', id, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {
                         resolve(result.rows);
+
+                    }
+                });
+            });
+        },
+
+        // Function to retrieve a all reviews avg from all packages
+        getAvgReviews: function() {
+            return new Promise(function(resolve, reject) {
+                client.query('SELECT packageid, avg(rating) FROM reviews GROUP BY packageid',  function(err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result.rows);
+
                     }
                 });
             });

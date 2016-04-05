@@ -42,7 +42,8 @@
                                     < 4.5 %} <img src="/images/filter-rating-4.png" alt="" /> {% else %}
                                     <img src="/images/filter-rating-5.png" alt="" /> {% endif %}-->
                                         <br/>
-                                        <span class="size11 grey">#rat/5 Rating</span>
+                                        <span ng-show=" package.avg > 0" class="size11 grey">{{ package.avg }}/5 Rating</span>
+                                        <span ng-hide=" package.avg > 0" class="size11 grey">No ratings yet.</span>
                                         <br/>
                                         </br>
                                         <span class="size11 grey">#NRev Reviews</span>

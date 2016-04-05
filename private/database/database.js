@@ -119,6 +119,10 @@
         getPackages: function() {
             return databasePackages.getPackages();
         },
+        // Function to retrieve a all reviews avg from all packages
+        getAvgReviews: function() {
+            return databasePackages.getAvgReviews();
+        },
 
         // Function to retrieve a certain package
         getPackageID: function(id) {
