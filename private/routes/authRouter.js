@@ -245,7 +245,7 @@
                                                     } else {
                                                         database.updatePassword(hash, user.email)
                                                             .then(function() {
-                                                                res.status(200).send("Your password is changed");
+                                                                res.status(200).send("Your password was changed");
                                                             })
                                                             .catch(function() {
                                                                 res.status(406).send('It was impossible to change the password.');
