@@ -115,6 +115,7 @@
                     $scope.errorMessage = err.data;
                 });
         };
+
         //A function that updates userInfo
         $scope.updateUserInfo = function(updatedUser) {
             //faltam verificacoes
@@ -128,6 +129,24 @@
                     console.log("updateUserInfo failed");
                 });
 
+        };
+
+        // A function that asks for a password change.
+        $scope.changePassword = function(passwords){
+            
+            if(passwords.oldpassword !== '' && passwords.newpassword !== '' && passwords.confirmpassword !== ''){
+                UserServices.changepassword(passwords)
+                    .then(function(updPassword){
+                        $scope.confirmationInfo = updPassword.data;
+                        var d = document.getElementById("info");
+                        d.className = "alert alert-success";
+                    })
+                    .catch(function(err){
+                        $scope.confirmationInfo = err.data;
+                        var d = document.getElementById("info");
+                        d.className = "alert alert-danger";
+                    });
+            }
         };
 
         $scope.logout = function() {

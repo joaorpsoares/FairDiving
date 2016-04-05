@@ -115,6 +115,17 @@
 
         };
 
+        this.changepassword = function(passwords){
+            return $http.post('/api/user/changePassword', passwords)
+                .success(function(res){
+                    deferred.resolve(res);
+                })
+                .error(function(err){
+                    console.log(err);
+                    deferred.reject(err);
+                });
+        };
+
         this.logout = function() {
             $cookies.remove('session', {
                 path: '/'

@@ -621,20 +621,23 @@
                     </div>
                     <!-- END OF TAB 5 -->
                     <!-- TAB 6 -->
-                    <div class="tab-pane padding40 active" ng-show="tab === 6">
+                    <div class="tab-pane padding40 active" ng-controller="UserCtrl" ng-show="tab === 6">
                         <div class="padding40">
-                            <form action="" method="post">
-                                <span class="dark size18">Change password</span>
-                                <div class="line4"></div>
-                                Old Password:
-                                <input type="password" class="form-control " name="oldpassword" placeholder="" required>
-                                <br/> New Password:
-                                <input type="password" class="form-control logpadding" name="newpassword" placeholder="New Password" id="passwordw" pattern=".{5,}" required title="5 characters minimum" required>
-                                <br/> Confirm New Password:
-                                <input type="password" class="form-control logpadding" name="confirmpassword" placeholder="New Password" id="confirm_password" pattern=".{5,}" required title="5 characters minimum" required>
-                                <br/>
-                                <br/>
-                                <button type="submit" id="submitButton" class="btn-search5">Save changes</button>
+                            <div id="info">     
+                                <p ng-if="confirmationInfo" class="text-center">{{confirmationInfo}}</p>
+                            </div>
+                            <form enctype="multipart/form-data" name="form">
+                                    <span class="dark size18">Change password</span>
+                                    <div class="line4"></div>
+                                    Old Password:
+                                    <input ng-model="passwords.oldpassword" type="password" class="form-control " name="oldpassword" placeholder="" value = "" required>
+                                    <br/> New Password:
+                                    <input ng-model="passwords.newpassword" type="password" class="form-control logpadding" name="newpassword" placeholder="New Password" value = "" id="passwordw" pattern=".{5,}" required title="5 characters minimum" required>
+                                    <br/> Confirm New Password:
+                                    <input ng-model="passwords.confirmpassword" type="password" class="form-control logpadding" name="confirmpassword" placeholder="New Password" id="confirm_password" pattern=".{5,}" required title="5 characters minimum" value = "" required>
+                                    <br/>
+                                    <br/>
+                                    <button type="submit" id="submitButton" class="btn-search5" ng-click = "changePassword(passwords)">Save changes</button>
                             </form>
                         </div>
                     </div>
