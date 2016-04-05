@@ -161,6 +161,7 @@
                                     res.status(200).send(result);
                                 })
                                 .catch(function(err) {
+                                    console.log(err);
                                     res.status(406).send(err);
                                 });
                         })

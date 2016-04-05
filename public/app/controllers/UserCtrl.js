@@ -122,10 +122,11 @@
             UserServices.updateUserInfo(updatedUser)
                 .then(function(updUser) {
                     $scope.user = updUser.data;
+                    $scope.successMessage = "Your profile was successfully updated.";
                     console.log("updateUserInfo successful");
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    $scope.errorMessage = err.data;
                     console.log("updateUserInfo failed");
                 });
 
