@@ -21,6 +21,7 @@
 
             pkgServices.getPackages()
                 .then(function(_packages) {
+                    console.log(_packages.data);
                     $scope.packages = _packages.data;
                     console.log("getPackages successful");
                 })
@@ -148,8 +149,10 @@
                     for (i = 0; i < _reviews.data.length; i++) {
                         total += parseInt(_reviews.data[i].rating);
                     }
-
+                    
                     $scope.packageOnUse.avg = Math.round((total / _reviews.data.length) * 10) / 10;
+                    
+                    console.log('reviews'+_reviews);
                     if (!isNaN($scope.packageOnUse.avg)) {
                         $scope.packageOnUse.show = true;
                     }

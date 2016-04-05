@@ -31,6 +31,7 @@
                         <strong>Info:</strong> {{errorMessage}}
                     </div>
                 </div>
+                <h3>Login</h3>
                 <input ng-model="user.email" type="email" class="form-control logpadding" placeholder="email" required>
                 <br/>
                 <input id="password" ng-model="user.password" type="password" class="form-control logpadding" placeholder="Password" required>
@@ -53,7 +54,6 @@
             </div>
         </div>
         <div class="login-c3">
-
             <div class="left">
                 <a href="http://ec2-52-36-104-49.us-west-2.compute.amazonaws.com:3000/" class="whitelink"><span></span>Website</a>
             </div>
@@ -73,17 +73,16 @@ function errorMessage() {
     });
 }
 </script>
-
 <script>
-    $(document).ready(function(){
-        $('#lostpassword').click(function(){
-            if ($('#lostpassword a').text() != "Login"){
-                $('#password').hide();
-                $('#lostpassword a').text("Login");
-            } else {
-                $('#password').show();
-                $('#lostpassword a').text("Lost password?");
-            }
-        });
+$(document).ready(function() {
+    $('#lostpassword').click(function() {
+        if ($('#lostpassword a').text() != "Login") {
+            $('#password').hide();
+            $('#lostpassword a').text("Login");
+        } else {
+            $('#password').show();
+            $('#lostpassword a').text("Lost password?");
+        }
     });
+});
 </script>
