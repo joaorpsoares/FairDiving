@@ -8,13 +8,15 @@
         var deferred = $q.defer();
 
         this.login = function(user) {
-
             return $http.post('/api/login', user)
                 .success(function(res) {
 
+                    var now = new Date();
+
                     // Use cookie
                     $cookies.put('session', res, {
-                        path: '/'
+                        path: '/',
+                        expires: user.remember ? new Date(now.getFullYear() + 1, now.getMonth(), now.getDate()) : null
                     });
 
                     $window.location = '/profile';
@@ -90,8 +92,6 @@
             reset.email = url[0];
             reset.token = url[1];
 
-            console.log(reset);
-
             return $http.post('api/user/recover/confirmed', reset)
                 .success(function(res) {
                     deferred.resolve(res);
@@ -105,6 +105,7 @@
             return $http.post('/api/updateUser', updatedUser)
                 .success(function(res) {
                     deferred.resolve(res);
+                    $window.location = '/profile/';
                 })
                 .error(function(err) {
                     console.log(err);

@@ -55,8 +55,6 @@
             fd.append('description', newPackage.description);
             fd.append('country_code', newPackage.country_code);
 
-            console.log(fd.avatar);
-
             return $http.post('/api/package/', fd, {
                     transformRequest: angular.identity,
                     headers: {
@@ -65,7 +63,7 @@
                     enctype: 'multipart/form-data'
                 })
                 .success(function(res) {
-                    //$window.location = '/package/' + res.id;
+                    $window.location = '/package/' + res.id;
                     deferred.resolve(res);
                 })
                 .error(function(err) {
@@ -103,6 +101,17 @@
             return $http.get('/api/package/' + id + '/reviews')
                 .success(function(res) {
                     deferred.resolve(res);
+                })
+                .error(function(err) {
+                    deferred.reject(err);
+                });
+        };
+
+
+        this.getPackageImage = function(id) {
+            return $http.get('/api/package/image/' + id)
+                .success(function(res) {
+                    deferred.resolve(res.data);
                 })
                 .error(function(err) {
                     deferred.reject(err);

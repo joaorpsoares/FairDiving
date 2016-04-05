@@ -7,20 +7,28 @@
 
         $scope.user = {
             token: null,
-            logged: false
+            logged: false,
+            email: '',
+            password: ''
         };
         $scope.errorMessage = "";
         $scope.toogle = true;
 
+        $scope.$watch('toogle', function() {
+            $scope.errorMessage = '';
+        });
+
         $scope.login = function() {
+
+            console.log($scope.user);
+            $scope.errorMessage = '';
             if ($scope.user.email === '' || $scope.user.password === '') {
-                // TODO: Show error
+                $scope.errorMessage = "Email or password field cannot be empty.";
             } else {
                 UserServices.login($scope.user)
                     .then(function() {
                         $scope.errorMessage = "";
                         $scope.user.logged = true;
-                        console.log("Login successful");
                     })
                     .catch(function(err) {
                         $scope.errorMessage = err.data;
@@ -31,7 +39,6 @@
 
 
         $scope.register = function() {
-            console.log($scope.user);
             if ($scope.user.email === '' || $scope.user.password === '' || $scope.user.confirmPassword === '') {
                 $scope.errorMessage = "Email and passwords fields cannot be empty.";
             } else {
@@ -82,13 +89,17 @@
 
         // Function to reset password
         $scope.forgetPassword = function() {
+            $scope.errorMessage = '';
             if ($scope.user.email !== '') {
                 UserServices.forgetPassword({ email: $scope.user.email })
                     .then(function() {
-                        console.log("check your mail.");
+                        $scope.errorMessage = "It was sent to your email a recover link.";
                     }).catch(function(err) {
+                        $scope.errorMessage = "Oops, something happened.";
                         console.log(err);
                     });
+            } else {
+                $scope.errorMessage = "Email field cannot be empty.";
             }
         };
 
@@ -98,6 +109,7 @@
             UserServices.resetPassword(reset)
                 .then(function() {
                     $scope.errorMessage = "Your password was changed. You can now login.";
+                    $scope.showUrlLogin = true;
                 })
                 .catch(function(err) {
                     $scope.errorMessage = err.data;

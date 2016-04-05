@@ -131,10 +131,10 @@
 
             database.updateActiveAtribute(req.params.id)
                 .then(function() {
-                    res.status(200).send('OK');
+                    res.render('index');
                 })
                 .catch(function(err) {
-                    res.status(406).send(err);
+                    res.render('index');
                 });
         });
 
@@ -182,23 +182,23 @@
                                         id: userID
                                     };
 
-                                    req.body.name == undefined || req.body.name == '' ? __user['name'] = user[0]['name'] : __user['name'] = req.body.name;
+                                    req.body.name == undefined || req.body.name === '' ? __user['name'] = user[0]['name'] : __user['name'] = req.body.name;
 
-                                    req.body.email == undefined || req.body.email == '' ? __user['email'] = user[0]['email'] : __user['email'] = req.body.email;
+                                    req.body.email == undefined || req.body.email === '' ? __user['email'] = user[0]['email'] : __user['email'] = req.body.email;
 
-                                    req.body.telephone == undefined || req.body.telephone == '' ? __user['telephone'] = user[0]['telephone'] : __user['telephone'] = req.body.telephone;
+                                    req.body.telephone == undefined || req.body.telephone === '' ? __user['telephone'] = user[0]['telephone'] : __user['telephone'] = req.body.telephone;
 
-                                    req.body.birthdate == undefined || req.body.birthdate == '' ? __user['birthdate'] = user[0]['birthdate'] : __user['birthdate'] = req.body.birthdate;
+                                    req.body.birthdate == undefined || req.body.birthdate === '' ? __user['birthdate'] = user[0]['birthdate'] : __user['birthdate'] = req.body.birthdate;
 
-                                    req.body.shopname == undefined || req.body.shopname == '' ? __user['shopname'] = user[0]['shopname'] : __user['shopname'] = req.body.shopname;
+                                    req.body.shopname == undefined || req.body.shopname === '' ? __user['shopname'] = user[0]['shopname'] : __user['shopname'] = req.body.shopname;
 
-                                    req.body.websitelink == undefined || req.body.websitelink == '' ? __user['websitelink'] = user[0]['websitelink'] : __user['websitelink'] = req.body.websitelink;
+                                    req.body.websitelink == undefined || req.body.websitelink === '' ? __user['websitelink'] = user[0]['websitelink'] : __user['websitelink'] = req.body.websitelink;
 
-                                    req.body.address == undefined || req.body.address == '' ? __user['address'] = user[0]['address'] : __user['address'] = req.body.address;
+                                    req.body.address == undefined || req.body.address === '' ? __user['address'] = user[0]['address'] : __user['address'] = req.body.address;
 
-                                    req.body.zipcode == undefined || req.body.zipcode == '' ? __user['zipcode'] = user[0]['zipcode'] : __user['zipcode'] = req.body.zipcode;
+                                    req.body.zipcode == undefined || req.body.zipcode === '' ? __user['zipcode'] = user[0]['zipcode'] : __user['zipcode'] = req.body.zipcode;
 
-                                    req.body.country == undefined || req.body.country == '' ? __user['country'] = user[0]['country'] : __user['country'] = req.body.country;
+                                    req.body.country == undefined || req.body.country === '' ? __user['country'] = user[0]['country'] : __user['country'] = req.body.country;
 
                                     database.updateUsrByID(__user)
                                         .then(function(updatedUser) {
@@ -232,27 +232,21 @@
             if (validator.isEmail(req.body.email)) {
                 database.checkEmailExistance(req.body.email)
                     .then(function() {
-                        crypto.randomBytes(32, function(err, buf) {
-                            if (err) {
-                                res.status(406).send(err);
-                            } else {
-                                database.refreshToken(buf.toString('hex'), req.body.email)
+                        database.getSensetiveData(req.body.email)
+                            .then(function(_userData) {
+                                email.sendRecover(req.body.email, _userData[0].token)
                                     .then(function() {
-                                        email.sendRecover(req.body.email, buf.toString('hex'))
-                                            .then(function() {
-                                                console.log('@authRouter.js : Recover email was sent.');
-                                                res.status(200).send('OK');
-                                            })
-                                            .catch(function(err) {
-                                                console.log('@authRouter.js : Recover email was not sent.');
-                                                res.status(200).send('OK');
-                                            });
+                                        console.log('@authRouter.js : Recover email was sent.');
+                                        res.status(200).send('OK');
                                     })
                                     .catch(function(err) {
-                                        res.status(406).send("Something went wrong!");
+                                        console.log('@authRouter.js : Recover email was not sent.');
+                                        res.status(200).send('OK');
                                     });
-                            }
-                        });
+                            })
+                            .catch(function(err) {
+                                res.status(500).send("Oh well... There was a problem with us.");
+                            });
                     })
                     .catch(function(err) {
                         console.log(err);
@@ -280,13 +274,25 @@
                             .then(function(result) {
                                 if (result[0].token === user.token) {
                                     bcrypt.hash(req.body.password, null, null, function(err, hash) {
-
                                         if (err) {
                                             res.status(406).send('WARNING: There was a problem with hashing your password.');
                                         } else {
                                             database.updatePassword(hash, user.email)
                                                 .then(function() {
-                                                    res.status(200).send("ALL GOOD : Password was changed.");
+                                                    crypto.randomBytes(32, function(err, buf) {
+                                                        if (err) {
+                                                            res.status(406).send(err);
+                                                        } else {
+                                                            database.refreshToken(buf.toString('hex'), req.body.email)
+                                                                .then(function() {
+                                                                    res.status(200).send("ALL GOOD : Password was changed.");
+                                                                })
+                                                                .catch(function(err) {
+                                                                    res.status(200).send("ALL GOOD : Password was changed.");
+                                                                    // TODO: CREATE ADMIN LOG SAYNG TOKEN WAS NOT CHANGED
+                                                                });
+                                                        }
+                                                    });
                                                 })
                                                 .catch(function() {
                                                     res.status(406).send('WARNING : It was impossible to change the password.');
