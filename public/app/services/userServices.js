@@ -8,13 +8,15 @@
         var deferred = $q.defer();
 
         this.login = function(user) {
-
             return $http.post('/api/login', user)
                 .success(function(res) {
 
+                    var now = new Date();
+
                     // Use cookie
                     $cookies.put('session', res, {
-                        path: '/'
+                        path: '/',
+                        expires: user.remember ? new Date(now.getFullYear() + 1, now.getMonth(), now.getDate()) : null
                     });
 
                     $window.location = '/profile';
@@ -110,6 +112,17 @@
                 });
 
 
+        };
+
+        this.changepassword = function(passwords){
+            return $http.post('/api/user/changePassword', passwords)
+                .success(function(res){
+                    deferred.resolve(res);
+                })
+                .error(function(err){
+                    console.log(err);
+                    deferred.reject(err);
+                });
         };
 
         this.logout = function() {

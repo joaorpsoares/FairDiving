@@ -182,23 +182,23 @@
                                         id: userID
                                     };
 
-                                    req.body.name == undefined || req.body.name === '' ? __user['name'] = user[0]['name'] : __user['name'] = req.body.name;
+                                    req.body.name === undefined || req.body.name === '' ? __user.name = user[0].name : __user.name = req.body.name;
 
-                                    req.body.email == undefined || req.body.email === '' ? __user['email'] = user[0]['email'] : __user['email'] = req.body.email;
+                                    req.body.email === undefined || req.body.email === '' ? __user.email = user[0].email : __user.email = req.body.email;
 
-                                    req.body.telephone == undefined || req.body.telephone === '' ? __user['telephone'] = user[0]['telephone'] : __user['telephone'] = req.body.telephone;
+                                    req.body.telephone === undefined || req.body.telephone === '' ? __user.telephone = user[0].telephone : __usertelephone = req.body.telephone;
 
-                                    req.body.birthdate == undefined || req.body.birthdate === '' ? __user['birthdate'] = user[0]['birthdate'] : __user['birthdate'] = req.body.birthdate;
+                                    req.body.birthdate === undefined || req.body.birthdate === '' ? __user.birthdate = user[0].birthdate : __user.birthdate = req.body.birthdate;
 
-                                    req.body.shopname == undefined || req.body.shopname === '' ? __user['shopname'] = user[0]['shopname'] : __user['shopname'] = req.body.shopname;
+                                    req.body.shopname === undefined || req.body.shopname === '' ? __user.shopname = user[0].shopname : __user.shopname = req.body.shopname;
 
-                                    req.body.websitelink == undefined || req.body.websitelink === '' ? __user['websitelink'] = user[0]['websitelink'] : __user['websitelink'] = req.body.websitelink;
+                                    req.body.websitelink === undefined || req.body.websitelink === '' ? __user.websitelink = user[0].websitelink : __user.websitelink = req.body.websitelink;
 
-                                    req.body.address == undefined || req.body.address === '' ? __user['address'] = user[0]['address'] : __user['address'] = req.body.address;
+                                    req.body.address === undefined || req.body.address === '' ? __user.address = user[0].address : __user.address = req.body.address;
 
-                                    req.body.zipcode == undefined || req.body.zipcode === '' ? __user['zipcode'] = user[0]['zipcode'] : __user['zipcode'] = req.body.zipcode;
+                                    req.body.zipcode === undefined || req.body.zipcode === '' ? __user.zipcode = user[0].zipcode : __user.zipcode = req.body.zipcode;
 
-                                    req.body.country == undefined || req.body.country === '' ? __user['country'] = user[0]['country'] : __user['country'] = req.body.country;
+                                    req.body.country === undefined || req.body.country === '' ? __user.country = user[0].country : __user.country = req.body.country;
 
                                     database.updateUsrByID(__user)
                                         .then(function(updatedUser) {
@@ -224,7 +224,52 @@
                 });
         });
 
-
+        // Route to update password
+        server.post('/api/user/changePassword', function(req, res) {
+            token.verifySession(req.cookies.session)
+                .then(function(info) {
+                    database.retrieveUsrByToken(info.token)
+                        .then(function(userID) {
+                            database.getSensetiveData(userID[0].email)
+                                .then(function(user) {
+                                    if (req.body.newpassword !== req.body.confirmpassword) {
+                                        res.status(406).send("New password and its confirmation dont match");
+                                    } else {
+                                        bcrypt.compare(req.body.oldpassword, user[0].password, function(err, _result) {
+                                            if (err) {
+                                                res.status(406).send('You wrote the wrong old password.');
+                                            } else {
+                                                bcrypt.hash(req.body.newpassword, null, null, function(err, hash) {
+                                                    if (err) {
+                                                        res.status(406).send('There was a problem with hashing your password.');
+                                                    } else {
+                                                        database.updatePassword(hash, user.email)
+                                                            .then(function() {
+                                                                res.status(200).send("Your password was changed");
+                                                            })
+                                                            .catch(function() {
+                                                                res.status(406).send('It was impossible to change the password.');
+                                                            });
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                })
+                                .catch(function(err) {
+                                    console.log(err);
+                                    res.status(500).send("An error occured on server. Try again later.");
+                                });
+                        })
+                        .catch(function(err) {
+                            console.log(err);
+                            res.status(406).send('Some error happened on our side. Try again later please.');
+                        });
+                })
+                .catch(function(err) {
+                    res.status(401).send('Do you have permission to do that?!');
+                });
+        });
 
         // Route to send a confirmation email to change password
         server.post('/api/user/recover', function(req, res) {

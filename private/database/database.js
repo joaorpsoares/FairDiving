@@ -119,10 +119,19 @@
         getPackages: function() {
             return databasePackages.getPackages();
         },
+        // Function to retrieve a all reviews avg from all packages
+        getAvgReviews: function() {
+            return databasePackages.getAvgReviews();
+        },
 
         // Function to retrieve a certain package
         getPackageID: function(id) {
             return databasePackages.getPackageID([id]);
+        },
+
+        // Function to retrive all images from a certain package
+        getPackageImage: function(id) {
+            return databasePackages.getPackageImage([id]);
         },
 
         getPackagesByOperator: function(operatorID) {

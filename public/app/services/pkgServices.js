@@ -63,7 +63,7 @@
                     enctype: 'multipart/form-data'
                 })
                 .success(function(res) {
-                    //$window.location = '/package/' + res.id;
+                    $window.location = '/package/' + res.id;
                     deferred.resolve(res);
                 })
                 .error(function(err) {
@@ -101,6 +101,17 @@
             return $http.get('/api/package/' + id + '/reviews')
                 .success(function(res) {
                     deferred.resolve(res);
+                })
+                .error(function(err) {
+                    deferred.reject(err);
+                });
+        };
+
+
+        this.getPackageImage = function(id) {
+            return $http.get('/api/package/image/' + id)
+                .success(function(res) {
+                    deferred.resolve(res.data);
                 })
                 .error(function(err) {
                     deferred.reject(err);

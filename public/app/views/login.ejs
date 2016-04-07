@@ -21,7 +21,7 @@
 <div class="login-fullwidith">
     <!-- Login Wrap  -->
     <div class="login-wrap">
-        <a href="http://ec2-52-36-104-49.us-west-2.compute.amazonaws.com:3000/" target="_blank"><img src="images/logo.png" class="login-img" alt="logo" /></a>
+        <img src="images/logo.png" class="login-img" alt="logo" />
         <br/>
         <div class="login-c1">
             <div class="cpadding50">
@@ -31,7 +31,9 @@
                         <strong>Info:</strong> {{errorMessage}}
                     </div>
                 </div>
+                <h3>Login</h3>
                 <input ng-model="user.email" type="email" class="form-control logpadding" placeholder="email" required>
+
                 <br/>
                 <input id="password" ng-model="user.password" type="password" class="form-control logpadding" placeholder="Password" required>
             </div>
@@ -45,7 +47,7 @@
                     <div class="alignbottom2">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox">Remember
+                                <input ng-model="user.remember" type="checkbox">Remember
                             </label>
                         </div>
                     </div>
@@ -53,9 +55,8 @@
             </div>
         </div>
         <div class="login-c3">
-
             <div class="left">
-                <a href="http://ec2-52-36-104-49.us-west-2.compute.amazonaws.com:3000/" class="whitelink"><span></span>Website</a>
+                <a href="http://ec2-52-37-66-121.us-west-2.compute.amazonaws.com:3000//" class="whitelink"><span></span>Website</a> <!--TODO: barra absoluta -->
             </div>
             <div ng-click="toogle = !toogle" class="right" id="lostpassword"><a href="#" class="whitelink">Lost password?</a></div>
         </div>
@@ -73,17 +74,16 @@ function errorMessage() {
     });
 }
 </script>
-
 <script>
-    $(document).ready(function(){
-        $('#lostpassword').click(function(){
-            if ($('#lostpassword a').text() != "Login"){
-                $('#password').hide();
-                $('#lostpassword a').text("Login");
-            } else {
-                $('#password').show();
-                $('#lostpassword a').text("Lost password?");
-            }
-        });
+$(document).ready(function() {
+    $('#lostpassword').click(function() {
+        if ($('#lostpassword a').text() != "Login") {
+            $('#password').hide();
+            $('#lostpassword a').text("Login");
+        } else {
+            $('#password').show();
+            $('#lostpassword a').text("Lost password?");
+        }
     });
+});
 </script>

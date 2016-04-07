@@ -15,7 +15,7 @@
     <div class="brlines"></div>
 </div>
 <!-- CONTENT -->
-<div class="container">
+<div class="container" data-ng-init="tab = 1">
     <div class="container mt25 offset-0">
         <!-- CONTENT -->
         <div class="col-md-12 pagecontainer2 offset-0">
@@ -23,40 +23,40 @@
             <div class="col-md-1 offset-0">
                 <!-- Nav tabs -->
                 <ul class="nav profile-tabs">
-                    <li class="active">
-                        <a href="#profile" data-toggle="tab">
+                    <li ng-class="{active:tab === 1}">
+                        <a data-toggle="tab" ng-click="tab = 1">
                             <span class="profile-icon"></span> Your profile
                         </a>
                     </li>
                     <!-- if role == operator -->
-                    <li>
-                        <a href="#packages" data-toggle="tab" onclick="mySelectUpdate()">
+                    <li ng-class="{active:tab === 2}">
+                        <a data-toggle="tab" ng-click="tab = 2">
                             <span class="bookings-icon"></span> Packages
                         </a>
                     </li>
                     <!--endif-->
-                    <li>
-                        <a href="#wishlist" data-toggle="tab" onclick="mySelectUpdate()">
+                    <li ng-class="{active:tab === 3}">
+                        <a data-toggle="tab" ng-click="tab = 3">
                             <span class="wishlist-icon"></span> Wishlist
                         </a>
                     </li>
-                    <li>
-                        <a href="#settings" data-toggle="tab" onclick="mySelectUpdate()">
+                    <li ng-class="{active:tab === 4}">
+                        <a data-toggle="tab" ng-click="tab = 4">
                             <span class="settings-icon"></span> Settings
                         </a>
                     </li>
-                    <li>
-                        <a href="#history" data-toggle="tab" onclick="mySelectUpdate()">
+                    <li ng-class="{active:tab === 5}">
+                        <a data-toggle="tab" ng-click="tab = 5">
                             <span class="history-icon"></span> History
                         </a>
                     </li>
-                    <li>
-                        <a href="#password" data-toggle="tab" onclick="mySelectUpdate()">
+                    <li ng-class="{active:tab === 6}">
+                        <a data-toggle="tab" ng-click="tab = 6">
                             <span class="password-icon"></span> Change password
                         </a>
                     </li>
-                    <li>
-                        <a href="#newsletter" data-toggle="tab" onclick="mySelectUpdate()">
+                    <li ng-class="{active:tab === 7}">
+                        <a data-toggle="tab" ng-click="tab = 7">
                             <span class="newsletter-icon"></span> Newsletters
                         </a>
                     </li>
@@ -69,7 +69,7 @@
                 <!-- Tab panes from left menu -->
                 <div class="tab-content5">
                     <!-- TAB 1 -->
-                    <div class="tab-pane padding40 active" id="profile">
+                    <div class="tab-pane padding40 active" ng-show="tab === 1">
                         <!-- Admin top -->
                         <div class="col-md-4 offset-0">
                             <img src="images/user.png" alt="" class="left margright20" />
@@ -78,6 +78,7 @@
                             </p>
                             <div class="clearfix"></div>
                         </div>
+                        <!-- se operador nao mostrar - se user normal mostrar
                         <div class="col-md-4">
                         </div>
                         <div class="col-md-4 ">
@@ -93,12 +94,23 @@
                                         <br/><span class="size12">Countries</span></td>
                                 </tr>
                             </table>
-                        </div>
+                        </div>-->
                         </br>
                         </br>
                         </br>
                         </br>
                         </br>
+                        <div ng-if="successMessage">
+                    		<div class="alert alert-success">
+                    		    <strong>Info:</strong> {{successMessage}}
+                    		</div>
+               			</div>
+
+               			<div ng-if="errorMessage">
+                    		<div class="alert alert-warning">
+                    		    <strong>Info:</strong> {{errorMessage}}
+                    		</div>
+               			</div>
                         <!-- End of Admin top -->
                         <span class="size16 bold">Personal details</span>
                         <div class="line2"></div>
@@ -148,7 +160,7 @@
                     <!-- END OF TAB 1 -->
                     <!-- if role == operator -->
                     <!-- TAB 2 PACKAGES-->
-                    <div class="tab-pane" id="packages">
+                    <div class="tab-pane padding40 active" ng-show="tab === 2">
                         <div class="padding40">
                             <span class="size16 bold">Create a package</span>
                             <div class="line2"></div>
@@ -280,7 +292,7 @@
                                                         <br/>
                                                         <br/>
                                                         <br/>
-                                                        <!-- <a href="/package/{{ package.id }}" class="bookbtn mt1">Book</a>-->
+                                                         <a href="/package/{{ package.id }}" class="bookbtn mt1">View package</a>
                                                     </div>
                                                     <div class="labelleft2">
                                                         <b>{{ package.title }}</b>
@@ -343,7 +355,7 @@
                     <!-- END OF TAB 2 PACKAGES -->
                     <!-- end if -->
                     <!-- TAB 3 -->
-                    <div class="tab-pane" id="wishlist">
+                    <div class="tab-pane padding40 active" ng-show="tab === 3">
                         <div class="padding40">
                             <br/>
                             <br/>
@@ -472,7 +484,7 @@
                     </div>
                     <!-- END OF TAB 3 -->
                     <!-- TAB 4 -->
-                    <div class="tab-pane" id="settings">
+                    <div class="tab-pane padding40 active" ng-show="tab === 4">
                         <div class="padding40 dark">
                             <span class="dark size18">Settings (NOT DONE)</span>
                             <div class="line4"></div>
@@ -558,7 +570,7 @@
                     </div>
                     <!-- END OF TAB 4 -->
                     <!-- TAB 5 -->
-                    <div class="tab-pane" id="history">
+                    <div class="tab-pane padding40 active" ng-show="tab === 5">
                         <div class="padding40">
                             <span class="dark size18">History (NOT DONE)</span>
                             <div class="line4"></div>
@@ -620,26 +632,29 @@
                     </div>
                     <!-- END OF TAB 5 -->
                     <!-- TAB 6 -->
-                    <div class="tab-pane" id="password">
+                    <div class="tab-pane padding40 active" ng-controller="UserCtrl" ng-show="tab === 6">
                         <div class="padding40">
-                            <form action="" method="post">
-                                <span class="dark size18">Change password</span>
-                                <div class="line4"></div>
-                                Old Password:
-                                <input type="password" class="form-control " name="oldpassword" placeholder="" required>
-                                <br/> New Password:
-                                <input type="password" class="form-control logpadding" name="newpassword" placeholder="New Password" id="passwordw" pattern=".{5,}" required title="5 characters minimum" required>
-                                <br/> Confirm New Password:
-                                <input type="password" class="form-control logpadding" name="confirmpassword" placeholder="New Password" id="confirm_password" pattern=".{5,}" required title="5 characters minimum" required>
-                                <br/>
-                                <br/>
-                                <button type="submit" id="submitButton" class="btn-search5">Save changes</button>
+                            <div id="info">     
+                                <p ng-if="confirmationInfo" class="text-center">{{confirmationInfo}}</p>
+                            </div>
+                            <form enctype="multipart/form-data" name="form">
+                                    <span class="dark size18">Change password</span>
+                                    <div class="line4"></div>
+                                    Old Password:
+                                    <input ng-model="passwords.oldpassword" type="password" class="form-control " name="oldpassword" placeholder="" value = "" required>
+                                    <br/> New Password:
+                                    <input ng-model="passwords.newpassword" type="password" class="form-control logpadding" name="newpassword" placeholder="New Password" value = "" id="passwordw" pattern=".{5,}" required title="5 characters minimum" required>
+                                    <br/> Confirm New Password:
+                                    <input ng-model="passwords.confirmpassword" type="password" class="form-control logpadding" name="confirmpassword" placeholder="New Password" id="confirm_password" pattern=".{5,}" required title="5 characters minimum" value = "" required>
+                                    <br/>
+                                    <br/>
+                                    <button type="submit" id="submitButton" class="btn-search5" ng-click = "changePassword(passwords)">Save changes</button>
                             </form>
                         </div>
                     </div>
                     <!-- END OF TAB 6 -->
                     <!-- TAB 7 -->
-                    <div class="tab-pane" id="newsletter">
+                    <div class="tab-pane padding40 active" ng-show="tab === 7">
                         <div class="padding40">
                             <span class="dark size18">Newsletter</span>
                             <div class="line4"></div>

@@ -7,11 +7,12 @@
 
         $scope.user = {
             token: null,
-            logged: false
+            logged: false,
+            email: '',
+            password: ''
         };
         $scope.errorMessage = "";
         $scope.toogle = true;
-
 
         $scope.$watch('toogle', function() {
             $scope.errorMessage = '';
@@ -19,15 +20,15 @@
 
         $scope.login = function() {
 
+            console.log($scope.user);
             $scope.errorMessage = '';
             if ($scope.user.email === '' || $scope.user.password === '') {
-                // TODO: Show error
+                $scope.errorMessage = "Email or password field cannot be empty.";
             } else {
                 UserServices.login($scope.user)
                     .then(function() {
                         $scope.errorMessage = "";
                         $scope.user.logged = true;
-                        console.log("Login successful");
                     })
                     .catch(function(err) {
                         $scope.errorMessage = err.data;
@@ -97,6 +98,8 @@
                         $scope.errorMessage = "Oops, something happened.";
                         console.log(err);
                     });
+            } else {
+                $scope.errorMessage = "Email field cannot be empty.";
             }
         };
 
@@ -106,24 +109,45 @@
             UserServices.resetPassword(reset)
                 .then(function() {
                     $scope.errorMessage = "Your password was changed. You can now login.";
+                    $scope.showUrlLogin = true;
                 })
                 .catch(function(err) {
                     $scope.errorMessage = err.data;
                 });
         };
+
         //A function that updates userInfo
         $scope.updateUserInfo = function(updatedUser) {
             //faltam verificacoes
             UserServices.updateUserInfo(updatedUser)
                 .then(function(updUser) {
                     $scope.user = updUser.data;
+                    $scope.successMessage = "Your profile was successfully updated.";
                     console.log("updateUserInfo successful");
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    $scope.errorMessage = err.data;
                     console.log("updateUserInfo failed");
                 });
 
+        };
+
+        // A function that asks for a password change.
+        $scope.changePassword = function(passwords){
+            
+            if(passwords.oldpassword !== '' && passwords.newpassword !== '' && passwords.confirmpassword !== ''){
+                UserServices.changepassword(passwords)
+                    .then(function(updPassword){
+                        $scope.confirmationInfo = updPassword.data;
+                        var d = document.getElementById("info");
+                        d.className = "alert alert-success";
+                    })
+                    .catch(function(err){
+                        $scope.confirmationInfo = err.data;
+                        var d = document.getElementById("info");
+                        d.className = "alert alert-danger";
+                    });
+            }
         };
 
         $scope.logout = function() {
