@@ -68,7 +68,7 @@
 
         getPackagesByOperator: function(operatorID) {
             return new Promise(function(resolve, reject) {
-                client.query('SELECT * FROM package WHERE operatorID = $1', operatorID, function(err, result) {
+                client.query('SELECT * FROM packages WHERE operatorID = $1', operatorID, function(err, result) {
                     if (err) {
                         reject(err);
                     } else {
