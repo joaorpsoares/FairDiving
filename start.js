@@ -6,6 +6,7 @@
         server = express(),
         morgan = require('morgan'),
         path = require('path'),
+        compression = require('compression'),
         // Request parsing and handling information
         bodyParser = require('body-parser'),
         cookieParser = require('cookie-parser'),
@@ -52,6 +53,8 @@
     server.use(cookieParser());
     server.use(bodyParser.json());
 
+    // Gzip enabled
+    server.use(compression());
 
     // TODO: Not implemented corretly. Do better.
     //server.use(mld.securityLevel);
