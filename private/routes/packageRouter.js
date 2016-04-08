@@ -9,7 +9,7 @@
         multer = require('multer'),
         storage = multer.diskStorage({
             destination: function(req, file, cb) {
-                cb(null, 'images/packages/');
+                cb(null, 'public/uploaded/images/');
             },
             filename: function(req, file, cb) {
                 cb(null, file.fieldname + '-' + Date.now());
@@ -27,7 +27,6 @@
                     if (info.role === "OPERATOR" || info.role === "ADMIN") {
                         database.retrieveUsrIDByToken(info.token)
                             .then(function(usrID) {
-                                console.log(req.body);
                                 var __package = {
                                     operatorID: usrID,
                                     package_type: req.body.package_type,
@@ -110,33 +109,26 @@
         // Route to get all packages from database
         server.get('/api/package', function(req, res) {
             database.getPackages()
-            .then(function(packs) {
-
-
-
-                database.getAvgReviews()
-                .then(function(result){
-                    console.log('result'+result);
-                for(var j = 0; j < packs.length;j++){
-                    for(var i = 0; i < result.length; i++){
-                        if(parseInt(result[i]['packageid'])===parseInt(packs[j]['id'])){
-                            packs[j]['avg'] = null;
-                            packs[j]['avg'] = parseInt(result[i]['avg']);
-                        }
-                    }
-                    console.log('packs'+j+packs[j]['avg']);
-                }
-                
-                res.status(200).send(packs);
+                .then(function(packs) {
+                    database.getAvgReviews()
+                        .then(function(result) {
+                            for (var j = 0; j < packs.length; j++) {
+                                for (var i = 0; i < result.length; i++) {
+                                    if (parseInt(result[i].packageid) === parseInt(packs[j].id)) {
+                                        packs[j].avg = null;
+                                        packs[j].avg = parseInt(result[i].avg);
+                                    }
+                                }
+                            }
+                            res.status(200).send(packs);
+                        })
+                        .catch(function(err) {
+                            console.log(err);
+                        });
                 })
-                .catch(function(err) {console.log(err);
+                .catch(function(err) {
+                    res.status(406).send('It was impossible to retrieve the packages.');
                 });
-
- 
-            })
-            .catch(function(err) {
-                res.status(406).send('It was impossible to retrieve the packages.');
-            });
         });
 
         // Route to get a unique package informaton

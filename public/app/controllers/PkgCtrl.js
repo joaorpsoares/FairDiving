@@ -42,7 +42,7 @@
                         // Get image
                         pkgServices.getPackageImage($scope.packageOnUse.id)
                             .then(function(res) {
-                                $scope.packageOnUse.image = "../../../images/packages/" + res.data[0].imagename;
+                                $scope.packageOnUse.image = "/uploaded/images/" + res.data[0].imagename;
                                 console.log('Image was successful retrieved');
                             }).catch(function() {
                                 console.log('Impossible to retrieve an image');
@@ -156,10 +156,10 @@
                     for (i = 0; i < _reviews.data.length; i++) {
                         total += parseInt(_reviews.data[i].rating);
                     }
-                    
+
                     $scope.packageOnUse.avg = Math.round((total / _reviews.data.length) * 10) / 10;
-                    
-                    console.log('reviews'+_reviews);
+
+                    console.log('reviews' + _reviews);
                     if (!isNaN($scope.packageOnUse.avg)) {
                         $scope.packageOnUse.show = true;
                     }
