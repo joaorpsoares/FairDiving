@@ -93,7 +93,7 @@
             if ($scope.user.email !== '') {
                 UserServices.forgetPassword({ email: $scope.user.email })
                     .then(function() {
-                        $scope.errorMessage = "It was sent to your email a recover link.";
+                        $scope.errorMessage = "A recovery link was sent to your email.";
                     }).catch(function(err) {
                         $scope.errorMessage = "Oops, something happened.";
                         console.log(err);

@@ -79,7 +79,7 @@
                                     }
                                 });
                             })
-                            .catch(function(err) {
+                            .catch(function() {
                                 res.status(406).send('This email is already in our database.');
                             });
                     }
@@ -92,20 +92,20 @@
         // Route to verify the login
         server.post('/api/login', function(req, res) {
             if (validator.isEmail(req.body.email)) {
-                database.getSensetiveData(req.body.email)
+                database.getSensitiveData(req.body.email)
                     .then(function(result) {
                         if (result.length > 0) {
                             if (!result[0].active) res.status(406).send('You need to complete the registration before login. Check you email.');
                             else {
                                 bcrypt.compare(req.body.password, result[0].password, function(err, _result) {
                                     if (err) {
-                                        res.status(406).send('Password and email didnt match.');
+                                        res.status(406).send('Password and email didn\'t match.');
                                     } else {
                                         if (_result) {
                                             token.sign(result[0].token)
                                                 .then(function(token) {
                                                     res.status(200).send(token);
-                                                }).catch(function(err) {
+                                                }).catch(function() {
                                                     res.status(400).send('We could not generate a token for this session.');
                                                 });
                                         } else {
@@ -122,18 +122,18 @@
                         res.status(406).send(err);
                     });
             } else {
-                res.status(406).send('Sorry! This email does not exist!');
+                res.status(406).send('Sorry! Please enter an email address.');
             }
         });
 
         // Route to check token
         server.get('/api/confirmation/:id', function(req, res) {
 
-            database.updateActiveAtribute(req.params.id)
+            database.updateActiveAttribute(req.params.id)
                 .then(function() {
                     res.render('index');
                 })
-                .catch(function(err) {
+                .catch(function() {
                     res.render('index');
                 });
         });
@@ -186,7 +186,7 @@
 
                                     req.body.email === undefined || req.body.email === '' ? __user.email = user[0].email : __user.email = req.body.email;
 
-                                    req.body.telephone === undefined || req.body.telephone === '' ? __user.telephone = user[0].telephone : __usertelephone = req.body.telephone;
+                                    req.body.telephone === undefined || req.body.telephone === '' ? __user.telephone = user[0].telephone : __user.telephone = req.body.telephone;
 
                                     req.body.birthdate === undefined || req.body.birthdate === '' ? __user.birthdate = user[0].birthdate : __user.birthdate = req.body.birthdate;
 
@@ -204,8 +204,7 @@
                                         .then(function(updatedUser) {
                                             res.status(200).send(updatedUser);
                                         })
-                                        .catch(function(err) {
-                                            console.log(err);
+                                        .catch(function() {
                                             res.status(406).send(err);
                                         });
 
@@ -215,22 +214,23 @@
                                 });
 
                         })
-                        .catch(function(err) {
+                        .catch(function() {
                             res.status(406).send('Some error happened on our side. Try again later please.');
                         });
                 })
-                .catch(function(err) {
+                .catch(function() {
                     res.status(401).send('Do you have permission to do that?!');
                 });
         });
 
         // Route to update password
         server.post('/api/user/changePassword', function(req, res) {
+
             token.verifySession(req.cookies.session)
                 .then(function(info) {
                     database.retrieveUsrByToken(info.token)
                         .then(function(userID) {
-                            database.getSensetiveData(userID[0].email)
+                            database.getSensitiveData(userID[0].email)
                                 .then(function(user) {
                                     if (req.body.newpassword !== req.body.confirmpassword) {
                                         res.status(406).send("New password and its confirmation dont match");
@@ -239,30 +239,32 @@
                                             if (err) {
                                                 res.status(406).send('You wrote the wrong old password.');
                                             } else {
-                                                bcrypt.hash(req.body.newpassword, null, null, function(err, hash) {
-                                                    if (err) {
-                                                        res.status(406).send('There was a problem with hashing your password.');
-                                                    } else {
-                                                        database.updatePassword(hash, user.email)
-                                                            .then(function() {
-                                                                res.status(200).send("Your password was changed");
-                                                            })
-                                                            .catch(function() {
-                                                                res.status(406).send('It was impossible to change the password.');
-                                                            });
-                                                    }
-                                                });
+                                                if (_result) {
+                                                    bcrypt.hash(req.body.newpassword, null, null, function (err, hash) {
+                                                        if (err) {
+                                                            res.status(406).send('There was a problem with hashing your password.');
+                                                        } else {
+                                                            database.updatePassword(hash, userID[0].email)
+                                                                .then(function () {
+                                                                    res.status(200).send("Your password was changed");
+                                                                })
+                                                                .catch(function () {
+                                                                    res.status(406).send('It was impossible to change the password.');
+                                                                });
+                                                        }
+                                                    });
+                                                } else {
+                                                    res.status(406).send("The \'current password\' sent do not match with the current one.");
+                                                }
                                             }
                                         });
                                     }
                                 })
                                 .catch(function(err) {
-                                    console.log(err);
-                                    res.status(500).send("An error occured on server. Try again later.");
+                                    res.status(500).send("An error occurred on server. Try again later.");
                                 });
                         })
                         .catch(function(err) {
-                            console.log(err);
                             res.status(406).send('Some error happened on our side. Try again later please.');
                         });
                 })
@@ -277,7 +279,7 @@
             if (validator.isEmail(req.body.email)) {
                 database.checkEmailExistance(req.body.email)
                     .then(function() {
-                        database.getSensetiveData(req.body.email)
+                        database.getSensitiveData(req.body.email)
                             .then(function(_userData) {
                                 email.sendRecover(req.body.email, _userData[0].token)
                                     .then(function() {
@@ -315,7 +317,7 @@
             if (validator.isEmail(user.email) && user.password === user.passwordconfirm) {
                 database.checkEmailExistance(user.email)
                     .then(function() {
-                        database.getSensetiveData(user.email)
+                        database.getSensitiveData(user.email)
                             .then(function(result) {
                                 if (result[0].token === user.token) {
                                     bcrypt.hash(req.body.password, null, null, function(err, hash) {
@@ -348,11 +350,11 @@
                                     res.status(406).send('WARNING: Token is not valid. Ask again for your password.');
                                 }
                             })
-                            .catch(function(err) {
+                            .catch(function() {
                                 res.status(406).send("WARNING: This token is not valid anymore.");
                             });
                     })
-                    .catch(function(err) {
+                    .catch(function() {
                         res.status(406).send("WARNING: This email is not recognized by our system. Did you change the url?");
                     });
             } else {
