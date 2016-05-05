@@ -60,13 +60,13 @@
         },
 
         // Function to get sensetive data of a user
-        getSensetiveData: function(email) {
-            return databaseUsers.getSensetiveData([email.toLowerCase()]);
+        getSensitiveData: function(email) {
+            return databaseUsers.getSensitiveData([email.toLowerCase()]);
         },
 
         // Function to update active atribute
-        updateActiveAtribute: function(token) {
-            return databaseUsers.updateActiveAtribute([token]);
+        updateActiveAttribute: function(token) {
+            return databaseUsers.updateActiveAttribute([token]);
         },
 
         // Function to retrieve a clearance level from a token

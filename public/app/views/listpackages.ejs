@@ -28,7 +28,7 @@
                         <div class="offset-2">
                             <div class="col-md-4 offset-0">
                                 <div class="listitem2">
-                                    <!-- <a href="/package/{{ package.id }}" data-gallery="multiimages" data-toggle="lightbox"><img src="/package/{{ package.id }}/{{ package.image }}" alt="" /></a> --- IMAGES-->
+                                    <a href="/package/{{ package.id }}" data-gallery="multiimages" data-toggle="lightbox"><img src="uploaded/images/{{package.imagename}}" alt="" /></a>
                                     <div class="liover"></div>
                                 </div>
                             </div>
@@ -58,13 +58,14 @@
                                          <a href="/package/{{ package.id }}" class="bookbtn mt1">Book</a>
                                     </div>
                                     <div class="labelleft2">
-                                        <b>{{ package.title }}</b>
+                                        <b><a href="/package/{{ package.id }}">{{ package.title }}</a></b>
                                         <br/>
                                         <br/>
                                         <br/>
                                         <p class="grey">
                                             {{ package.description }}</p>
                                         <br/>
+                                        <!--
                                         <ul class="hotelpreferences">
                                             <li class="icohp-internet"></li>
                                             <li class="icohp-air"></li>
@@ -76,6 +77,7 @@
                                             <li class="icohp-pets"></li>
                                             <li class="icohp-spa"></li>
                                         </ul>
+                                        -->
                                     </div>
                                 </div>
                             </div>

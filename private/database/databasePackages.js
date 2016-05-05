@@ -30,7 +30,7 @@
         // Function to retrieve all packages from database
         getPackages: function() {
             return new Promise(function(resolve, reject) {
-                client.query('SELECT * FROM packages', function(err, result) {
+                client.query('SELECT packages.*, packageimage.imagename FROM packages, packageimage WHERE packages.id = packageimage.idpackage;', function(err, result) {
                     if (err) {
                         reject(err);
                     } else {
@@ -121,7 +121,7 @@
         // Function to retrieve a all reviews avg from all packages
         getAvgReviews: function() {
             return new Promise(function(resolve, reject) {
-                client.query('SELECT packageid, avg(rating) FROM reviews GROUP BY packageid',  function(err, result) {
+                client.query('SELECT packageid, avg(rating) FROM reviews GROUP BY packageid', function(err, result) {
                     if (err) {
                         reject(err);
                     } else {

@@ -62,7 +62,7 @@
         },
 
         // Function to retrieve a password of user
-        getSensetiveData: function(email) {
+        getSensitiveData: function(email) {
             return new Promise(function(resolve, reject) {
                 client.query('SELECT password,active,token FROM users WHERE email = $1', email, function(err, result) {
                     if (err) {
@@ -87,8 +87,8 @@
             });
         },
 
-        // Function to update an active atribute
-        updateActiveAtribute: function(token) {
+        // Function to update an active attribute
+        updateActiveAttribute: function(token) {
             return new Promise(function(resolve, reject) {
                 client.query('UPDATE users SET active = \'1\' WHERE token = $1', token, function(err, result) {
                     if (err) {
