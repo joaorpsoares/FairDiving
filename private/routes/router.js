@@ -22,7 +22,7 @@
             res.render('index');
         });
 
-        // Route to send package page
+        // Route to send package package
         server.get('/package', function(req, res) {
             res.render('index');
         });

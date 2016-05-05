@@ -122,6 +122,42 @@
                     }
                 });
             });
+        },
+
+        // Function to send the contact form
+        sendContactForm: function(data){
+            return new Promise(function(resolve, reject) {
+
+                var formEmail = new EmailTemplate(path.join(__dirname, '../resources/emailTemplates', 'formMail'));
+
+                formMail.render({
+                    name: data.name,
+                    phone: data.phone,
+                    email: data.email,
+                    text: data.text
+                }, function(err, results){
+                    if (err) {
+                        reject(err);
+                    } else {
+
+                        var mailOptions = {
+                            from: email.name,
+                            to: data.email,
+                            subject: "[Contact] We received a message from you.",
+                            html: results.html,
+                            text: results.text
+                        };
+
+                        transporter.sendMail(mailOptions, function(err, info) {
+                            if (err) {
+                                reject(err);
+                            } else {
+                                resolve(contact);
+                            }
+                        });
+                    }
+                });
+            });
         }
     };
 }());

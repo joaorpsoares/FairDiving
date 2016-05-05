@@ -11,6 +11,9 @@
             email: '',
             password: ''
         };
+
+
+
         $scope.errorMessage = "";
         $scope.toogle = true;
 
@@ -150,13 +153,29 @@
             }
         };
 
+
+        // A function to send email
+        $scope.sendEmail = function(data){
+            if (data.name === ''){
+                $scope.errorMessage = "You need to tell us your name.";
+            } else if (data.email === ''){
+                $scope.errorMessage = "You need to tell us your email.";
+            } else if (data.text === ''){
+                $scope.errorMessage = "You need to tell us what do you want us to know.";
+            } else {
+                UserServices.sendEmail(data)
+                    .then(function(res){
+                        console.log(res);
+                    }).catch(function(err){
+                        console.log(err);
+                    });
+            }
+        };
+
         $scope.logout = function() {
 
             UserServices.logout();
-
         };
-
-
 
     };
 

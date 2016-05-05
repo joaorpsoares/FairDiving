@@ -124,6 +124,18 @@
                 });
         };
 
+        this.sendEmail = function(data){
+            console.log(data);
+            return $http.post('/api/email/sendEmail', data)
+                .success(function(res){
+                    deferred.resolve(res);
+                })
+                .error(function(err){
+                    console.log(err);
+                    deferred.reject(err);
+                });
+        };
+
         this.logout = function() {
             $cookies.remove('session', {
                 path: '/'

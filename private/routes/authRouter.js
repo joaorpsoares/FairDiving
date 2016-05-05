@@ -362,6 +362,21 @@
             }
         });
 
+
+        // Route to send email
+        server.post('/api/email/sendEmail', function(req, res){
+            if (validator.isEmail(req.body.email)){
+                email.sendContactForm(req.body)
+                    .then(function(){
+                        res.status(200).send('OK');
+                    })
+                    .catch(function(err){
+                        console.log('@authRouter.js : Form was not sent.');
+                        res.status(406).send("Something went wrong!");
+                    });
+            }
+            res.status(200).send('ok');
+        });
     };
 
 }());

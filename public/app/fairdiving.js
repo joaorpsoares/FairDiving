@@ -13,6 +13,10 @@
                 // controller: 'UserCtrl',
                 templateUrl: 'app/views/home.ejs'
             })
+            .when('/contact', {
+                controller: 'UserCtrl',
+                templateUrl: 'app/views/contact.ejs'
+            })
             .when('/login', {
                 controller: 'UserCtrl',
                 templateUrl: 'app/views/login.ejs'
