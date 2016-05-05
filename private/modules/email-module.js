@@ -31,7 +31,9 @@
                 var welcomeTemplate = new EmailTemplate(path.join(__dirname, '../resources/emailTemplates', 'welcomeMail'));
 
                 welcomeTemplate.render({
-                    code: 'http://52.37.66.121:3000/api/confirmation/' + token
+                    code: 'http://52.37.66.121:3000/api/confirmation/' + token,
+                    contact: contact
+
                 }, function(err, results) {
 
                     if (err) {
