@@ -48,6 +48,12 @@
                 controller: 'UserCtrl',
                 templateUrl: 'app/views/confirmation.ejs'
             })
+            .when('/about', {
+                templateUrl: 'app/views/about.ejs'
+            })
+            .when('/contact', {
+                templateUrl: 'app/views/contact.ejs'
+            })
             .otherwise({
                 redirectTo: '/'
             });

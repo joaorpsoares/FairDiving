@@ -51,6 +51,16 @@
             res.render('index');
         });
 
+        // Route to send contact view
+        server.get('/contact', function(req, res) {
+            res.render('index');
+        });
+
+        // Route to send about view
+        server.get('/about', function(req, res) {
+            res.render('index');
+        });
+
 
         // Require the routes related to authentication
         require('./authRouter')(server);
