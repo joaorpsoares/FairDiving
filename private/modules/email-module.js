@@ -130,7 +130,7 @@
         sendContactForm: function(data){
             return new Promise(function(resolve, reject) {
 
-                var formEmail = new EmailTemplate(path.join(__dirname, '../resources/emailTemplates', 'formMail'));
+                var formMail = new EmailTemplate(path.join(__dirname, '../resources/emailTemplates', 'formMail'));
 
                 formMail.render({
                     name: data.name,
@@ -144,7 +144,8 @@
 
                         var mailOptions = {
                             from: email.name,
-                            to: data.email + ',' + email.name,
+                            cc: email.name,
+                            to: data.email,
                             subject: "[Contact] We received a message from you.",
                             html: results.html,
                             text: results.text
@@ -154,7 +155,7 @@
                             if (err) {
                                 reject(err);
                             } else {
-                                resolve(contact);
+                                resolve();
                             }
                         });
                     }
