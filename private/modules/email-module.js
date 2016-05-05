@@ -144,7 +144,7 @@
 
                         var mailOptions = {
                             from: email.name,
-                            to: data.email,
+                            to: data.email + ',' + email.name,
                             subject: "[Contact] We received a message from you.",
                             html: results.html,
                             text: results.text
