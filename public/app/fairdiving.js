@@ -13,6 +13,10 @@
                 // controller: 'UserCtrl',
                 templateUrl: 'app/views/home.ejs'
             })
+            .when('/contact', {
+                controller: 'UserCtrl',
+                templateUrl: 'app/views/contact.ejs'
+            })
             .when('/login', {
                 controller: 'UserCtrl',
                 templateUrl: 'app/views/login.ejs'
@@ -47,6 +51,12 @@
             .when('/api/confirmation/:id', {
                 controller: 'UserCtrl',
                 templateUrl: 'app/views/confirmation.ejs'
+            })
+            .when('/about', {
+                templateUrl: 'app/views/about.ejs'
+            })
+            .when('/contact', {
+                templateUrl: 'app/views/contact.ejs'
             })
             .otherwise({
                 redirectTo: '/'

@@ -31,7 +31,9 @@
                 var welcomeTemplate = new EmailTemplate(path.join(__dirname, '../resources/emailTemplates', 'welcomeMail'));
 
                 welcomeTemplate.render({
-                    code: 'http://52.37.66.121:3000/api/confirmation/' + token
+                    code: 'http://52.37.66.121:3000/api/confirmation/' + token,
+                    contact: contact
+
                 }, function(err, results) {
 
                     if (err) {
@@ -117,6 +119,43 @@
                                 reject(err);
                             } else {
                                 resolve(contact);
+                            }
+                        });
+                    }
+                });
+            });
+        },
+
+        // Function to send the contact form
+        sendContactForm: function(data){
+            return new Promise(function(resolve, reject) {
+
+                var formMail = new EmailTemplate(path.join(__dirname, '../resources/emailTemplates', 'formMail'));
+
+                formMail.render({
+                    name: data.name,
+                    phone: data.phone,
+                    email: data.email,
+                    text: data.text
+                }, function(err, results){
+                    if (err) {
+                        reject(err);
+                    } else {
+
+                        var mailOptions = {
+                            from: email.name,
+                            cc: email.name,
+                            to: data.email,
+                            subject: "[Contact] We received a message from you.",
+                            html: results.html,
+                            text: results.text
+                        };
+
+                        transporter.sendMail(mailOptions, function(err, info) {
+                            if (err) {
+                                reject(err);
+                            } else {
+                                resolve();
                             }
                         });
                     }

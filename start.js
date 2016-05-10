@@ -57,7 +57,10 @@
     server.use(compression());
 
     // TODO: Not implemented corretly. Do better.
-    //server.use(mld.securityLevel);
+    server.use(function(req, res, next){
+        //console.log(req);
+        next();
+    });
 
     // Sets the folder where are the files are static
     server.use(express.static(path.resolve(__dirname, './public/')));

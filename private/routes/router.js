@@ -22,7 +22,7 @@
             res.render('index');
         });
 
-        // Route to send package page
+        // Route to send package package
         server.get('/package', function(req, res) {
             res.render('index');
         });
@@ -48,6 +48,16 @@
         });
 
         server.get('/resetPassword/:id', function(req, res) {
+            res.render('index');
+        });
+
+        // Route to send contact view
+        server.get('/contact', function(req, res) {
+            res.render('index');
+        });
+
+        // Route to send about view
+        server.get('/about', function(req, res) {
             res.render('index');
         });
 
