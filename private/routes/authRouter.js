@@ -370,10 +370,10 @@
                     })
                     .catch(function(err){
                         console.log('@authRouter.js : Form was not sent.');
+                        console.log(err);
                         res.status(406).send("Something went wrong!");
                     });
             }
-            res.status(200).send('ok');
         });
     };
 
