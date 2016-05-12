@@ -58,6 +58,13 @@
             .when('/contact', {
                 templateUrl: 'app/views/contact.ejs'
             })
+
+            /*
+                ADMIN
+            */
+            .when('/admin', {
+                templateUrl: 'app/views/admin/dashboard.ejs'
+            })
             .otherwise({
                 redirectTo: '/'
             });

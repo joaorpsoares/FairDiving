@@ -67,6 +67,9 @@
 
         // Require the routes related to packages
         require('./packageRouter')(server);
+
+        // Require the routes related to administration
+        require('./adminRouter')(server);
     };
 
 }());
