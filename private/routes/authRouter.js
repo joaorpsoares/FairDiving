@@ -138,7 +138,6 @@
                 });
         });
 
-
         // Route to retrieve user by cookie session
         server.get('/api/user', function(req, res) {
             token.verifySession(req.cookies.session)
@@ -361,7 +360,6 @@
                 res.status(406).send("WARNING: Email is not valid or passwords dont match.");
             }
         });
-
 
         // Route to send email
         server.post('/api/email/sendEmail', function(req, res){
