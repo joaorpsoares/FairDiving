@@ -1,4 +1,4 @@
-<div ng-include="'/app/views/header.ejs'">
+tmlt<div ng-include="'/app/views/header.ejs'">
 </div>
 <div class="container breadcrub">
     <div>
@@ -213,7 +213,7 @@
                                     <br/>
                                     <input type="file" ngf-select ngf-resize-if="$width > 2000" ngf-resize="{width: 800, quality:0.9}" ng-model="newPackage.avatar" name="avatar" ngf-pattern="'image/*'"
     ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
-    ngf-resize="{width: 100, height: 100}">Select</input>
+    ngf-resize="{width: 100, height: 100}"></input>
 
     <br/>
     <br/>
@@ -357,7 +357,84 @@
                     <!-- TAB 3 -->
                     <div class="tab-pane padding40 active" ng-show="tab === 3">
                         <div class="padding40">
-                            <br/>
+                        	 <span class="size16 bold">Edit package</span>
+                            <div class="line2"></div>
+                            <!-- COL 1 -->
+                            <div class="col-md-12 offset-0">
+                                <form enctype="multipart/form-data" name="form">
+                                    <br/> Title*:
+                                    <input ng-model="updatedPackage.title" type="text" class="form-control" placeholder="{{package.title}}" rel="popover" required="required">
+                                    </br> Type*:
+                                    <select ng-model="updatedPackage.package_type" class="form-control" name="package_type" required="required">
+                                        <option value="1" selected="selected">Fun Dive</option>
+                                        <option value="2">Dive Course</option>
+                                        <option value="3">Complete Package</option>
+                                    </select>
+                                    <br/> Currency*:
+                                    <select ng-model="updatedPackage.currency" class="form-control " name="package_type" required="required">
+                                        <option value="€" selected="selected">€ EUR</option>
+                                        <option value="$">$ USD</option>
+                                        <option value="£">£ GBP</option>
+                                    </select>
+                                    <br/> Price*:
+                                    <input ng-model="updatedPackage.price" type="number" min="0" class="form-control" placeholder="{{package.price}}" rel="popover" required="required">
+                                    <br/> Certification*:
+                                    <select ng-model="updatedPackage.certification" class="form-control " name="package_type" required="required">
+                                        <option value="None Required" selected="selected">None Required</option>
+                                        <option value="Open Water Diver">Open Water Diver</option>
+                                        <option value="Advanced Open Water Diver">Advanced Open Water Diver</option>
+                                    </select>
+                                    <!-- <br/> Difficulty*:
+                                    <select ng-model="updatedPackage.difficulty" class="form-control" name="difficulty" placeholder="Enter the difficulty of this package" required="required">
+                                        <option value="1" selected="selected">Easy</option>
+                                        <option value="2">Medium</option>
+                                        <option value="3">Medium Hard</option>
+                                        <option value="4">Hard</option>
+                                        <option value="5">Extreme</option>
+                                    </select>-->
+                                    <!--<input ng-model="newPackage.difficulty" type="text" class="form-control" placeholder="Enter the difficulty of this package" required="required"> -->
+                                    <br/> Number of Dives *:
+                                    <input ng-model="updatedPackage.n_dives" type="number" min="0" class="form-control" placeholder="{{package.n_dives}}" id="n_dives" name="n_dives" required="required">
+                                    <br/> Dive Sites *:
+                                    <input ng-model="updatedPackage.dive_sites" type="text" class="form-control" placeholder="{{package.dive_sites}}" required="required">
+                                    <br/> Description *:
+                                    <input ng-model="updatedPackage.description" type="text" class="form-control" placeholder="{{package.description}}" required="required">
+                                    <br/> Location*:
+                                    <select ng-model="updatedPackage.country_code" class="form-control" name="country_code" required="required">
+                                        <!--for each country-->
+                                        <option ng-repeat="country in countries" value={{country.abrev}}>{{country.name}}</option>
+                                        <!--endfor-->
+                                    </select>   
+                                    <br/>
+                                    <input type="file" ngf-select ngf-resize-if="$width > 2000" ngf-resize="{width: 800, quality:0.9}" ng-model="updatedPackage.avatar" name="avatar" ngf-pattern="'image/*'"
+    ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
+    ngf-resize="{width: 100, height: 100}"></input>
+
+    <br/>
+    <br/>
+                                    <!--
+                                    <div class="button" ngf-select ng-model="newPackage.pickFile" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 100, height: 100}">Select</div>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <pre>{{newPackage.picFile}}</pre>-->
+                                    <!-- <input type="text" class="form-control" placeholder="Description of the location (address, etc.)" name="location" required="required">
+                                    <br/> Image*:
+                                    <br/>
+                                    <div class="fileUpload btn btn-default">
+                                        <span>Upload</span>
+                                        <input type="file" ng-model="newPackage.avatar" class="upload" name="avatar" accept="image/*" multiple>
+                                    </div>
+                                    <br/>-->
+                                    <!-- insertNewPackage(newPackage) -->
+                                    <button type="submit" class="bluebtn margtop20" ng-click="updatePackage(updatedPackage)">Edit</button>
+                                </form>
+                            </div>
+                            <div class="clearfix"></div>
+
+
+
+                         <!--   <br/>
                             <br/>
                             <span class="dark size18">Favourites list (NOT DONE)</span>
                             <div class="right mt-5">
@@ -481,7 +558,7 @@
                                 <li><a href="#">»</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- END OF TAB 3 -->
                     <!-- TAB 4 -->
                     <div class="tab-pane padding40 active" ng-show="tab === 4">
