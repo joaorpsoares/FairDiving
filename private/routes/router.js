@@ -60,6 +60,15 @@
         server.get('/about', function(req, res) {
             res.render('index');
         });
+        
+        // Route to send about view
+        server.get('/admin', function(req, res) {
+            res.render('index');
+        });
+        
+        server.get('/listusersadmin', function(req, res) {
+            res.render('index');
+        });
 
 
         // Require the routes related to authentication

@@ -58,6 +58,14 @@
             .when('/contact', {
                 templateUrl: 'app/views/contact.ejs'
             })
+            .when('/admin', {
+                controller: 'UserCtrl',
+                templateUrl: 'app/views/admin/AdminPanel/dashboard.ejs'
+            })
+            .when('/listusersadmin', {
+                controller: 'UserCtrl',
+                templateUrl: 'app/views/admin/AdminPanel/listusers.ejs'
+            })
             .otherwise({
                 redirectTo: '/'
             });
