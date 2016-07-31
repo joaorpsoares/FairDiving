@@ -239,15 +239,15 @@
                                                 res.status(406).send('You wrote the wrong old password.');
                                             } else {
                                                 if (_result) {
-                                                    bcrypt.hash(req.body.newpassword, null, null, function (err, hash) {
+                                                    bcrypt.hash(req.body.newpassword, null, null, function(err, hash) {
                                                         if (err) {
                                                             res.status(406).send('There was a problem with hashing your password.');
                                                         } else {
                                                             database.updatePassword(hash, userID[0].email)
-                                                                .then(function () {
+                                                                .then(function() {
                                                                     res.status(200).send("Your password was changed");
                                                                 })
-                                                                .catch(function () {
+                                                                .catch(function() {
                                                                     res.status(406).send('It was impossible to change the password.');
                                                                 });
                                                         }
@@ -362,13 +362,13 @@
         });
 
         // Route to send email
-        server.post('/api/email/sendEmail', function(req, res){
-            if (validator.isEmail(req.body.email)){
+        server.post('/api/email/sendEmail', function(req, res) {
+            if (validator.isEmail(req.body.email)) {
                 email.sendContactForm(req.body)
-                    .then(function(){
+                    .then(function() {
                         res.status(200).send('OK');
                     })
-                    .catch(function(err){
+                    .catch(function(err) {
                         console.log('@authRouter.js : Form was not sent.');
                         console.log(err);
                         res.status(406).send("Something went wrong!");

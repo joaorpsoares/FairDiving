@@ -39,6 +39,11 @@ CREATE TABLE users (
 	active bit NOT NULL DEFAULT '0'
 );
 
+CREATE TABLE operators (
+	id BIGINT REFERENCES users(id),
+	accepted bit NOT NULL DEFAULT '0'
+)
+
 CREATE TABLE packageType (
 	id BIGSERIAL PRIMARY KEY,
 	description VARCHAR(30) NOT NULL

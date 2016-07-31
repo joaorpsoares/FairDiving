@@ -4,8 +4,16 @@
     var pg = require('pg'),
         Promise = require('bluebird'),
         database = require('../developer/secrets/database'),
-        conString = 'postgres://' + database.user + ':' + database.password + '@' + database.url + ':' + database.port + '/' + database.database,
-        client = new pg.Client(conString),
+        //conString = 'postgres://' + database.user + ':' + database.password + '@' + database.url + ':' + database.port + '/' + database.database,
+
+        client = new pg.Client({
+            user: database.user,
+            password: database.password,
+            database: database.database,
+            port: database.port,
+            host: database.url,
+            ssl: true
+        }),
 
         // database modules
         databaseUsers = require('./databaseUsers'),

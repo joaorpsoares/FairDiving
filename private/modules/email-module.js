@@ -31,7 +31,7 @@
                 var welcomeTemplate = new EmailTemplate(path.join(__dirname, '../resources/emailTemplates', 'welcomeMail'));
 
                 welcomeTemplate.render({
-                    code: 'http://52.37.66.121:3000/api/confirmation/' + token,
+                    code: 'https://fairdiving.herokuapp.com/api/confirmation/' + token,
                     contact: contact
 
                 }, function(err, results) {
@@ -43,7 +43,7 @@
                         var mailOptions = {
                             from: email.name,
                             to: contact,
-                            subject: "Welcome to FairDiving!",
+                            subject: "Welcome to Fair Diving!",
                             html: results.html,
                             text: results.text
                         };
@@ -66,7 +66,7 @@
                 var recoverMail = new EmailTemplate(path.join(__dirname, '../resources/emailTemplates', 'recoverMail'));
 
                 recoverMail.render({
-                    code: 'http://52.37.66.121:3000/resetPassword/' + encodeURIComponent(contact) + '+' + token
+                    code: 'https://fairdiving.herokuapp.com/resetPassword/' + encodeURIComponent(contact) + '+' + token
                 }, function(err, results) {
 
                     if (err) {
@@ -76,7 +76,7 @@
                         var mailOptions = {
                             from: email.name,
                             to: contact,
-                            subject: "Recover your password at fairdiving.",
+                            subject: "Recover your password at Fair Diving.",
                             html: results.html,
                             text: results.text
                         };
@@ -127,7 +127,7 @@
         },
 
         // Function to send the contact form
-        sendContactForm: function(data){
+        sendContactForm: function(data) {
             return new Promise(function(resolve, reject) {
 
                 var formMail = new EmailTemplate(path.join(__dirname, '../resources/emailTemplates', 'formMail'));
@@ -137,7 +137,7 @@
                     phone: data.phone,
                     email: data.email,
                     text: data.text
-                }, function(err, results){
+                }, function(err, results) {
                     if (err) {
                         reject(err);
                     } else {

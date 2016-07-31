@@ -21,6 +21,7 @@
             console.log('@start.js: Database is connected.');
         })
         .catch(function(err) {
+            console.log(err);
             console.log('@start.js: Database is not connected.');
         });
 
@@ -57,7 +58,7 @@
     server.use(compression());
 
     // TODO: Not implemented corretly. Do better.
-    server.use(function(req, res, next){
+    server.use(function(req, res, next) {
         //console.log(req);
         next();
     });
@@ -73,8 +74,8 @@
 
     require('./private/routes/router')(server);
 
-    server.listen(3000, function() {
-        console.log('Inital configuration went good. Server is running.');
+    var sv = server.listen(process.env.PORT || 3000, function() {
+        console.log('Inital configuration went good. Server is running at :', sv.address().port);
     });
 
 }());
