@@ -60,11 +60,11 @@
             })
             .when('/admin', {
                 controller: 'UserCtrl',
-                templateUrl: 'app/views/admin/AdminPanel/dashboard.ejs'
+                templateUrl: 'app/views/admin/AdminPanel/admin.ejs'
             })
             .when('/listusersadmin', {
                 controller: 'UserCtrl',
-                templateUrl: 'app/views/admin/AdminPanel/listusers.ejs'
+                templateUrl: 'app/views/admin/AdminPanel/listusersadmin.ejs'
             })
             .otherwise({
                 redirectTo: '/'
