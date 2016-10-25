@@ -31,6 +31,21 @@
 
         };
 
+        //A function that gets 3 packages most booked
+        $scope.getPackagesMostBooked = function() {
+
+            pkgServices.getPackagesMostBooked()
+                .then(function(_packages) {
+                    console.log(_packages.data);
+                    $scope.packages = _packages.data;
+                    console.log("getPackagesMostBooked successful");
+                })
+                .catch(function() {
+                    console.log("getPackagesMostBooked failed");
+                });
+
+        };
+
         //A function that gets a package by id
         $scope.getPackageID = function() {
             if ($scope.packageOnUse.Id === '') {

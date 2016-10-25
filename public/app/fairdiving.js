@@ -11,6 +11,7 @@
         $routeProvider
             .when('/', {
                 // controller: 'UserCtrl',
+                controller: 'PkgCtrl',
                 templateUrl: 'app/views/home.ejs'
             })
             .when('/contact', {

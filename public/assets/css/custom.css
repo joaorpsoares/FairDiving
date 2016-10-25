@@ -2961,8 +2961,8 @@ ul.footerlistblack li a:hover {
 }
 
 .sfix2 {
-    position: absolute;
-    top: 440px;
+    position: relative;
+    top: 150px;
 }
 
 .sfix3 {
@@ -2976,8 +2976,8 @@ ul.footerlistblack li a:hover {
         top: 277px;
     }
     .sfix2 {
-        position: absolute;
-        top: 277px;
+        position: relative;
+        top: 150px;
     }
     .sfix3 {
         position: absolute;

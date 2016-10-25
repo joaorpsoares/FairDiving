@@ -18,6 +18,19 @@
                 });
         };
 
+
+        // TO DO: A MUDAR QUANDO BACKEND FEITO
+        this.getPackagesMostBooked = function() {
+
+            return $http.get('/api/package')
+                .success(function(res) {
+                    deferred.resolve(res);
+                })
+                .error(function(err) {
+                    deferred.reject(err);
+                });
+        };
+
         this.getPackageID = function(Id) {
 
             return $http.get('/api/package/' + Id)
