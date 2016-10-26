@@ -42,7 +42,7 @@ CREATE TABLE users (
 CREATE TABLE operators (
 	id BIGINT REFERENCES users(id),
 	accepted bit NOT NULL DEFAULT '0'
-)
+);
 
 CREATE TABLE packageType (
 	id BIGSERIAL PRIMARY KEY,
